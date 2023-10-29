@@ -1,0 +1,7 @@
+{
+  "name": "DineEase",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
