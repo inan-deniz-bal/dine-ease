@@ -16,6 +16,6 @@ export class LoginPage implements OnInit {
 
   login() {
     console.log(this.username);
-    this.navctrl.navigateRoot('home')
+    this.navctrl.navigateRoot('sign-up')
   }
 }
