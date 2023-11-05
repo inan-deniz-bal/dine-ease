@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RestList } from 'src/classes/rest-list';
+import { ServerHandlerService } from 'src/services/server-handler.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  restourants: RestList[]=[]
+  constructor(
+    private serverH: ServerHandlerService
+  ) { }
 
   ngOnInit() {
+    this.restourants=this.serverH.getRestList();
+
   }
 
 }
