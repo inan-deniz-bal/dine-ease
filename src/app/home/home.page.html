@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-card *ngFor="let rest of restourants">
+  <ion-card *ngFor="let rest of restourants" (click)="showRestaurant(rest.getName())">
     <ion-card-title>
       {{rest.getName()}}
     </ion-card-title>
