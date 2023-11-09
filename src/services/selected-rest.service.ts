@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SelectedRestaurant } from '../interfaces/selected-restaurant';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,4 @@ export class SelectedRestService {
   }
 }
 
-interface SelectedRestaurant {
-  name: string;
-  rate: string;
-}
+

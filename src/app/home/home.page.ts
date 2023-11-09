@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RestList } from 'src/classes/rest-list';
 import { ServerHandlerService } from 'src/services/server-handler.service';
-import { NavController } from '@ionic/angular';
+import { SelectedRestService } from 'src/services/selected-rest.service';
+import { SelectedRestaurant } from 'src/interfaces/selected-restaurant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,20 +11,25 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  restourants: RestList[]=[]
+  restourants: RestList[] = [];
   constructor(
-    private navCtrl: NavController,
-    private serverH: ServerHandlerService
-  ) { }
+
+    private serverH: ServerHandlerService,
+    private selectedRest: SelectedRestService,
+    private route:Router
+  ) {}
 
   ngOnInit() {
-    this.restourants=this.serverH.getRestList();
-
+    this.restourants = this.serverH.getRestList();
+    console.log("Restaurants ",this.restourants)
   }
-showRestaurant(restaurantName:string){
-  console.log("name: ", restaurantName)
+  showRestaurant(selectedRestaurant: RestList) {
+    const selectedR: SelectedRestaurant = {
+      name: selectedRestaurant.getName(),
+      rate: selectedRestaurant.getRate(),
+    };
 
-}
-
+    this.selectedRest.selectRestaurant(selectedRestaurant);
+    this.route.navigate(['./restaurant'])
+  }
 }
