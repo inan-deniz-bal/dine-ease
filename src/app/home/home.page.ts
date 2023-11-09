@@ -21,6 +21,7 @@ export class HomePage implements OnInit {
 
   }
 showRestaurant(restaurantName:string){
+  console.log("name: ", restaurantName)
 
 }
 
