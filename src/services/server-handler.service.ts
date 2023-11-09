@@ -14,7 +14,19 @@ export class ServerHandlerService {
     meals: [
       {
         mealName: 'Ezogelin Çorbası',
-        mealPrice: '19.90 TL',
+        mealPrice: 70,
+        mealCount: 20,
+        ingridients: ['Tereyağ', 'Su', 'Mercimek'],
+      },
+      {
+        mealName: 'Mercimek Çorbası',
+        mealPrice: 70,
+        mealCount: 20,
+        ingridients: ['Tereyağ', 'Su', 'Mercimek'],
+      },
+      {
+        mealName: 'Kelle Paça Çorbası',
+        mealPrice: 110,
         mealCount: 20,
         ingridients: ['Tereyağ', 'Su', 'Mercimek'],
       },
