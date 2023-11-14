@@ -1,6 +1,7 @@
 import { Menu } from 'src/interfaces/menu';
 export class RestList {
   //Bu sınıf daha da geliştirilecek, sınıfta restoran ismi, doluluk, menü, masa listesi olacak
+
   constructor(
     private name: string,
     private totalCap: number,

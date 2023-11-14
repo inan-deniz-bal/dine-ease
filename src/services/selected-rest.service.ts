@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
 import { SelectedRestaurant } from '../interfaces/selected-restaurant';
+import { RestList } from 'src/classes/rest-list';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SelectedRestService {
-  selectedRestaurant: SelectedRestaurant = { name: '', rate: '' };
+  selectedRestaurant: RestList = new RestList('', 0, 0, [], []);
   constructor() {}
 
-  selectRestaurant(restInfo: any) {
-    this.selectedRestaurant.name = restInfo.name;
-    this.selectedRestaurant.rate = restInfo.rate;
+  selectRestaurant(restInfo: RestList) {
+    this.selectedRestaurant = restInfo;
 
-    localStorage.setItem(
+    /* localStorage.setItem(
       'selected-restaurant',
       JSON.stringify(this.selectedRestaurant)
-    );
+    );*/
   }
-  getSelectedRestaurant(): SelectedRestaurant {
-    const data = localStorage.getItem('selected-restaurant');
+  getSelectedRestaurant(): RestList {
+    /* const data = localStorage.getItem('selected-restaurant');
     if (data) {
       return JSON.parse(data);
-    }
+    }*/
     return this.selectedRestaurant;
   }
 }
-
-

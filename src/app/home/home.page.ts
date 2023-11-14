@@ -24,10 +24,6 @@ export class HomePage implements OnInit {
     console.log("Restaurants ",this.restourants)
   }
   showRestaurant(selectedRestaurant: RestList) {
-    const selectedR: SelectedRestaurant = {
-      name: selectedRestaurant.getName(),
-      rate: selectedRestaurant.getRate(),
-    };
 
     this.selectedRest.selectRestaurant(selectedRestaurant);
     this.route.navigate(['./restaurant'])

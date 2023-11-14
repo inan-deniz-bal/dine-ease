@@ -1,48 +1,54 @@
-<ion-header >
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{selectedRestaurant.name}}</ion-title>
+    <ion-title>{{selectedRestaurant.getName()}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!--
+
+  Buranın hatası, tıkladığımda sadece onunla alakalı yerin açılması gerekiyor
+  2. hataysa meal type için yeni bir tür eklenebilir
+-->
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <ion-card *ngIf="!showOrderComponent">
     <ion-card-header>
       <ion-card-title> Masalar </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-button expand="full" style="width: 100%"> Masa 1 </ion-button>
-        </ion-item>
-        <ion-item>
-          <ion-button expand="full" style="width: 100%"> Masa 2 </ion-button>
-        </ion-item>
-        <ion-item>
-          <ion-button expand="full" style="width: 100%"> Masa 3 </ion-button>
-        </ion-item>
-        <ion-item>
-          <ion-button expand="full" style="width: 100%" disabled="true">
-            Masa 6
-          </ion-button>
-        </ion-item>
-        <ion-item>
-          <ion-button expand="full" style="width: 100%"> Masa 7 </ion-button>
-        </ion-item>
-        <ion-item>
-          <ion-button expand="full" style="width: 100%" disabled="true">
-            Masa 8
-          </ion-button>
-        </ion-item>
+      <ion-list *ngFor="let table of selectedRestaurant.getTables()">
+        <ion-item (click)="showOrder(table)">{{table}}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="!showOrderComponent">
     <ion-card-header>
       <ion-card-title> Menü </ion-card-title>
     </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngFor="let menuType of selectedRestaurant.getMenuList()">
+        <div>
+          <ion-item (click)="mealClicked()"
+            ><ion-title>{{menuType.mealType}}</ion-title></ion-item
+          >
+          <div *ngIf="clicked">
+            <ion-item *ngFor="let meal of menuType.meals"
+              >{{meal.mealName}}</ion-item
+            >
+          </div>
+        </div>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
+  <div *ngIf="showOrderComponent">
+    <app-order
+      [selectedRest]="selectedRestaurant"
+      [tableNumber]="selectedTable"
+      (callOrder)="orderItem($event)"
+      (closeOrder)="showOrder($event)"
+    ></app-order>
+  </div>
 </ion-content>

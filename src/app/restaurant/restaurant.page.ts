@@ -1,21 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectedRestaurant } from 'src/interfaces/selected-restaurant'; //belki bunun yerine restlist de kullanılabilir
+import { RestList } from 'src/classes/rest-list';
 import { SelectedRestService } from 'src/services/selected-rest.service';
+import { NavController } from '@ionic/angular';
+import { Order } from 'src/interfaces/order';
+import { ServerServiceService } from 'src/services/server-service.service';
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.page.html',
   styleUrls: ['./restaurant.page.scss'],
 })
 export class RestaurantPage implements OnInit {
-  selectedRestaurant: SelectedRestaurant = {
+  selectedRestaurant:RestList =new RestList("",0,0,[],[]);
+  /*selectedRestaurant: SelectedRestaurant = {
     name: '',
     rate: '',
-  };
+  };*/
 
-  constructor(private selectedRest: SelectedRestService) {}
+  constructor(private selectedRest: SelectedRestService,
+    private navCtrl:NavController,
+    private serverSer:ServerServiceService) {}
+  clicked=false
+  showOrderComponent=false
+  selectedTable:string=""
 
+  mealClicked(){
+    this.clicked=!this.clicked
+    console.log(this.clicked)
+  }
   ngOnInit() {
+    console.log(this.clicked)
+
 
     this.selectedRestaurant=this.selectedRest.getSelectedRestaurant();
+    if(this.selectedRestaurant.getName()==""){
+      this.navCtrl.navigateRoot(['./home'])
+    }
+  }
+  showOrder(table : string){
+    console.log(table)
+    this.selectedTable=table
+    this.showOrderComponent=!this.showOrderComponent
+  }
+
+  orderItem(order :Order){
+    this.serverSer.orderItem(order)
   }
 }

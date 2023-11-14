@@ -33,6 +33,30 @@ export class ServerHandlerService {
     ],
   };
 
+  menu2: Menu = {
+    mealType: 'Pideler',
+    meals: [
+      {
+        mealName: 'Kıymalı Pide',
+        mealPrice: 70,
+        mealCount: 20,
+        ingridients: [ 'Kıyma',],
+      },
+      {
+        mealName: 'Tavuklu Pide',
+        mealPrice: 90,
+        mealCount: 20,
+        ingridients: [ 'Tavuk',],
+      },
+      {
+        mealName: 'Kuşbaşı Kaşarlı Pide',
+        mealPrice: 120,
+        mealCount: 20,
+        ingridients: [ 'Kuşbaşı','Kaşar Peyniri'],
+      },
+    ],
+  };
+
   getRestList(): RestList[] {
     const rets: RestList[] = [
       new RestList(
@@ -42,7 +66,9 @@ export class ServerHandlerService {
         ['Masa 1', 'Masa 2', 'Masa 3', 'Masa 4'],
         [this.menu1]
       ),
-      new RestList("Burcu'nun Pastanesi", 4, 2),
+      new RestList("Burcu'nun Pastanesi", 4, 2,
+      ["Tatlı Masası" , "Çikolata Masası", "Ekmek Masası", "Pide Masası"],
+      [this.menu2,this.menu1]),
     ];
     return rets;
   }
