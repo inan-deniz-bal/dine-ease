@@ -82,6 +82,7 @@ export class ServerHandlerService {
     const userList: Login[] = [
       new Login('gencayburcu@gmail.com', 'eyşan'),
       new Login('idb@gmail.com', 'cesur'),
+      new Login('test1','a')
     ];
     const serverResponse = userList.filter(
       (loginInfo) =>
@@ -91,7 +92,7 @@ export class ServerHandlerService {
       return 'not_match';
     }
     if (
-      serverResponse[0].getUserInfo().password ==
+      serverResponse[0].getUserInfo().password !=
       loginUser.getUserInfo().password
     ) {
       return 'wrong_pass';

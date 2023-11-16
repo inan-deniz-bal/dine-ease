@@ -12,6 +12,6 @@ export class AppComponent {
     { title: 'Scan QR', url: 'qr', icon: 'qr-code' },
     { title: 'Payment History', url: 'order-history', icon: 'wallet' },
     { title: 'Settings', url: 'settings', icon: 'settings' },
-    { title: 'Logout', url: 'sign-in', icon: 'log-out' },
+    { title: 'Logout', url: 'login', icon: 'log-out' },
   ];
 }
