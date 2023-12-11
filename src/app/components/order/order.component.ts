@@ -24,4 +24,9 @@ export class OrderComponent implements OnInit {
   cancel() {
     this.closeOrder.emit();
   }
+
+  openMenu(){
+    this.selectedRest.getMenuList()
+
+  }
 }
