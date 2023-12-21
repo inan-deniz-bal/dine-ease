@@ -10,39 +10,47 @@ import { ServerServiceService } from 'src/services/server-service.service';
   styleUrls: ['./restaurant.page.scss'],
 })
 export class RestaurantPage implements OnInit {
-  selectedRestaurant:RestList =new RestList("",0,0,[],[]);
+  selectedRestaurant: RestList = new RestList('', 0, 0, [], []);
   /*selectedRestaurant: SelectedRestaurant = {
     name: '',
     rate: '',
   };*/
 
-  constructor(private selectedRest: SelectedRestService,
-    private navCtrl:NavController,
-    private serverSer:ServerServiceService) {}
-  clicked=false
-  showOrderComponent=false
-  selectedTable:string=""
+  constructor(
+    private selectedRest: SelectedRestService,
+    private navCtrl: NavController,
+    private serverSer: ServerServiceService
+  ) {}
+  clicked = false;
+  clickedMenutype = '';
+  showOrderComponent = false;
+  selectedTable: string = '';
 
-  mealClicked(){
-    this.clicked=!this.clicked
-    console.log(this.clicked)
+  mealClicked(item: any) {
+    console.log(item);
+    if(item.mealType===this.clickedMenutype){
+      this.clickedMenutype=""
+    }
+    else{
+      this.clickedMenutype = item.mealType;
+    }
+
   }
   ngOnInit() {
-    console.log(this.clicked)
+    console.log(this.clicked);
 
-
-    this.selectedRestaurant=this.selectedRest.getSelectedRestaurant();
-    if(this.selectedRestaurant.getName()==""){
-      this.navCtrl.navigateRoot(['./home'])
+    this.selectedRestaurant = this.selectedRest.getSelectedRestaurant();
+    if (this.selectedRestaurant.getName() == '') {
+      this.navCtrl.navigateRoot(['./home']);
     }
   }
-  showOrder(table : string){
-    console.log(table)
-    this.selectedTable=table
-    this.showOrderComponent=!this.showOrderComponent
+  showOrder(table: string) {
+    console.log(table);
+    this.selectedTable = table;
+    this.showOrderComponent = !this.showOrderComponent;
   }
 
-  orderItem(order :Order){
-    this.serverSer.orderItem(order)
+  orderItem(order: Order) {
+    this.serverSer.orderItem(order);
   }
 }

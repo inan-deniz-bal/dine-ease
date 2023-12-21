@@ -69,9 +69,24 @@ export class ServerHandlerService {
       ),
       new RestList(
         "Burcu'nun Pastanesi",
-        4,
+        20,
         2,
-        ['Tatlı Masası', 'Çikolata Masası', 'Ekmek Masası', 'Pide Masası'],
+        [
+          'Atakan',
+          'Bora',
+          'Eda',
+          'Rüya',
+          'Tuna',
+          'Deniz',
+          'Utku',
+          'Mert',
+          'Kemal',
+          'Savaş',
+          'Ege',
+          'Berat',
+          'Aydemir',
+          'Fatih',
+        ],
         [this.menu2, this.menu1]
       ),
     ];
@@ -82,7 +97,7 @@ export class ServerHandlerService {
     const userList: Login[] = [
       new Login('gencayburcu@gmail.com', 'eyşan'),
       new Login('idb@gmail.com', 'cesur'),
-      new Login('test1','a')
+      new Login('test1', 'a'),
     ];
     const serverResponse = userList.filter(
       (loginInfo) =>
