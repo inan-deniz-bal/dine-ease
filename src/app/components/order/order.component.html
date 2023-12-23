@@ -1,16 +1,50 @@
 <ion-card>
   <ion-card-content>
     <ion-list>
-      <ion-item><ion-label> Menüyü Aç</ion-label>
+      <ion-item>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
       </ion-item>
-      <ion-item> Tarihi Seç </ion-item>
+
+      <ion-item
+        ><ion-label (click)="openMenu()"> Menüyü Aç</ion-label>
+      </ion-item>
+
       <ion-item> Menü Özeti </ion-item>
       <ion-item button (click)="apply({})">
         <ion-label>Onayla</ion-label>
       </ion-item>
       <ion-item button (click)="cancel()">
-       <ion-label>İptal Et</ion-label>
+        <ion-label>İptal Et</ion-label>
       </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime
+      min="{{ minDateTime }}"
+      minuteValues="0,15,30,45"
+      id="datetime"
+    ></ion-datetime>
+  </ng-template>
+</ion-modal>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title> Menü </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list *ngFor="let menuType of selectedRest.getMenuList()">
+      <div>
+        <ion-item (click)="mealClicked(menuType)"
+          ><ion-title>{{menuType.mealType}}</ion-title></ion-item
+        >
+        <div *ngIf="clickedMenutype===menuType.mealType">
+          <ion-item *ngFor="let meal of menuType.meals"
+            >{{meal.mealName}}     {{meal.mealPrice}} TL</ion-item
+          >
+        </div>
+      </div>
     </ion-list>
   </ion-card-content>
 </ion-card>

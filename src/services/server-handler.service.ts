@@ -58,6 +58,108 @@ export class ServerHandlerService {
     ],
   };
 
+  burcuMenu: Menu[] = [
+    {
+      mealType: 'Simitler ve Boyozlar',
+      meals: [
+        {
+          mealName: 'Simit',
+          mealPrice: 10,
+          mealCount: 20,
+          ingridients: [''],
+        },
+        {
+          mealName: 'Tereyağlı Simit',
+          mealPrice: 10,
+          mealCount: 5,
+          ingridients: [''],
+        },
+        {
+          mealName: 'Boyoz',
+          mealPrice: 10,
+          mealCount: 5,
+          ingridients: [''],
+        },
+        {
+          mealName: 'Çikolatalı Boyoz',
+          mealPrice: 15,
+          mealCount: 5,
+          ingridients: ['Nutella Çikolata'],
+        },
+      ],
+    },
+    {
+      mealType: 'Poğaçalar ve Açmalar',
+      meals: [
+        {
+          mealName: 'Karaköy Poğaçası',
+          mealPrice: 10,
+          mealCount: 20,
+          ingridients: [''],
+        },
+        {
+          mealName: 'Sosisli Poğaça',
+          mealPrice: 15,
+          mealCount: 5,
+          ingridients: ['Sosis'],
+        },
+        {
+          mealName: 'Zeytinli Poğaça',
+          mealPrice: 12,
+          mealCount: 5,
+          ingridients: ['Zeytin'],
+        },
+        {
+          mealName: 'Domatesli Kaşarlı Poğaça (Acar)',
+          mealPrice: 13,
+          mealCount: 5,
+          ingridients: ['Domates', 'Kaşar'],
+        },
+        {
+          mealName: 'Sade Açma',
+          mealPrice: 10,
+          mealCount: 5,
+          ingridients: [''],
+        },
+        {
+          mealName: 'Zeytinli Açma',
+          mealPrice: 14,
+          mealCount: 5,
+          ingridients: ['Zeytin'],
+        },
+      ],
+    },
+    {
+      mealType: 'Sandviçler ve Tostlar',
+      meals: [
+        {
+          mealName: 'Simit Tost',
+          mealPrice: 20,
+          mealCount: 20,
+          ingridients: ['Kaşar', 'Domates'],
+        },
+        {
+          mealName: 'Kumru',
+          mealPrice: 70,
+          mealCount: 5,
+          ingridients: ['Sosis', 'Sucuk', 'Kaşar', 'Turşu'],
+        },
+        {
+          mealName: 'Çok Peynirli Tost',
+          mealPrice: 60,
+          mealCount: 3,
+          ingridients: ['Kaşar','Tulum','Cheddar','Krem Peyniri'],
+        },
+        {
+          mealName: 'Karışık Tost',
+          mealPrice: 50,
+          mealCount: 5,
+          ingridients: ['Sucuk', 'Kaşar','Turşu'],
+        },
+      ],
+    },
+  ];
+
   getRestList(): RestList[] {
     const rets: RestList[] = [
       new RestList(
@@ -87,7 +189,7 @@ export class ServerHandlerService {
           'Aydemir',
           'Fatih',
         ],
-        [this.menu2, this.menu1]
+        this.burcuMenu
       ),
     ];
     return rets;
