@@ -19,25 +19,11 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="!showOrderComponent">
-    <ion-card-header>
-      <ion-card-title> Menü </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list *ngFor="let menuType of selectedRestaurant.getMenuList()">
-        <div>
-          <ion-item (click)="mealClicked(menuType)"
-            ><ion-title>{{menuType.mealType}}</ion-title></ion-item
-          >
-          <div *ngIf="clickedMenutype===menuType.mealType">
-            <ion-item *ngFor="let meal of menuType.meals"
-              >{{meal.mealName}}     {{meal.mealPrice}} TL</ion-item
-            >
-          </div>
-        </div>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <app-menu *ngIf="!showOrderComponent"
+    [restaurantMenu]="selectedRestaurant.getMenuList()"
+    [addCart]="false"
+  ></app-menu>
+
   <div *ngIf="showOrderComponent">
     <app-order
       [selectedRest]="selectedRestaurant"

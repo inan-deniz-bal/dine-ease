@@ -10,6 +10,8 @@ import { RestaurantPage } from './restaurant.page';
 
 import { OrderComponent } from '../components/order/order.component';
 
+import { MenuComponent } from '../components/menu/menu.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +19,6 @@ import { OrderComponent } from '../components/order/order.component';
     IonicModule,
     RestaurantPageRoutingModule
   ],
-  declarations: [RestaurantPage,OrderComponent]
+  declarations: [RestaurantPage,OrderComponent, MenuComponent]
 })
 export class RestaurantPageModule {}

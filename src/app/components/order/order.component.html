@@ -19,6 +19,11 @@
     </ion-list>
   </ion-card-content>
 </ion-card>
+
+
+<app-menu >
+
+</app-menu>
 <ion-modal [keepContentsMounted]="true">
   <ng-template>
     <ion-datetime
@@ -29,22 +34,3 @@
   </ng-template>
 </ion-modal>
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-title> Menü </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-list *ngFor="let menuType of selectedRest.getMenuList()">
-      <div>
-        <ion-item (click)="mealClicked(menuType)"
-          ><ion-title>{{menuType.mealType}}</ion-title></ion-item
-        >
-        <div *ngIf="clickedMenutype===menuType.mealType">
-          <ion-item *ngFor="let meal of menuType.meals"
-            >{{meal.mealName}}     {{meal.mealPrice}} TL</ion-item
-          >
-        </div>
-      </div>
-    </ion-list>
-  </ion-card-content>
-</ion-card>

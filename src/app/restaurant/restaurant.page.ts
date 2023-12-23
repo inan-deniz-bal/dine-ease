@@ -22,20 +22,11 @@ export class RestaurantPage implements OnInit {
     private serverSer: ServerServiceService
   ) {}
   clicked = false;
-  clickedMenutype = '';
+
   showOrderComponent = false;
   selectedTable: string = '';
 
-  mealClicked(item: any) {
-    console.log(item);
-    if(item.mealType===this.clickedMenutype){
-      this.clickedMenutype=""
-    }
-    else{
-      this.clickedMenutype = item.mealType;
-    }
 
-  }
   ngOnInit() {
     console.log(this.clicked);
 
