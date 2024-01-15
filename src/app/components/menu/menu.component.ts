@@ -3,6 +3,7 @@ import { Menu } from 'src/interfaces/menu';
 import { Input } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { Order } from 'src/interfaces/order';
+import { CurrentMenuService } from 'src/services/current-menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,9 +11,9 @@ import { Order } from 'src/interfaces/order';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  @Input() restaurantMenu: Menu[] = [
+  /* @Input() */ restaurantMenu: Menu[] = [
     {
-      mealType: '',
+      mealType: 'a',
       meals: [
         {
           mealName: '',
@@ -24,14 +25,19 @@ export class MenuComponent implements OnInit {
     },
   ];
 
-  @Input() addCart: Boolean = false;
+  @Input() addCart: Boolean = true;
+  @Input() upperMenu: Boolean = false;
   clicked = false;
   clickedMenutype = '';
 
   orderMenu: Order[] = [];
-  constructor() {}
+  constructor(private curMen: CurrentMenuService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('menü açıldı');
+    this.restaurantMenu = this.curMen.getMenu();
+    console.log('kart ', this.addCart);
+  }
 
   mealClicked(item: any) {
     console.log(item);

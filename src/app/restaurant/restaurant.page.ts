@@ -3,6 +3,7 @@ import { RestList } from 'src/classes/rest-list';
 import { SelectedRestService } from 'src/services/selected-rest.service';
 import { NavController } from '@ionic/angular';
 import { Order } from 'src/interfaces/order';
+import { CurrentMenuService } from 'src/services/current-menu.service';
 import { ServerServiceService } from 'src/services/server-service.service';
 @Component({
   selector: 'app-restaurant',
@@ -19,7 +20,8 @@ export class RestaurantPage implements OnInit {
   constructor(
     private selectedRest: SelectedRestService,
     private navCtrl: NavController,
-    private serverSer: ServerServiceService
+    private serverSer: ServerServiceService,
+    private curMen: CurrentMenuService
   ) {}
   clicked = false;
 
@@ -28,12 +30,13 @@ export class RestaurantPage implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.clicked);
+
 
     this.selectedRestaurant = this.selectedRest.getSelectedRestaurant();
     if (this.selectedRestaurant.getName() == '') {
       this.navCtrl.navigateRoot(['./home']);
     }
+    this.curMen.setMenu(this.selectedRestaurant.getMenuList())
   }
   showOrder(table: string) {
     console.log(table);

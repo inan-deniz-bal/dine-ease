@@ -1,9 +1,5 @@
+import { Meal } from './meal';
 export interface Menu {
   mealType: string;
-  meals: {
-    mealName: string;
-    mealPrice: number;
-    mealCount: number;
-    ingridients: string[];
-  }[];
+  meals: Meal[];
 }

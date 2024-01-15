@@ -20,9 +20,8 @@
   </ion-card-content>
 </ion-card>
 
-
-<app-menu >
-
+<app-menu *ngIf="showMenu">
+  [addCart]="true"
 </app-menu>
 <ion-modal [keepContentsMounted]="true">
   <ng-template>
@@ -33,4 +32,3 @@
     ></ion-datetime>
   </ng-template>
 </ion-modal>
-

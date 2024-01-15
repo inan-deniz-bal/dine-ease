@@ -3,7 +3,7 @@ import { Input } from '@angular/core';
 import { RestList } from 'src/classes/rest-list';
 import { Output, EventEmitter } from '@angular/core';
 import { Order } from 'src/interfaces/order';
-import { MenuComponent } from '../menu/menu.component';
+import { Menu } from 'src/interfaces/menu';
 
 @Component({
   selector: 'app-order',
@@ -21,6 +21,9 @@ export class OrderComponent implements OnInit {
   minuteValues: string[] = [];
 
   menuOrderList: Order[] = [{}];
+
+  showMenu: boolean = false;
+
 
   constructor() {
     const currentDate = new Date();
@@ -51,7 +54,8 @@ export class OrderComponent implements OnInit {
     this.closeOrder.emit();
   }
 
-  openMenu() {
+  async openMenu() {
     console.log(this.selectedRest.getMenuList());
+    this.showMenu = !this.showMenu;
   }
 }
