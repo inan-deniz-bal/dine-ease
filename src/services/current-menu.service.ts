@@ -21,9 +21,6 @@ export class CurrentMenuService {
   }
 
   getMenu(): Menu[] {
-    this.newMenu.subscribe((menu) => {
-      this.currentMenu = menu;
-    });
     return this.currentMenu;
   }
   //yollardan biri bu verileri local'e atmak, böylece hangi masa hangi menüde kesinleştirebiliriz

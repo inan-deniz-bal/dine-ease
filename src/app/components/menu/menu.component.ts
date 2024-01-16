@@ -4,6 +4,7 @@ import { Input } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { Order } from 'src/interfaces/order';
 import { CurrentMenuService } from 'src/services/current-menu.service';
+import { TemporaryOrderService } from 'src/services/temporary-order.service';
 
 @Component({
   selector: 'app-menu',
@@ -31,7 +32,8 @@ export class MenuComponent implements OnInit {
   clickedMenutype = '';
 
   orderMenu: Order[] = [];
-  constructor(private curMen: CurrentMenuService) {}
+  constructor(private curMen: CurrentMenuService,
+    private tempOrder: TemporaryOrderService) {}
 
   ngOnInit() {
     console.log('menü açıldı');
@@ -46,30 +48,6 @@ export class MenuComponent implements OnInit {
     } else {
       this.clickedMenutype = item.mealType;
     }
-  }
-
-  test(item: any) {
-    let hasMeal = false;
-    //burayı aktive edildiğinde sipariş için kullanabiliriz
-    this.orderMenu.map((meal) => {
-      if (meal.mealName == item.mealName) {
-        hasMeal = true;
-        if (meal.mealCount) {
-          meal.mealCount += 1;
-        }
-      }
-    });
-    if (!hasMeal) {
-      this.orderMenu.push({
-        mealCount: 1,
-        mealName: item.mealName,
-        mealPrice: item.mealPrice,
-      });
-    }
-
-    console.log('TIKLANAN YEMEK ', item);
-
-    console.log('listemiz ', this.orderMenu);
   }
 
   addFood(item: any) {
@@ -90,6 +68,7 @@ export class MenuComponent implements OnInit {
       });
     }
     console.log('liste ', this.orderMenu);
+    this.tempOrder.updateOrder(this.orderMenu)
   }
   removeFood(item: any) {
     this.orderMenu.forEach((meal) => {
@@ -103,5 +82,6 @@ export class MenuComponent implements OnInit {
       }
     });
     console.log('liste ', this.orderMenu);
+    this.tempOrder.updateOrder(this.orderMenu)
   }
 }

@@ -30,8 +30,6 @@ export class RestaurantPage implements OnInit {
 
 
   ngOnInit() {
-
-
     this.selectedRestaurant = this.selectedRest.getSelectedRestaurant();
     if (this.selectedRestaurant.getName() == '') {
       this.navCtrl.navigateRoot(['./home']);

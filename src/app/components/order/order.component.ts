@@ -4,6 +4,7 @@ import { RestList } from 'src/classes/rest-list';
 import { Output, EventEmitter } from '@angular/core';
 import { Order } from 'src/interfaces/order';
 import { Menu } from 'src/interfaces/menu';
+import { TemporaryOrderService } from 'src/services/temporary-order.service';
 
 @Component({
   selector: 'app-order',
@@ -20,12 +21,11 @@ export class OrderComponent implements OnInit {
   minDateTime: string;
   minuteValues: string[] = [];
 
-  menuOrderList: Order[] = [{}];
+  menuOrderList: Order[] = [];
 
   showMenu: boolean = false;
 
-
-  constructor() {
+  constructor(private tempOrder: TemporaryOrderService) {
     const currentDate = new Date();
 
     // Set minDateTime to the current date and time plus 30 minutes
@@ -45,7 +45,11 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tempOrder.currentOrderSubject.subscribe((menu) => {
+      this.menuOrderList = menu;
+    });
+  }
   apply(order: Order) {
     this.callOrder.emit(order);
   }
