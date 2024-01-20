@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrderHistoryPageRoutingModule } from './order-history-routing.module';
 
 import { OrderHistoryPage } from './order-history.page';
+import { PastOrderComponent } from '../components/past-order/past-order.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { OrderHistoryPage } from './order-history.page';
     IonicModule,
     OrderHistoryPageRoutingModule
   ],
-  declarations: [OrderHistoryPage]
+  declarations: [OrderHistoryPage,PastOrderComponent]
 })
 export class OrderHistoryPageModule {}

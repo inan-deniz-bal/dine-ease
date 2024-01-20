@@ -1,0 +1,17 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      {{ pastOrder.restaurantName }}
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label>{{ pastOrder.totalPrice }} TL</ion-label>
+        </ion-col>
+        <ion-col>{{ pastOrder.date }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
