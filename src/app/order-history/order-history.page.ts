@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PastOrders } from 'src/interfaces/past-orders';
 import { ServerServiceService } from 'src/services/server-service.service';
 import { Router } from '@angular/router';
+import { ClickedPastOrderService } from 'src/services/clicked-past-order.service';
 
 @Component({
   selector: 'app-order-history',
@@ -9,7 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./order-history.page.scss'],
 })
 export class OrderHistoryPage implements OnInit {
-  constructor(private server: ServerServiceService) {}
+  constructor(
+    private server: ServerServiceService,
+    private route: Router,
+    private clickedPastOrder: ClickedPastOrderService
+  ) {}
 
   pastOrders: PastOrders[] = [];
 
@@ -17,8 +22,8 @@ export class OrderHistoryPage implements OnInit {
     this.pastOrders = this.server.getPastOrders();
   }
 
-  onClickComponent(a :any)
-  {
-    console.log(a)
+  onClickComponent(clickedOrder: PastOrders) {
+    this.clickedPastOrder.setPastOrder(clickedOrder);
+    this.route.navigate(['/order-detail']);
   }
 }

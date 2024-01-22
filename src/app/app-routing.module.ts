@@ -43,7 +43,11 @@ const routes: Routes = [
   {
     path: 'order-history',
     loadChildren: () => import('./order-history/order-history.module').then( m => m.OrderHistoryPageModule)
+  },  {
+    path: 'order-detail',
+    loadChildren: () => import('./order-detail/order-detail.module').then( m => m.OrderDetailPageModule)
   }
+
 ];
 
 @NgModule({
