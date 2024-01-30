@@ -50,6 +50,14 @@ const routes: Routes = [
   {
     path: 'home-after-order',
     loadChildren: () => import('./home-after-order/home-after-order.module').then( m => m.HomeAfterOrderPageModule)
+  },
+  {
+    path: 'waiter-home',
+    loadChildren: () => import('./waiter-home/waiter-home.module').then( m => m.WaiterHomePageModule)
+  },
+  {
+    path: 'waiter-table',
+    loadChildren: () => import('./waiter-table/waiter-table.module').then( m => m.WaiterTablePageModule)
   }
 
 ];

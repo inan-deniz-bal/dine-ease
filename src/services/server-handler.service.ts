@@ -148,13 +148,13 @@ export class ServerHandlerService {
           mealName: 'Çok Peynirli Tost',
           mealPrice: 60,
           mealCount: 3,
-          ingridients: ['Kaşar','Tulum','Cheddar','Krem Peyniri'],
+          ingridients: ['Kaşar', 'Tulum', 'Cheddar', 'Krem Peyniri'],
         },
         {
           mealName: 'Karışık Tost',
           mealPrice: 50,
           mealCount: 5,
-          ingridients: ['Sucuk', 'Kaşar','Turşu'],
+          ingridients: ['Sucuk', 'Kaşar', 'Turşu'],
         },
       ],
     },
@@ -195,6 +195,31 @@ export class ServerHandlerService {
     return rets;
   }
 
+  getWorkersRestaurant(): RestList {
+    return new RestList(
+      "Burcu'nun Pastanesi",
+      20,
+      2,
+      [
+        'Atakan',
+        'Bora',
+        'Eda',
+        'Rüya',
+        'Tuna',
+        'Deniz',
+        'Utku',
+        'Mert',
+        'Kemal',
+        'Savaş',
+        'Ege',
+        'Berat',
+        'Aydemir',
+        'Fatih',
+      ],
+      this.burcuMenu
+    );
+  }
+
   loginHandler(loginUser: Login): string {
     const userList: Login[] = [
       new Login('gencayburcu@gmail.com', 'eyşan'),
@@ -217,5 +242,8 @@ export class ServerHandlerService {
 
     this.loginSer.successfulLogin();
     return 'all_true';
+  }
+  getRestaurantMenu():Menu[]{
+    return this.burcuMenu
   }
 }

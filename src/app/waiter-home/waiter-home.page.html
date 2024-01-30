@@ -1,0 +1,13 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Burcu'nun Pastanesi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-item  (click)="onClickTable(table)" *ngFor="let table of workingRestourant.getTables()">
+      {{table}}
+    </ion-item>
+  </ion-card>
+</ion-content>
