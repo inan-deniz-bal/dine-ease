@@ -7,6 +7,8 @@ import { Order } from 'src/interfaces/order';
   templateUrl: './waiter-take-payment.page.html',
   styleUrls: ['./waiter-take-payment.page.scss'],
 })
+// EKSİKLER
+// FİYATLANDIRMA EKSİK
 export class WaiterTakePaymentPage implements OnInit {
   orderList: Order[] = [
     {
