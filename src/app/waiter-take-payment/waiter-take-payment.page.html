@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{tableName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <!--Burada forla döneceğiz-->
+      <ion-item *ngFor=" let order of orderList">
+        <ion-col> {{order.mealName}} [{{order.mealCount}}]</ion-col>
+        <ion-buttons>
+          <ion-button (click)="addToPay(order)">Ekle</ion-button>
+          <!--<ion-button (click)="removeFromPay(order)">Çıkart</ion-button> -->
+        </ion-buttons>
+      </ion-item>
+      <div class="kalan">
+        Ödemesi alınanlar:
+
+        <ion-list>
+          <ion-row
+            *ngFor="let meals of mealsToPay "
+            (click)="removeFromPay(meals)"
+          >
+            {{meals.mealName}} / [{{meals.mealCount}}]
+          </ion-row>
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full"> Ödemeyi Onayla </ion-button>
+</ion-content>

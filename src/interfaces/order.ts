@@ -1,5 +1,5 @@
 export interface Order {
-  mealCount?: number;
+  mealCount: number;
   mealName?: string;
   mealPrice?: number;
 }

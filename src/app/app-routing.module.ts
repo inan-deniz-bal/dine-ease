@@ -43,7 +43,8 @@ const routes: Routes = [
   {
     path: 'order-history',
     loadChildren: () => import('./order-history/order-history.module').then( m => m.OrderHistoryPageModule)
-  },  {
+  },
+  {
     path: 'order-detail',
     loadChildren: () => import('./order-detail/order-detail.module').then( m => m.OrderDetailPageModule)
   },
@@ -58,7 +59,12 @@ const routes: Routes = [
   {
     path: 'waiter-table',
     loadChildren: () => import('./waiter-table/waiter-table.module').then( m => m.WaiterTablePageModule)
-  }
+  },  {
+    path: 'waiter-take-payment',
+    loadChildren: () => import('./waiter-take-payment/waiter-take-payment.module').then( m => m.WaiterTakePaymentPageModule)
+  },
+
+
 
 ];
 
