@@ -11,7 +11,7 @@ export class QrPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //this.startScanner()
+    this.startScanner()
   }
 
   async startScanner(){

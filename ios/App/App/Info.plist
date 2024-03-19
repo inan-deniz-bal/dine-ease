@@ -6,6 +6,8 @@
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>dine-ease</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To be able to scan barcodes</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
