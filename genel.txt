@@ -1,0 +1,13 @@
+Sorunlar ve Eksikler:
+1) Menüye yemek ekleyince altında fazladan onayla!! çıkıyor
+2) Menüye yemek ekleyince toplam fiyat çıkmıyor
+3) Menü kısmında zaman kontrolcüsü Eksikler
+4) Rehome kısmına dinamik veri gelmeli
+5) Waiter home kısmına dinamik veri eklenmeli ve fiyatlar eklenmeli
+6) Payment kısmı için kart seçilmeli
+7) Kart ekle kısmı yapılmalı
+8) Scan QR sayfası yapılmalı
+9) Payment history kısmı dinamik yapılmalı
+10) Settings kısmı yapılabilir
+
+11) BACKEND TAMAMEN EKSİK
