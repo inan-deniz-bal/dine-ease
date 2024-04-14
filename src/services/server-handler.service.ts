@@ -3,12 +3,16 @@ import { RestList } from 'src/classes/rest-list';
 import { Login } from 'src/classes/login';
 import { Menu } from 'src/interfaces/menu';
 import { LoginService } from './login.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServerHandlerService {
-  constructor(private loginSer: LoginService) {}
+  constructor(private loginSer: LoginService, private http: HttpClient) {}
+
+  apiUrl = 'http://localhost:3000/api/v1';
 
   menu1: Menu = {
     mealType: 'Sıcaklar',
@@ -219,7 +223,7 @@ export class ServerHandlerService {
       this.burcuMenu
     );
   }
-
+  /*
   loginHandler(loginUser: Login): string {
     const userList: Login[] = [
       new Login('gencayburcu@gmail.com', 'eyşan'),
@@ -242,8 +246,12 @@ export class ServerHandlerService {
 
     this.loginSer.successfulLogin();
     return 'all_true';
+  }*/
+  getRestaurantMenu(): Menu[] {
+    return this.burcuMenu;
   }
-  getRestaurantMenu():Menu[]{
-    return this.burcuMenu
+
+  login(data: Login): Observable<any> {
+    return this.http.post(`${this.apiUrl}/customers/login`, data.getUserInfo());
   }
 }

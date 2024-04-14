@@ -8,7 +8,7 @@ export class Login {
   }
   getUserInfo(){
     return {
-      mail:this.mail,
+      email:this.mail,
       password:this.password
     }
   }
