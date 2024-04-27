@@ -1,11 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>sign-up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense"> </ion-header>
   <ion-card>
     <ion-list>
       <ion-item>
@@ -22,7 +24,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="passowrd"></ion-input>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Username</ion-label>

@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="homeE">
   <ion-card *ngFor="let rest of restourants" (click)="showRestaurant(rest)">
     <ion-card-title> {{rest.getName()}} </ion-card-title>
     <ion-card-content> {{rest.getRate()}} </ion-card-content>

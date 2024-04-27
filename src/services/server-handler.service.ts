@@ -5,7 +5,7 @@ import { Menu } from 'src/interfaces/menu';
 import { LoginService } from './login.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { Customer } from 'src/interfaces/customer';
 @Injectable({
   providedIn: 'root',
 })
@@ -253,5 +253,8 @@ export class ServerHandlerService {
 
   login(data: Login): Observable<any> {
     return this.http.post(`${this.apiUrl}/customers/login`, data.getUserInfo());
+  }
+  signUp(user: Customer): Observable<any> {
+    return this.http.post(`${this.apiUrl}/customers/`, user);
   }
 }
