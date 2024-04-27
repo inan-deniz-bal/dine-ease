@@ -257,4 +257,9 @@ export class ServerHandlerService {
   signUp(user: Customer): Observable<any> {
     return this.http.post(`${this.apiUrl}/customers/`, user);
   }
+
+  getPastOrders(): Observable<any> {
+    const userID = this.loginSer.getUser();
+    return this.http.get(`${this.apiUrl}/pastOrders/${userID}`);
+  }
 }

@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
         console.log('cevap bastırılıyor:', response);
 
         this.menuCtrl.enable(true);
-        this.loginSer.successfulLogin();
+        this.loginSer.successfulLogin(response.data.userid);
         this.navctrl.navigateRoot('/home');
       },
       error: (error) => {

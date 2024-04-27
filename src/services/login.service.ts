@@ -18,13 +18,23 @@ export class LoginService {
     return false
   }
 
-  successfulLogin(){
+  successfulLogin(userID:string){
     localStorage.setItem('login-info', JSON.stringify({ info: true }));
+    localStorage.setItem('userid',userID)
+  }
+
+  getUser():string{
+    const userID=localStorage.getItem('userid')
+    if(userID){
+      return userID
+    }
+    return ""
   }
 
   logOut(){
     if(localStorage.getItem('login-info')){
       localStorage.removeItem('login-info')
+      localStorage.clear();
     }
     console.log("çıkış yapıldı")
   }

@@ -4,4 +4,6 @@ export interface PastOrders {
   totalPrice: Number;
   date: String;
   orderedMeals: Order[];
+  customerId?: String;
+  _id?: String;
 }

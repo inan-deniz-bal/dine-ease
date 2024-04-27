@@ -35,7 +35,6 @@ export class SignUpPage implements OnInit {
 
   signUp() {
     if (this.username) {
-      this.loginSer.successfulLogin();
       this.menuCtrl.enable(true);
       this.checkErrors();
       //this.navCtrl.navigateRoot('home');
@@ -98,18 +97,21 @@ export class SignUpPage implements OnInit {
         next: (response) => {
           console.log(response);
           if (response.status == 'success') {
-            this.alert.create({
-              header: 'Başarılı',
-              message: 'Kaydınız başarıyla oluşturuldu!',
-              buttons: [
-                {
-                  text: 'Tamam',
-                  handler: () => {
-                    this.navCtrl.navigateRoot('/home');
+            this.loginSer.successfulLogin(response.data.userid);
+            this.alert
+              .create({
+                header: 'Başarılı',
+                message: 'Kaydınız başarıyla oluşturuldu!',
+                buttons: [
+                  {
+                    text: 'Tamam',
+                    handler: () => {
+                      this.navCtrl.navigateRoot('/home');
+                    },
                   },
-                },
-              ],
-            }).then((alertEl) => alertEl.present());;
+                ],
+              })
+              .then((alertEl) => alertEl.present());
           }
         },
         error: (error) => {
