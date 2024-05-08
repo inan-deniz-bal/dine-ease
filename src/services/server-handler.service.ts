@@ -6,6 +6,7 @@ import { LoginService } from './login.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Customer } from 'src/interfaces/customer';
+import { Restaurant } from 'src/types/restaurantType';
 @Injectable({
   providedIn: 'root',
 })
@@ -261,5 +262,11 @@ export class ServerHandlerService {
   getPastOrders(): Observable<any> {
     const userID = this.loginSer.getUser();
     return this.http.get(`${this.apiUrl}/pastOrders/${userID}`);
+  }
+
+  getAllRestaurants(): Observable<{ status: string; data: Restaurant[] }> {
+    return this.http.get<{ status: string; data: Restaurant[] }>(
+      `${this.apiUrl}/restaurants`
+    );
   }
 }

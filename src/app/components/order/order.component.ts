@@ -5,6 +5,8 @@ import { Output, EventEmitter } from '@angular/core';
 import { Order } from 'src/interfaces/order';
 import { Menu } from 'src/interfaces/menu';
 import { TemporaryOrderService } from 'src/services/temporary-order.service';
+import { Restaurant } from 'src/types/restaurantType';
+import { Table } from 'src/types/tableType';
 
 @Component({
   selector: 'app-order',
@@ -12,8 +14,15 @@ import { TemporaryOrderService } from 'src/services/temporary-order.service';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnInit {
-  @Input() selectedRest: RestList = new RestList('', 0, 0, [], []);
-  @Input() tableNumber: string = '';
+  @Input() selectedRest: Restaurant={
+    name: '',
+    address: '',
+    menu: [],
+    tableList: [],
+    totalCapacity: 0,
+    customerCount: 0,
+  }
+  @Input() tableNumber: String = '';
 
   @Output() callOrder: EventEmitter<Order> = new EventEmitter<Order>();
   @Output() closeOrder: EventEmitter<any> = new EventEmitter<any>();
@@ -59,7 +68,7 @@ export class OrderComponent implements OnInit {
   }
 
   async openMenu() {
-    console.log(this.selectedRest.getMenuList());
+    console.log(this.selectedRest.menu);
     this.showMenu = !this.showMenu;
   }
 }

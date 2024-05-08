@@ -6,7 +6,7 @@ import { SelectedRestaurant } from 'src/interfaces/selected-restaurant';
 import { LoginService } from 'src/services/login.service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-
+import { Restaurant } from 'src/types/restaurantType';
 
 @Component({
   selector: 'app-home',
@@ -15,33 +15,37 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
   restourants: RestList[] = [];
+  restaurants: Restaurant[] = [];
   constructor(
-
     private serverH: ServerHandlerService,
     private selectedRest: SelectedRestService,
-    private route:Router,
-    private loginSer:LoginService,
-    private navCtrl:NavController
-
+    private route: Router,
+    private loginSer: LoginService,
+    private navCtrl: NavController
   ) {}
 
-  isLoggedIn:boolean=false;
+  isLoggedIn: boolean = false;
   ngOnInit() {
-    if(this.loginSer.checkLogin())
-    {
-      console.log("hello")
+    if (this.loginSer.checkLogin()) {
+      console.log('hello');
 
-      this.restourants = this.serverH.getRestList();
-      console.log("Restaurants ",this.restourants)
+      //this.restourants = this.serverH.getRestList();
+      console.log('Restaurants ', this.restourants);
+      this.serverH.getAllRestaurants().subscribe({
+        next: (data) => {
+          console.log('Data:', data);
+          this.restaurants = data.data;
+        },
+        error: (error) => {
+          console.log('Error:', error);
+        },
+      });
+    } else {
+      this.navCtrl.navigateRoot('/login');
     }
-    else{
-      this.navCtrl.navigateRoot('/login')
-    }
-
   }
-  showRestaurant(selectedRestaurant: RestList) {
-
-    this.selectedRest.selectRestaurant(selectedRestaurant);
-    this.route.navigate(['./restaurant'])
+  showRestaurant(selectedRestaurant: Restaurant) {
+  this.selectedRest.selectRestaurant(selectedRestaurant);
+   this.route.navigate(['./restaurant']);
   }
 }

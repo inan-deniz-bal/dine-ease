@@ -8,8 +8,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="homeE">
-  <ion-card *ngFor="let rest of restourants" (click)="showRestaurant(rest)">
-    <ion-card-title> {{rest.getName()}} </ion-card-title>
-    <ion-card-content> {{rest.getRate()}} </ion-card-content>
+  <ion-card *ngFor="let rest of restaurants" (click)="showRestaurant(rest)">
+    <ion-card-title> {{rest.name}} </ion-card-title>
+    <ion-card-content
+      >{{rest.customerCount}}/ {{rest.totalCapacity}}
+    </ion-card-content>
   </ion-card>
 </ion-content>

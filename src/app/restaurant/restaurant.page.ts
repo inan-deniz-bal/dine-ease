@@ -1,17 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { RestList } from 'src/classes/rest-list';
 import { SelectedRestService } from 'src/services/selected-rest.service';
 import { NavController } from '@ionic/angular';
 import { Order } from 'src/interfaces/order';
 import { CurrentMenuService } from 'src/services/current-menu.service';
 import { ServerServiceService } from 'src/services/server-service.service';
+import { Restaurant } from 'src/types/restaurantType';
+import { Table } from 'src/types/tableType';
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.page.html',
   styleUrls: ['./restaurant.page.scss'],
 })
 export class RestaurantPage implements OnInit {
-  selectedRestaurant: RestList = new RestList('', 0, 0, [], []);
+  selectedRestaurant: Restaurant = {
+    name: '',
+    address: '',
+    menu: [],
+    tableList: [],
+    totalCapacity: 0,
+    customerCount: 0,
+  };
   /*selectedRestaurant: SelectedRestaurant = {
     name: '',
     rate: '',
@@ -26,17 +34,22 @@ export class RestaurantPage implements OnInit {
   clicked = false;
 
   showOrderComponent = false;
-  selectedTable: string = '';
-
+  selectedTable: Table = {
+    tableName: '',
+    status: '',
+    currentOrder: '',
+    customerId: '',
+  };
 
   ngOnInit() {
     this.selectedRestaurant = this.selectedRest.getSelectedRestaurant();
-    if (this.selectedRestaurant.getName() == '') {
+    console.log(this.selectedRestaurant)
+    if (this.selectedRestaurant.name == '') {
       this.navCtrl.navigateRoot(['./home']);
     }
-    this.curMen.setMenu(this.selectedRestaurant.getMenuList())
+    this.curMen.setMenu(this.selectedRestaurant.menu);
   }
-  showOrder(table: string) {
+  showOrder(table: Table) {
     console.log(table);
     this.selectedTable = table;
     this.showOrderComponent = !this.showOrderComponent;

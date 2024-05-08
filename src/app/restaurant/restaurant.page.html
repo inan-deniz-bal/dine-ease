@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{selectedRestaurant.getName()}}</ion-title>
+    <ion-title>{{selectedRestaurant.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,20 +13,18 @@
       <ion-card-title> Masalar </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-list *ngFor="let table of selectedRestaurant.getTables()">
-        <ion-item (click)="showOrder(table)">{{table}}</ion-item>
+      <ion-list *ngFor="let table of selectedRestaurant.tableList">
+        <ion-item (click)="showOrder(table)">{{table.tableName}}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <app-menu *ngIf="!showOrderComponent"
-    [addCart]="false"
-  ></app-menu>
+  <app-menu *ngIf="!showOrderComponent" [addCart]="false"></app-menu>
 
   <div *ngIf="showOrderComponent">
     <app-order
       [selectedRest]="selectedRestaurant"
-      [tableNumber]="selectedTable"
+      [tableNumber]="selectedTable.tableName"
       (callOrder)="orderItem($event)"
       (closeOrder)="showOrder($event)"
     ></app-order>
