@@ -12,13 +12,17 @@
 
       <ion-item detail="true"> Menü Özeti </ion-item>
       <ion-grid>
-        <ion-item *ngFor="let order of menuOrderList">
-          {{ order.mealName }} - {{ order.mealPrice }} /
-          {{ order.mealCount }}</ion-item
+        <ion-item
+          *ngFor="let order of menuOrderList"
+          (click)="removeFood(order)"
         >
+          {{ order.mealName }} - {{ order.mealPrice }} /
+          {{ order.mealCount }}
+        </ion-item>
       </ion-grid>
-      <ion-item  *ngFor="let order of menuOrderList" button (click)="apply(order)"> <!--buraya bakılacak-->
-        <ion-label>Onayla !!</ion-label>
+      <ion-item button (click)="apply()">
+        <!--buraya bakılacak-->
+        <ion-label>Onayla</ion-label>
       </ion-item>
       <ion-item button (click)="cancel()">
         <ion-label>İptal Et</ion-label>

@@ -11,7 +11,7 @@ export class WaiterTablePage implements OnInit {
 
   constructor(private waiterTable:WaiterTableHandlerService,
     private route: Router) { }
-  table=""
+  table:String=""
   currentFee=0
   ngOnInit() {
     this.table=this.waiterTable.getTable()

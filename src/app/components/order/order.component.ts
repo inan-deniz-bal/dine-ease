@@ -24,7 +24,7 @@ export class OrderComponent implements OnInit {
   }
   @Input() tableNumber: String = '';
 
-  @Output() callOrder: EventEmitter<Order> = new EventEmitter<Order>();
+  @Output() callOrder: EventEmitter<Order[]> = new EventEmitter<Order[]>();
   @Output() closeOrder: EventEmitter<any> = new EventEmitter<any>();
 
   minDateTime: string;
@@ -59,8 +59,9 @@ export class OrderComponent implements OnInit {
       this.menuOrderList = menu;
     });
   }
-  apply(order: Order) {
-    this.callOrder.emit(order);
+  apply() {
+    console.log(this.menuOrderList);
+    this.callOrder.emit(this.menuOrderList);
   }
 
   cancel() {
@@ -70,5 +71,17 @@ export class OrderComponent implements OnInit {
   async openMenu() {
     console.log(this.selectedRest.menu);
     this.showMenu = !this.showMenu;
+  }
+
+  removeFood(Item:Order){
+    this.menuOrderList.forEach((meal) => {
+      if (meal.mealName == Item.mealName && meal.mealCount) {
+        meal.mealCount -= 1;
+        if(meal.mealCount==0){
+          this.menuOrderList.splice(this.menuOrderList.indexOf(meal),1);
+        }
+      }
+    });
+    this.tempOrder.updateOrder(this.menuOrderList);
   }
 }

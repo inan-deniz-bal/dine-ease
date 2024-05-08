@@ -1,6 +1,6 @@
 export type Table = {
-  tableName: String;
-  status: String;
-  currentOrder: String;
-  customerId: String;
+  tableName: String|string;
+  status: String|string;
+  currentOrder: String|string;
+  customerId: String|string;
 };

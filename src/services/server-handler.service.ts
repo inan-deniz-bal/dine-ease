@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Customer } from 'src/interfaces/customer';
 import { Restaurant } from 'src/types/restaurantType';
+import { Table } from 'src/types/tableType';
 @Injectable({
   providedIn: 'root',
 })
@@ -267,6 +268,12 @@ export class ServerHandlerService {
   getAllRestaurants(): Observable<{ status: string; data: Restaurant[] }> {
     return this.http.get<{ status: string; data: Restaurant[] }>(
       `${this.apiUrl}/restaurants`
+    );
+  }
+
+  getTablesForRestaurant(restaurantID: string): Observable<{ status: string; data:Table[] }> {
+    return this.http.get<{ status: string; data: Table[] }>(
+      `${this.apiUrl}/restaurants/tables/${restaurantID}`
     );
   }
 }

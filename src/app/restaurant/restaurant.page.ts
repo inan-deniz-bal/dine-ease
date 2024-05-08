@@ -43,7 +43,7 @@ export class RestaurantPage implements OnInit {
 
   ngOnInit() {
     this.selectedRestaurant = this.selectedRest.getSelectedRestaurant();
-    console.log(this.selectedRestaurant)
+    console.log(this.selectedRestaurant);
     if (this.selectedRestaurant.name == '') {
       this.navCtrl.navigateRoot(['./home']);
     }
@@ -55,7 +55,7 @@ export class RestaurantPage implements OnInit {
     this.showOrderComponent = !this.showOrderComponent;
   }
 
-  orderItem(order: Order) {
-    this.serverSer.orderItem(order);
+  orderItem(order: Order[]) {
+    //this.serverSer.orderItem(order);
   }
 }

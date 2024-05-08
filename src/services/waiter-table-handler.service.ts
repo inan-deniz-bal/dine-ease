@@ -6,12 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class WaiterTableHandlerService {
   //selectedTable = new Subject<string>();
-  selectedTable=""
+  selectedTable:String|string=""
   getTable(){
     return this.selectedTable
   }
 
-  setTable(selectedT:string)
+  setTable(selectedT:String)
   {
     this.selectedTable=selectedT
   }
