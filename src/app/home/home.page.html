@@ -3,15 +3,24 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>HOME</ion-title>
+    <ion-title>Anasayfa</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="homeE">
   <ion-card *ngFor="let rest of restaurants" (click)="showRestaurant(rest)">
     <ion-card-title> {{rest.name}} </ion-card-title>
-    <ion-card-content
-      >{{rest.customerCount}}/ {{rest.totalCapacity}}
+    <ion-card-content>
+      <ion-row>
+        <ion-col>Kapasite</ion-col>
+        <ion-col>Park Yeri</ion-col>
+        <ion-col>Vegan Menü</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col> {{rest.customerCount}}/ {{rest.totalCapacity}} </ion-col>
+        <ion-col>0</ion-col>
+        <ion-col>Yok</ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-content>

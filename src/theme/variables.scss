@@ -242,3 +242,29 @@ html {
    */
   --ion-dynamic-font: var(--ion-default-dynamic-font);
 }
+
+ion-content{
+  --background:#DDF7E3;
+}
+
+ion-card{
+  padding: 10px;
+  --background:#DF2E38;
+}
+
+ion-card-content{
+  color:white;
+}
+
+ion-input{
+  background:white;
+}
+
+ion-header{
+  --background:transparent;
+}
+ion-toolbar{
+  --background:#788977;
+}
+
+

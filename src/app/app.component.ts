@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Home', url: 'home', icon: 'home' },
-    { title: 'Rehome', url: 'home-after-order', icon: 'home' },
-    { title: 'Waiter Home', url: 'waiter-home', icon: 'home' },
-    { title: 'Payment', url: 'payment', icon: 'card' },
-    { title: 'Scan QR', url: 'qr', icon: 'qr-code' },
-    { title: 'Payment History', url: 'order-history', icon: 'wallet' },
-    { title: 'Settings', url: 'settings', icon: 'settings' },
-    { title: 'Logout', url: 'login', icon: 'log-out' },
+    { title: 'Anasayfa', url: 'home', icon: 'home' },
+    { title: 'Anasayfa', url: 'home-after-order', icon: 'home' },
+    { title: 'Anasayfa', url: 'waiter-home', icon: 'home' },
+    { title: 'Kartlar', url: 'payment', icon: 'card' },
+    { title: 'QR Tara', url: 'qr', icon: 'qr-code' },
+    { title: 'Ödeme Geçmişi', url: 'order-history', icon: 'wallet' },
+    { title: 'Ayarlar', url: 'settings', icon: 'settings' },
+    { title: 'Çıkış Yap', url: 'login', icon: 'log-out' },
   ];
 }

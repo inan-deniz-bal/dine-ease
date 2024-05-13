@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>sign-up</ion-title>
+    <ion-title>Kayıt Olma Sayfası</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,23 +11,23 @@
   <ion-card>
     <ion-list>
       <ion-item>
-        <ion-label>Name</ion-label>
+        <ion-label>İsim</ion-label>
         <ion-input type="text" [(ngModel)]="name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Surname</ion-label>
+        <ion-label>Soyisim</ion-label>
         <ion-input type="text" [(ngModel)]="surname"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Birthday</ion-label>
+        <ion-label>Doğum Tarihi</ion-label>
         <ion-input type="date" [(ngModel)]="birthday"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Password</ion-label>
+        <ion-label>Şifre</ion-label>
         <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Username</ion-label>
+        <ion-label>Kullanıcı Adı</ion-label>
         <ion-input type="text" [(ngModel)]="username"></ion-input>
       </ion-item>
       <ion-item>
@@ -35,7 +35,7 @@
         <ion-input type="email" [(ngModel)]="e_mail"></ion-input>
       </ion-item>
 
-      <ion-button expand="block" (click)="signUp()">Sign Up</ion-button>
+      <ion-button expand="block" (click)="signUp()">Kayıt Ol</ion-button>
     </ion-list>
   </ion-card>
 </ion-content>

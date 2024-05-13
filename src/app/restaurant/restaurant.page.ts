@@ -56,6 +56,8 @@ export class RestaurantPage implements OnInit {
   }
 
   orderItem(order: Order[]) {
+    console.log("hey ", order)
+    this.navCtrl.navigateForward(['./home-after-order']);
     //this.serverSer.orderItem(order);
   }
 }

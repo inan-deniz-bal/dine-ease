@@ -60,7 +60,6 @@ export class OrderComponent implements OnInit {
     });
   }
   apply() {
-    console.log(this.menuOrderList);
     this.callOrder.emit(this.menuOrderList);
   }
 
