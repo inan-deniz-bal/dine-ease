@@ -14,7 +14,11 @@ import { Table } from 'src/types/tableType';
 export class ServerHandlerService {
   constructor(private loginSer: LoginService, private http: HttpClient) {}
 
-  apiUrl = 'http://localhost:3000/api/v1';
+  //apiUrl = 'http://localhost:3000/api/v1';
+
+  apiUrl="https://node1-1-ri4g.onrender.com/api/v1"
+
+
 
   menu1: Menu = {
     mealType: 'Sıcaklar',

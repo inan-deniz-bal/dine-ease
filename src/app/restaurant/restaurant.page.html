@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <app-menu *ngIf="!showOrderComponent" [addCart]="false"></app-menu>
   <ion-card *ngIf="!showOrderComponent">
     <ion-card-header>
       <ion-card-title> Masalar </ion-card-title>
@@ -18,8 +19,6 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-
-  <app-menu *ngIf="!showOrderComponent" [addCart]="false"></app-menu>
 
   <div *ngIf="showOrderComponent">
     <app-order

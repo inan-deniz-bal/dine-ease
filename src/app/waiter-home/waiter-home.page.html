@@ -9,8 +9,13 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <ion-item  (click)="onClickTable(table)" *ngFor="let table of restaurantTables">
-      {{table.tableName}}
-    </ion-item>
+    <ion-card-content>
+      <ion-item
+        (click)="onClickTable(table)"
+        *ngFor="let table of restaurantTables"
+      >
+        {{table.tableName}}
+      </ion-item>
+    </ion-card-content>
   </ion-card>
 </ion-content>
