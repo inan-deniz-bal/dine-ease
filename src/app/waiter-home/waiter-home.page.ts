@@ -17,7 +17,7 @@ export class WaiterHomePage implements OnInit {
     private route: Router
   ) {}
 
-  tempRestID = '663b5d2827a9efffd8369842';
+  tempRestID = '66434642221e055b49030d4c';
 
   restaurantTables: Table[] = [];
   ngOnInit() {
