@@ -24,6 +24,8 @@ export class HomePage implements OnInit {
     private navCtrl: NavController
   ) {}
 
+  imageList = ['./../../assets/rst.jpg', './../../assets/pastane.png', './../../assets/kebap.jpeg'];
+
   isLoggedIn: boolean = false;
   ngOnInit() {
     if (this.loginSer.checkLogin()) {
@@ -35,6 +37,9 @@ export class HomePage implements OnInit {
         next: (data) => {
           console.log('Data:', data);
           this.restaurants = data.data;
+          this.restaurants[0].images = this.imageList[1];
+          this.restaurants[1].images = this.imageList[0];
+          this.restaurants[2].images = this.imageList[2];
         },
         error: (error) => {
           console.log('Error:', error);
@@ -45,7 +50,7 @@ export class HomePage implements OnInit {
     }
   }
   showRestaurant(selectedRestaurant: Restaurant) {
-  this.selectedRest.selectRestaurant(selectedRestaurant);
-   this.route.navigate(['./restaurant']);
+    this.selectedRest.selectRestaurant(selectedRestaurant);
+    this.route.navigate(['./restaurant']);
   }
 }

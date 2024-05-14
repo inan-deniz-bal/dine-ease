@@ -7,4 +7,5 @@ export type Restaurant = {
   tableList: Table[];
   totalCapacity: Number;
   customerCount: Number;
+  images?:string;
 };

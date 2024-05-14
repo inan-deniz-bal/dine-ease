@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true" class="homeE">
   <ion-card *ngFor="let rest of restaurants" (click)="showRestaurant(rest)">
-    <img src="./../../assets/rst.jpg">
+    <img src={{rest.images}}>
     <ion-card-title> {{rest.name}} </ion-card-title>
     <ion-card-content>
 
