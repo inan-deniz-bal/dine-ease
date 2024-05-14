@@ -7,15 +7,28 @@
       </ion-item>
 
       <ion-item
-        ><ion-label (click)="openMenu()"> Menüyü Aç</ion-label>
+        ><ion-label (click)="openMenu()">{{ menuText }}</ion-label>
       </ion-item>
 
-      <ion-item detail="true"> Menü Özeti </ion-item>
+      <div class="menuSum">
+        <ion-item detail="true"> Menü Özeti </ion-item>
 
-      <ion-item *ngFor="let order of menuOrderList" (click)="removeFood(order)">
-        {{ order.mealName }} - {{ order.mealPrice }} /
-        {{ order.mealCount }}
-      </ion-item>
+        <ion-row
+          *ngFor="let order of menuOrderList"
+          (click)="removeFood(order)"
+        >
+          <div class="order">
+            <div>
+              {{ order.mealName }}
+            </div>
+            <div>
+              {{ order.mealCount }}/ {{ order.mealPrice * order.mealCount }} TL
+            </div>
+          </div>
+        </ion-row>
+
+        <div class="total"></div>
+      </div>
 
       <ion-row>
         <ion-col>

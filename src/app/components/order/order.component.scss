@@ -1,12 +1,22 @@
-ion-item{
-  color:black
+ion-item {
+  color: black;
 }
 
-ion-row{
+ion-row {
   background-color: #fefded;
-  color:black
+  font-size: 16px;
+  color: black;
+  padding: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-ion-list{
+.order {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+ion-list {
   background-color: #fefded;
 }

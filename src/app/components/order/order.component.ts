@@ -14,23 +14,27 @@ import { Table } from 'src/types/tableType';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnInit {
-  @Input() selectedRest: Restaurant={
+  @Input() selectedRest: Restaurant = {
     name: '',
     address: '',
     menu: [],
     tableList: [],
     totalCapacity: 0,
     customerCount: 0,
-  }
+  };
   @Input() tableNumber: String = '';
 
   @Output() callOrder: EventEmitter<Order[]> = new EventEmitter<Order[]>();
   @Output() closeOrder: EventEmitter<any> = new EventEmitter<any>();
 
+  menuText = 'Menüyü Göster';
+
   minDateTime: string;
   minuteValues: string[] = [];
 
   menuOrderList: Order[] = [];
+
+  total:Number=0;
 
   showMenu: boolean = false;
 
@@ -70,14 +74,19 @@ export class OrderComponent implements OnInit {
   async openMenu() {
     console.log(this.selectedRest.menu);
     this.showMenu = !this.showMenu;
+    if (this.showMenu) {
+      this.menuText = 'Menüyü Kapat';
+    } else {
+      this.menuText = 'Menüyü Göster';
+    }
   }
 
-  removeFood(Item:Order){
+  removeFood(Item: Order) {
     this.menuOrderList.forEach((meal) => {
       if (meal.mealName == Item.mealName && meal.mealCount) {
         meal.mealCount -= 1;
-        if(meal.mealCount==0){
-          this.menuOrderList.splice(this.menuOrderList.indexOf(meal),1);
+        if (meal.mealCount == 0) {
+          this.menuOrderList.splice(this.menuOrderList.indexOf(meal), 1);
         }
       }
     });

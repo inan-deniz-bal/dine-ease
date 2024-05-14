@@ -59,7 +59,8 @@ const routes: Routes = [
   {
     path: 'waiter-table',
     loadChildren: () => import('./waiter-table/waiter-table.module').then( m => m.WaiterTablePageModule)
-  },  {
+  },
+  {
     path: 'waiter-take-payment',
     loadChildren: () => import('./waiter-take-payment/waiter-take-payment.module').then( m => m.WaiterTakePaymentPageModule)
   },

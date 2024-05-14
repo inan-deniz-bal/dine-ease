@@ -1,15 +1,19 @@
-ion-item{
-  color:black
+ion-item {
+  color: black;
 }
 
-ion-title{
-  color:black
+ion-title {
+  color: black;
 }
-ion-row{
+ion-row {
   background-color: transparent;
-
 }
 
-ion-list{
+ion-list {
   background-color: transparent;
+}
+.meal {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

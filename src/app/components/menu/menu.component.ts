@@ -51,24 +51,28 @@ export class MenuComponent implements OnInit {
   }
 
   addFood(item: any) {
-    let hasMeal = false;
-    this.orderMenu.forEach((meal) => {
-      if (meal.mealName == item.mealName) {
-        hasMeal = true;
-        if (meal.mealCount) {
-          meal.mealCount += 1;
+    if(this.addCart)
+      {
+        let hasMeal = false;
+        this.orderMenu.forEach((meal) => {
+          if (meal.mealName == item.mealName) {
+            hasMeal = true;
+            if (meal.mealCount) {
+              meal.mealCount += 1;
+            }
+          }
+        });
+        if (!hasMeal) {
+          this.orderMenu.push({
+            mealCount: 1,
+            mealName: item.mealName,
+            mealPrice: item.mealPrice,
+          });
         }
+        console.log('liste ', this.orderMenu);
+        this.tempOrder.updateOrder(this.orderMenu)
       }
-    });
-    if (!hasMeal) {
-      this.orderMenu.push({
-        mealCount: 1,
-        mealName: item.mealName,
-        mealPrice: item.mealPrice,
-      });
-    }
-    console.log('liste ', this.orderMenu);
-    this.tempOrder.updateOrder(this.orderMenu)
+
   }
   removeFood(item: any) {
     this.orderMenu.forEach((meal) => {

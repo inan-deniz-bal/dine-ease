@@ -9,13 +9,18 @@
           ><ion-title>{{ menuType.mealType }}</ion-title></ion-item
         >
         <div *ngIf="clickedMenutype === menuType.mealType">
-          <ion-item *ngFor="let meal of menuType.meals"
-            >{{ meal.mealName }} {{ meal.mealPrice }} TL
-            <ion-buttons *ngIf="addCart">
+          <ion-item *ngFor="let meal of menuType.meals" (click)="addFood(meal)">
+            <div class="meal">
+              <div>
+                {{ meal.mealName }}
+              </div>
+              <div>{{ meal.mealPrice }} TL</div>
+            </div>
+            <!--<ion-buttons *ngIf="addCart">
               <ion-button (click)="addFood(meal)">Add</ion-button>
               <ion-button (click)="removeFood(meal)">Remove</ion-button>
-            </ion-buttons></ion-item
-          >
+            </ion-buttons>
+          --></ion-item>
         </div>
       </div>
     </ion-list>
