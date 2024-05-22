@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>add-card</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-img src="../../assets/kart-2.png"></ion-img>
+
+
+  <div class="card-form">
+    <div class="card-header">
+      <ion-label>Kart Numarası</ion-label>
+      <ion-input>{{newCard.cardNo}}</ion-input>
+    </div>
+    <div class="card-content">
+      <div class="card-holder">
+        <ion-label>Ad Soyad</ion-label>
+        <ion-input>{{newCard.cardHolder}}</ion-input>
+      </div>
+      <div class="card-details">
+        <div class="date">
+          <div>
+            <ion-label>Ay</ion-label>
+            <ion-input type="">{{newCard.expirityDate.month}}</ion-input>
+          </div>
+          <div>/</div>
+          <div>
+            <ion-label>Yıl</ion-label>
+            <ion-input>{{newCard.expirityDate.month}}</ion-input>
+          </div>
+        </div>
+        <div class="cvv"></div>
+        <div>
+          <ion-label>CVV</ion-label>
+          <ion-input>{{newCard.cvv}}</ion-input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-button expand="full" (click)="addCardAlert()">Kart Ekle</ion-button>
+</ion-content>

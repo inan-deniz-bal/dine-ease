@@ -8,19 +8,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <ion-img src="../../assets/kartlar.png"></ion-img>
   <ion-list>
-    <ion-item
-      ><ion-icon name="card" slot="start"></ion-icon
-      ><ion-label> İş Bankası **90</ion-label>
-    </ion-item>
-    <ion-item
-      ><ion-icon name="card" slot="start"></ion-icon
-      ><ion-label> İş Bankası **90</ion-label>
-    </ion-item>
-    <ion-item
-      ><ion-icon name="card" slot="start"></ion-icon
-      ><ion-label> İş Bankası **90</ion-label>
-    </ion-item>
+    <ion-reorder-group [disabled]="false" *ngFor="let card of cardList" (ionItemReorder)="handleReorder($any($event))">
+      <ion-reorder>
+        <ion-item
+          ><ion-icon name="card" slot="start"></ion-icon
+          ><ion-label> {{card.cardNo}}</ion-label>
+        </ion-item>
+      </ion-reorder>
+    </ion-reorder-group>
   </ion-list>
-  <ion-button expand="full">Kart Ekle</ion-button>
+  <ion-button expand="full" (click)="navigateCardPage()">Kart Ekle</ion-button>
 </ion-content>

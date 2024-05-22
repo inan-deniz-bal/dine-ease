@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { Customer } from 'src/interfaces/customer';
 import { Restaurant } from 'src/types/restaurantType';
 import { Table } from 'src/types/tableType';
+import { Card } from 'src/types/cardType';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,9 +17,7 @@ export class ServerHandlerService {
 
   //apiUrl = 'http://localhost:3000/api/v1';
 
-  apiUrl="https://node1-1-ri4g.onrender.com/api/v1"
-
-
+  apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
 
   menu1: Menu = {
     mealType: 'Sıcaklar',
@@ -275,9 +274,25 @@ export class ServerHandlerService {
     );
   }
 
-  getTablesForRestaurant(restaurantID: string): Observable<{ status: string; data:Table[] }> {
+  getTablesForRestaurant(
+    restaurantID: string
+  ): Observable<{ status: string; data: Table[] }> {
     return this.http.get<{ status: string; data: Table[] }>(
       `${this.apiUrl}/restaurants/tables/${restaurantID}`
+    );
+  }
+
+  getUserCards(): Observable<{ status: string; data: Card[] }> {
+    return this.http.get<{ status: string; data: Card[] }>(
+      `${this.apiUrl}/cards/${this.loginSer.getUser()}`
+    );
+  }
+  addCard(newCard: Card): Observable<{ status: string; data: Card }> {
+    newCard.customerId = this.loginSer.getUser();
+    console.log(newCard);
+    return this.http.post<{ status: string; data: Card }>(
+      `${this.apiUrl}/cards`,
+      newCard
     );
   }
 }
