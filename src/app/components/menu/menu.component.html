@@ -6,7 +6,7 @@
     <ion-list *ngFor="let menuType of restaurantMenu">
       <div>
         <ion-item (click)="mealClicked(menuType)"
-          ><ion-title>{{ menuType.mealType }}</ion-title></ion-item
+          ><ion-label>{{ menuType.mealType }}</ion-label></ion-item
         >
         <div *ngIf="clickedMenutype === menuType.mealType">
           <ion-item *ngFor="let meal of menuType.meals" (click)="addFood(meal)">

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -16,4 +17,11 @@ export class AppComponent {
     { title: 'Ayarlar', url: 'settings', icon: 'settings' },
     { title: 'Çıkış Yap', url: 'login', icon: 'log-out' },
   ];
+  isLoggedIn: boolean = false;
+
+  constructor(private authService: AuthService) {
+    this.authService.isLoggedIn.subscribe(state => {
+      this.isLoggedIn = state;
+   });
+  }
 }

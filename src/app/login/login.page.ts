@@ -6,6 +6,7 @@ import { Login } from 'src/classes/login';
 import { MenuController } from '@ionic/angular';
 import { LoginService } from 'src/services/login.service';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from '../../services/auth.service';
 
 import { Observable } from 'rxjs';
 
@@ -24,10 +25,12 @@ export class LoginPage implements OnInit {
     private menuCtrl: MenuController,
     private loginSer: LoginService,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.authService.logout();
     //this.loginSer.logOut();
     //this.menuCtrl.enable(false);
   }
@@ -39,6 +42,7 @@ export class LoginPage implements OnInit {
 
         this.menuCtrl.enable(true);
         this.loginSer.successfulLogin(response.data.userid);
+        this.authService.login();
         this.navctrl.navigateRoot('/home');
       },
       error: (error) => {
