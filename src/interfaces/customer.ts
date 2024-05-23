@@ -4,4 +4,5 @@ export interface Customer{
   password: String,
   birthday: String,
   username: String,
+  userType:String
 }

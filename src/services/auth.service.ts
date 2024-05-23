@@ -11,6 +11,7 @@ export class AuthService {
     localStorage.getItem('isLoggedIn')
       ? this.loggedIn.next(true)
       : this.loggedIn.next(false);
+    console.log("içerideyiz")
     return this.loggedIn.asObservable();
   }
 

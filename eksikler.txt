@@ -1,0 +1,3 @@
+Kartlar
+1) Yeni kart eklenince gözükmüyor, refresh eklenecek
+2) Kart silme alertleri yapılacak

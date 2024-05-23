@@ -11,12 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./payment.page.scss'],
 })
 export class PaymentPage implements OnInit {
+  cardList: Card[] = [];
+
   constructor(
     private serverH: ServerHandlerService,
     private alertController: AlertController,
     private route: Router
   ) {}
-  cardList: Card[] = [];
 
   ngOnInit() {
     this.serverH.getUserCards().subscribe({
@@ -29,17 +30,6 @@ export class PaymentPage implements OnInit {
         console.log('Error:', error);
       },
     });
-  }
-
-  handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
-    // The `from` and `to` properties contain the index of the item
-    // when the drag started and ended, respectively
-    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
-
-    // Finish the reorder and position the item in the DOM based on
-    // where the gesture ended. This method can also be called directly
-    // by the reorder group
-    ev.detail.complete();
   }
 
   noCardAlert() {
@@ -56,5 +46,34 @@ export class PaymentPage implements OnInit {
 
   navigateCardPage() {
     this.route.navigate(['./add-card']);
+  }
+
+  deleteCard(card: Card) {
+    if (card._id) {
+      this.serverH.removeCard(card._id).subscribe({
+        next: (data: { status: string }) => {
+          console.log(data.status);
+        },
+        error: (error) => {
+          console.log('Error:', error);
+        },
+      });
+    }
+  }
+  handleReorder(event: CustomEvent<ItemReorderEventDetail>) {
+    const from = event.detail.from;
+    const to = event.detail.to;
+
+    if (from !== to) {
+      const movedItem = this.cardList.splice(from, 1)[0];
+      this.cardList.splice(to, 0, movedItem);
+      console.log(this.cardList);
+    }
+
+    event.detail.complete();
+  }
+
+  ngOnDestroy() {
+    console.log('Payment page destroyed');
   }
 }

@@ -18,7 +18,6 @@ export class AddCardPage implements OnInit {
       month: '',
       year: '',
     },
-    _id: '',
   };
 
   constructor(
@@ -73,7 +72,7 @@ export class AddCardPage implements OnInit {
           {
             text: 'Tamam',
             handler: () => {
-              this.navCtrl.back();
+              this.navCtrl.navigateRoot('/payment');
             },
           },
         ],

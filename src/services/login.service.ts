@@ -10,6 +10,7 @@ export class LoginService {
 
   checkLogin():boolean{
     const data=localStorage.getItem('login-info')
+    console.log(data)
     if(data){
       const loginInfo=JSON.parse(data)
       return loginInfo.info

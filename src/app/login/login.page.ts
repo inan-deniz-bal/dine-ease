@@ -7,6 +7,8 @@ import { MenuController } from '@ionic/angular';
 import { LoginService } from 'src/services/login.service';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
+import { CustomerTypeService } from 'src/services/customer-type.service';
+import { loginRes } from 'src/types/loginResponseType';
 
 import { Observable } from 'rxjs';
 
@@ -26,23 +28,28 @@ export class LoginPage implements OnInit {
     private loginSer: LoginService,
     private alertController: AlertController,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private customerT: CustomerTypeService
   ) {}
 
   ngOnInit() {
     this.authService.logout();
+    this.customerT.setNull();
     //this.loginSer.logOut();
     //this.menuCtrl.enable(false);
   }
 
   login() {
     this.serverSer.login(new Login(this.username, this.password)).subscribe({
-      next: (response) => {
+      next: (response: loginRes) => {
         console.log('cevap bastırılıyor:', response);
 
         this.menuCtrl.enable(true);
         this.loginSer.successfulLogin(response.data.userid);
         this.authService.login();
+        response.data.userType === 'Customer'
+          ? this.customerT.setCustomerB()
+          : this.customerT.setWaiter();
         this.navctrl.navigateRoot('/home');
       },
       error: (error) => {

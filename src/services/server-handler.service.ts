@@ -9,6 +9,7 @@ import { Customer } from 'src/interfaces/customer';
 import { Restaurant } from 'src/types/restaurantType';
 import { Table } from 'src/types/tableType';
 import { Card } from 'src/types/cardType';
+import { loginRes } from 'src/types/loginResponseType';
 @Injectable({
   providedIn: 'root',
 })
@@ -256,8 +257,11 @@ export class ServerHandlerService {
     return this.burcuMenu;
   }
 
-  login(data: Login): Observable<any> {
-    return this.http.post(`${this.apiUrl}/customers/login`, data.getUserInfo());
+  login(data: Login): Observable<loginRes> {
+    return this.http.post<loginRes>(
+      `${this.apiUrl}/customers/login`,
+      data.getUserInfo()
+    );
   }
   signUp(user: Customer): Observable<any> {
     return this.http.post(`${this.apiUrl}/customers/`, user);
@@ -293,6 +297,11 @@ export class ServerHandlerService {
     return this.http.post<{ status: string; data: Card }>(
       `${this.apiUrl}/cards`,
       newCard
+    );
+  }
+  removeCard(cardId: String): Observable<{ status: string }> {
+    return this.http.delete<{ status: string }>(
+      `${this.apiUrl}/cards/${this.loginSer.getUser()}/${cardId}`
     );
   }
 }

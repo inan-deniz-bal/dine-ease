@@ -29,7 +29,11 @@ export class HomePage implements OnInit {
   isLoggedIn: boolean = false;
   ngOnInit() {
     if (this.loginSer.checkLogin()) {
+      if(localStorage.getItem("menu-type")=="waiter"){
+        this.navCtrl.navigateRoot('/waiter-home');
+      }
       console.log('hello');
+
 
       //this.restourants = this.serverH.getRestList();
       console.log('Restaurants ', this.restourants);

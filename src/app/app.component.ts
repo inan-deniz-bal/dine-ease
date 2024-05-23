@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { CustomerTypeService } from 'src/services/customer-type.service';
+import { menuItem } from 'src/types/menuItemType';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
+  public appPages: menuItem[] = [];
+  /*public appPages = [
     { title: 'Anasayfa', url: 'home', icon: 'home' },
     { title: 'Anasayfa', url: 'home-after-order', icon: 'home' },
     { title: 'Anasayfa', url: 'waiter-home', icon: 'home' },
@@ -16,12 +19,18 @@ export class AppComponent {
     { title: 'Ödeme Geçmişi', url: 'order-history', icon: 'wallet' },
     { title: 'Ayarlar', url: 'settings', icon: 'settings' },
     { title: 'Çıkış Yap', url: 'login', icon: 'log-out' },
-  ];
+  ]; */
   isLoggedIn: boolean = false;
 
-  constructor(private authService: AuthService) {
-    this.authService.isLoggedIn.subscribe(state => {
+  constructor(
+    private authService: AuthService,
+    private customerType: CustomerTypeService
+  ) {
+    this.authService.isLoggedIn.subscribe((state) => {
       this.isLoggedIn = state;
-   });
+    });
+    this.customerType.currentSideBar.subscribe((state) => {
+      this.appPages = state;
+    });
   }
 }

@@ -5,6 +5,8 @@ import { MenuController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Customer } from 'src/interfaces/customer';
 import { ServerHandlerService } from 'src/services/server-handler.service';
+import { CustomerTypeService } from 'src/services/customer-type.service';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,7 +28,9 @@ export class SignUpPage implements OnInit {
     private loginSer: LoginService,
     private menuCtrl: MenuController,
     private alert: AlertController,
-    private server: ServerHandlerService
+    private server: ServerHandlerService,
+    private customerType: CustomerTypeService,
+    private auth:AuthService
   ) {}
 
   ngOnInit() {
@@ -38,6 +42,8 @@ export class SignUpPage implements OnInit {
       this.menuCtrl.enable(true);
       this.checkErrors();
       //this.navCtrl.navigateRoot('home');
+
+      //this.customerType.setCustomerB()
     }
   }
   getMailFromLocal() {
@@ -92,12 +98,15 @@ export class SignUpPage implements OnInit {
         password: this.password,
         birthday: this.birthday,
         username: this.username,
+        userType: 'Customer',
       };
       this.server.signUp(user).subscribe({
         next: (response) => {
           console.log(response);
           if (response.status == 'success') {
             this.loginSer.successfulLogin(response.data.userid);
+            this.customerType.setCustomerB();
+            this.auth.login();
             this.alert
               .create({
                 header: 'Başarılı',
