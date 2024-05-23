@@ -25,7 +25,6 @@ export class CustomerTypeService {
 
   private waiterBar = [
     { title: 'Anasayfa', url: 'waiter-home', icon: 'home' },
-    { title: 'Ayarlar', url: 'settings', icon: 'settings' },
     { title: 'Çıkış Yap', url: 'login', icon: 'log-out' },
   ];
 

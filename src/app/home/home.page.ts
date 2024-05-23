@@ -24,31 +24,35 @@ export class HomePage implements OnInit {
     private navCtrl: NavController
   ) {}
 
-  imageList = ['./../../assets/rst.jpg', './../../assets/pastane.png', './../../assets/kebap.jpeg'];
+  imageList = [
+    './../../assets/rst.jpg',
+    './../../assets/pastane.png',
+    './../../assets/kebap.jpeg',
+  ];
 
   isLoggedIn: boolean = false;
   ngOnInit() {
     if (this.loginSer.checkLogin()) {
-      if(localStorage.getItem("menu-type")=="waiter"){
+      if (localStorage.getItem('menu-type') == 'waiter') {
         this.navCtrl.navigateRoot('/waiter-home');
+      } else {
+        console.log('hello');
+
+        //this.restourants = this.serverH.getRestList();
+        console.log('Restaurants ', this.restourants);
+        this.serverH.getAllRestaurants().subscribe({
+          next: (data) => {
+            console.log('Data:', data);
+            this.restaurants = data.data;
+            this.restaurants[0].images = this.imageList[1];
+            this.restaurants[1].images = this.imageList[0];
+            this.restaurants[2].images = this.imageList[2];
+          },
+          error: (error) => {
+            console.log('Error:', error);
+          },
+        });
       }
-      console.log('hello');
-
-
-      //this.restourants = this.serverH.getRestList();
-      console.log('Restaurants ', this.restourants);
-      this.serverH.getAllRestaurants().subscribe({
-        next: (data) => {
-          console.log('Data:', data);
-          this.restaurants = data.data;
-          this.restaurants[0].images = this.imageList[1];
-          this.restaurants[1].images = this.imageList[0];
-          this.restaurants[2].images = this.imageList[2];
-        },
-        error: (error) => {
-          console.log('Error:', error);
-        },
-      });
     } else {
       this.navCtrl.navigateRoot('/login');
     }

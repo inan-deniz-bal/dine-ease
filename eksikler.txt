@@ -1,3 +1,25 @@
-Kartlar
+[7]Kartlar
 1) Yeni kart eklenince gözükmüyor, refresh eklenecek
 2) Kart silme alertleri yapılacak
+
+[6]Geçmiş Siparişler
+1) UI tasarlanacak
+
+[1] Sipariş verme
+1) Sipariş vermenin başlatılması bağlanacak ve burada önemli olan
+o saatten 1 saat önce o restoranda o masada sipariş var mı kontrol edilecek
+2) Dolu olan masalar kırmızı olacak
+
+[2] Sipariş Sonrası Ekranı
+1) Tasarımı güncellenecek
+2) Veriler dinamik yapılacak
+3) İptal etme süreci yapılacak
+
+[5]Garson Ana Sayfası
+1) UI güncellenecek
+
+[4]Garson Sipariş Onaylama
+1) Bu sayfa yapılacak
+
+[3]Garson ödeme alma
+1) UI ve UX neredeyse yok onlar halledilecek
