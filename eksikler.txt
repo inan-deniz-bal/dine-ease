@@ -5,6 +5,9 @@
 [6]Geçmiş Siparişler
 1) UI tasarlanacak
 
+[0]QR
+1)UI tasarlanacak ve masaya yönlendirecek
+
 [1] Sipariş verme
 1) Sipariş vermenin başlatılması bağlanacak ve burada önemli olan
 o saatten 1 saat önce o restoranda o masada sipariş var mı kontrol edilecek
