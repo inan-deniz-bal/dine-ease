@@ -83,16 +83,16 @@ export class RestaurantPage implements OnInit {
       totalPrice: totalPrice,
     };
     console.log('newOrder', newOrder);
-/*
+
     this.serverH.makeOrder(newOrder).subscribe({
       next: (response) => {
         console.log(response);
         //this.navCtrl.navigateRoot(['./home-after-order']);
       },
       error: (err) => {
-        console.log(err);
+        console.log(err.message);
       },
-    });*/
+    });
   }
 
   onOrderAlert(order: Order[], date: Date) {
