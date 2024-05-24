@@ -7,6 +7,9 @@ import { ServerServiceService } from 'src/services/server-service.service';
 import { Restaurant } from 'src/types/restaurantType';
 import { Table } from 'src/types/tableType';
 import { ServerHandlerService } from 'src/services/server-handler.service';
+import { AlertController } from '@ionic/angular';
+import { MakeOrder } from 'src/types/makeOrderType';
+
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.page.html',
@@ -30,12 +33,15 @@ export class RestaurantPage implements OnInit {
     private selectedRest: SelectedRestService,
     private navCtrl: NavController,
     private serverSer: ServerServiceService,
-    private curMen: CurrentMenuService
+    private curMen: CurrentMenuService,
+    private serverH: ServerHandlerService,
+    private alertCtrl: AlertController
   ) {}
   clicked = false;
 
   showOrderComponent = false;
   selectedTable: Table = {
+    _id: '',
     tableName: '',
     orders: [
       {
@@ -60,9 +66,62 @@ export class RestaurantPage implements OnInit {
     this.showOrderComponent = !this.showOrderComponent;
   }
 
-  orderItem(order: Order[]) {
+  orderItem(order: Order[], date: Date) {
+    let totalPrice = 0;
+    order.forEach((meal) => {
+      totalPrice += meal.mealPrice * meal.mealQuantity;
+    });
+
     console.log('hey ', order);
-    this.navCtrl.navigateForward(['./home-after-order']);
-    //this.serverSer.orderItem(order);
+    console.log('masa', this.selectedTable);
+    const newOrder: MakeOrder = {
+      orderedMeals: order,
+      tableId: this.selectedTable._id,
+      date: date,
+      restaurantName: this.selectedRestaurant.name,
+      orderStatus: 'active',
+      totalPrice: totalPrice,
+    };
+    console.log('newOrder', newOrder);
+/*
+    this.serverH.makeOrder(newOrder).subscribe({
+      next: (response) => {
+        console.log(response);
+        //this.navCtrl.navigateRoot(['./home-after-order']);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });*/
   }
+
+  onOrderAlert(order: Order[], date: Date) {
+    console.log('order', order);
+    console.log('date', date);
+    this.alertCtrl
+      .create({
+        header: 'Sipariş Onayı',
+        message: 'Siparişinizi onaylıyor musunuz?',
+        buttons: [
+          {
+            text: 'Hayır',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            },
+          },
+          {
+            text: 'Evet',
+            handler: () => {
+              this.orderItem(order, date);
+            },
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
+  }
+
+
 }

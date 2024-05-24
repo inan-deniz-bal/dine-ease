@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TablePage implements OnInit {
   table: Table = {
     tableName: '',
+    _id: '',
   };
   menu: Menu[] = [];
   constructor(

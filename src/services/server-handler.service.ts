@@ -10,15 +10,16 @@ import { Restaurant } from 'src/types/restaurantType';
 import { Table } from 'src/types/tableType';
 import { Card } from 'src/types/cardType';
 import { loginRes } from 'src/types/loginResponseType';
+import { MakeOrder } from 'src/types/makeOrderType';
 @Injectable({
   providedIn: 'root',
 })
 export class ServerHandlerService {
   constructor(private loginSer: LoginService, private http: HttpClient) {}
 
-  //apiUrl = 'http://localhost:3000/api/v1';
+  apiUrl = 'http://localhost:3000/api/v1';
 
-  apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
+  //apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
 
   menu1: Menu = {
     mealType: 'Sıcaklar',
@@ -321,5 +322,14 @@ export class ServerHandlerService {
         // table: Table;
       };
     }>(`${this.apiUrl}/tables/${tableId}` /*, { date: new Date() }*/);
+  }
+
+  makeOrder(order: MakeOrder): Observable<{ status: string }> {
+    order.customerId = this.loginSer.getUser();
+    console.log(order.customerId)
+    return this.http.post<{ status: string }>(
+      `${this.apiUrl}/currentOrders`,
+      order
+    );
   }
 }

@@ -12,7 +12,7 @@
     <ion-card-content>
       <!--Burada forla döneceğiz-->
       <ion-item *ngFor=" let order of orderList">
-        <ion-col> {{order.mealName}} [{{order.mealCount}}]</ion-col>
+        <ion-col> {{order.mealName}} [{{order.mealQuantity}}]</ion-col>
         <ion-buttons>
           <ion-button (click)="addToPay(order)">Ekle</ion-button>
           <!--<ion-button (click)="removeFromPay(order)">Çıkart</ion-button> -->
@@ -26,7 +26,7 @@
             *ngFor="let meals of mealsToPay "
             (click)="removeFromPay(meals)"
           >
-            {{meals.mealName}} / [{{meals.mealCount}}]
+            {{meals.mealName}} / [{{meals.mealQuantity}}]
           </ion-row>
         </ion-list>
       </div>

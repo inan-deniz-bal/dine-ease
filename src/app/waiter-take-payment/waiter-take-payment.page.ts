@@ -13,12 +13,12 @@ export class WaiterTakePaymentPage implements OnInit {
   orderList: Order[] = [
     {
       mealName: 'Pilav',
-      mealCount: 3,
+      mealQuantity: 3,
       mealPrice: 30,
     },
     {
       mealName: 'Cacık',
-      mealCount: 1,
+      mealQuantity: 1,
       mealPrice: 15,
     },
   ];
@@ -41,12 +41,12 @@ export class WaiterTakePaymentPage implements OnInit {
     if (!contains) {
       this.mealsToPay.push({
         mealName: meal.mealName,
-        mealCount: 1,
+        mealQuantity: 1,
         mealPrice: meal.mealPrice,
       });
       this.orderList.map((listMeal) => {
         if (listMeal.mealName == meal.mealName) {
-          listMeal.mealCount -= 1;
+          listMeal.mealQuantity -= 1;
         }
       });
       console.log('Listeye eklendi ', this.mealsToPay);
@@ -55,11 +55,11 @@ export class WaiterTakePaymentPage implements OnInit {
         if (mealsToPay.mealName == meal.mealName) {
           this.orderList.map((mealsLeft) => {
             if (
-              mealsLeft.mealCount != 0 &&
+              mealsLeft.mealQuantity != 0 &&
               mealsLeft.mealName == mealsToPay.mealName
             ) {
-              mealsToPay.mealCount += 1;
-              mealsLeft.mealCount -= 1;
+              mealsToPay.mealQuantity += 1;
+              mealsLeft.mealQuantity -= 1;
             }
           });
         }
@@ -68,7 +68,7 @@ export class WaiterTakePaymentPage implements OnInit {
     this.orderList = this.checkForNoMeal(this.orderList);
   }
   removeFromPay(meal: Order) {
-    if (meal.mealCount && meal.mealCount <= 1) {
+    if (meal.mealQuantity && meal.mealQuantity <= 1) {
       const newMeals = this.mealsToPay.filter(
         (listMeal) => listMeal.mealName != meal.mealName
       );
@@ -76,8 +76,8 @@ export class WaiterTakePaymentPage implements OnInit {
       this.addToList(meal, this.orderList);
     } else {
       this.mealsToPay.map((listMeal) => {
-        if (listMeal.mealName == meal.mealName && meal.mealCount) {
-          listMeal.mealCount = meal.mealCount - 1;
+        if (listMeal.mealName == meal.mealName && meal.mealQuantity) {
+          listMeal.mealQuantity = meal.mealQuantity - 1;
           this.addToList(meal, this.orderList);
         }
       });
@@ -87,7 +87,7 @@ export class WaiterTakePaymentPage implements OnInit {
   }
 
   checkForNoMeal(orderList: Order[]) {
-    orderList = orderList.filter((order) => order.mealCount != 0);
+    orderList = orderList.filter((order) => order.mealQuantity != 0);
     return orderList;
   }
 
@@ -99,7 +99,7 @@ export class WaiterTakePaymentPage implements OnInit {
     if (contains) {
       mealList = mealList.map((listMeal) => {
         if (listMeal.mealName == meal.mealName) {
-          listMeal.mealCount += 1;
+          listMeal.mealQuantity += 1;
         }
         return listMeal;
       });
@@ -107,7 +107,7 @@ export class WaiterTakePaymentPage implements OnInit {
     } else {
       mealList.push({
         mealName: meal.mealName,
-        mealCount: 1,
+        mealQuantity: 1,
         mealPrice: meal.mealPrice,
       });
       return mealList;

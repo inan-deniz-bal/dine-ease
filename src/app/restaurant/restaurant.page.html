@@ -24,7 +24,7 @@
     <app-order
       [selectedRest]="selectedRestaurant"
       [tableNumber]="selectedTable.tableName"
-      (callOrder)="orderItem($event)"
+      (callOrder)="onOrderAlert($event.order,$event.date)"
       (closeOrder)="showOrder($event)"
     ></app-order>
   </div>

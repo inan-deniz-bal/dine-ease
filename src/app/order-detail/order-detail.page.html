@@ -17,7 +17,7 @@
       <ion-label>{{selectedOrder.date}}</ion-label>
       <ion-grid>
         <ion-item *ngFor="let meal of selectedOrder.orderedMeals">
-          {{meal.mealName}}: {{meal.mealCount}} Adet / {{meal.mealPrice}} TL
+          {{meal.mealName}}: {{meal.mealQuantity}} Adet / {{meal.mealPrice}} TL
         </ion-item>
       </ion-grid>
       <ion-label>TOPLAM: {{selectedOrder.totalPrice}} TL</ion-label>

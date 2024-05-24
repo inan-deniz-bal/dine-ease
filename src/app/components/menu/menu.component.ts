@@ -57,14 +57,14 @@ export class MenuComponent implements OnInit {
         this.orderMenu.forEach((meal) => {
           if (meal.mealName == item.mealName) {
             hasMeal = true;
-            if (meal.mealCount) {
-              meal.mealCount += 1;
+            if (meal.mealQuantity) {
+              meal.mealQuantity += 1;
             }
           }
         });
         if (!hasMeal) {
           this.orderMenu.push({
-            mealCount: 1,
+            mealQuantity: 1,
             mealName: item.mealName,
             mealPrice: item.mealPrice,
           });
@@ -76,9 +76,9 @@ export class MenuComponent implements OnInit {
   }
   removeFood(item: any) {
     this.orderMenu.forEach((meal) => {
-      if (meal.mealName == item.mealName && meal.mealCount) {
-        meal.mealCount -= 1;
-        if (meal.mealCount == 0) {
+      if (meal.mealName == item.mealName && meal.mealQuantity) {
+        meal.mealQuantity -= 1;
+        if (meal.mealQuantity == 0) {
           this.orderMenu = this.orderMenu.filter(
             (orderMeal) => orderMeal != meal
           );

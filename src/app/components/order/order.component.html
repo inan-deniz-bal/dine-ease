@@ -22,12 +22,17 @@
               {{ order.mealName }}
             </div>
             <div>
-              {{ order.mealCount }}/ {{ order.mealPrice * order.mealCount }} TL
+              {{ order.mealQuantity }}/
+              {{ order.mealPrice * order.mealQuantity }} TL
             </div>
           </div>
         </ion-row>
-
-        <div class="total"></div>
+        <ion-row>
+          <div class="total">
+            <div>Toplam</div>
+            <div>{{ total }} TL</div>
+          </div>
+        </ion-row>
       </div>
 
       <ion-row>
@@ -52,6 +57,7 @@
       min="{{ minDateTime }}"
       minuteValues="0,15,30,45"
       id="datetime"
+      (ionChange)="onDateTimeChange($event)"
     ></ion-datetime>
   </ng-template>
 </ion-modal>

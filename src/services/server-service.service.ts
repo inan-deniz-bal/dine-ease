@@ -12,27 +12,27 @@ export class ServerServiceService {
       date: '20.0.2024',
       orderedMeals: [
         {
-          mealCount: 2,
+          mealQuantity: 2,
           mealName: 'Sıcak Çıkolata',
           mealPrice: 15,
         },
         {
-          mealCount: 1,
+          mealQuantity: 1,
           mealName: 'Pizza',
           mealPrice: 25,
         },
         {
-          mealCount: 3,
+          mealQuantity: 3,
           mealName: 'Pasta',
           mealPrice: 18,
         },
         {
-          mealCount: 2,
+          mealQuantity: 2,
           mealName: 'Salata',
           mealPrice: 12,
         },
         {
-          mealCount: 4,
+          mealQuantity: 4,
           mealName: 'Burger',
           mealPrice: 20,
         },
@@ -44,27 +44,27 @@ export class ServerServiceService {
       date: '20.0.2024',
       orderedMeals: [
         {
-          mealCount: 2,
+          mealQuantity: 2,
           mealName: 'Sıcak Çıkolata',
           mealPrice: 15,
         },
         {
-          mealCount: 1,
+          mealQuantity: 1,
           mealName: 'Pizza',
           mealPrice: 25,
         },
         {
-          mealCount: 3,
+          mealQuantity: 3,
           mealName: 'Pasta',
           mealPrice: 18,
         },
         {
-          mealCount: 2,
+          mealQuantity: 2,
           mealName: 'Salata',
           mealPrice: 12,
         },
         {
-          mealCount: 4,
+          mealQuantity: 4,
           mealName: 'Burger',
           mealPrice: 20,
         },
@@ -76,27 +76,27 @@ export class ServerServiceService {
       date: '20.0.2024',
       orderedMeals: [
         {
-          mealCount: 2,
+          mealQuantity: 2,
           mealName: 'Sıcak Çıkolata',
           mealPrice: 15,
         },
         {
-          mealCount: 1,
+          mealQuantity: 1,
           mealName: 'Pizza',
           mealPrice: 25,
         },
         {
-          mealCount: 3,
+          mealQuantity: 3,
           mealName: 'Pasta',
           mealPrice: 18,
         },
         {
-          mealCount: 2,
+          mealQuantity: 2,
           mealName: 'Salata',
           mealPrice: 12,
         },
         {
-          mealCount: 4,
+          mealQuantity: 4,
           mealName: 'Burger',
           mealPrice: 20,
         },

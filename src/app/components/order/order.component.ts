@@ -24,9 +24,11 @@ export class OrderComponent implements OnInit {
   };
   @Input() tableNumber: String = '';
 
-  @Output() callOrder: EventEmitter<Order[]> = new EventEmitter<Order[]>();
+  @Output() callOrder: EventEmitter<{ order: Order[], date: Date }> =
+    new EventEmitter<{ order: Order[], date: Date }>();
   @Output() closeOrder: EventEmitter<any> = new EventEmitter<any>();
 
+  selectedDateTime: Date = new Date();
   menuText = 'Menüyü Göster';
 
   minDateTime: string;
@@ -34,7 +36,7 @@ export class OrderComponent implements OnInit {
 
   menuOrderList: Order[] = [];
 
-  total:Number=0;
+  total: number = 0;
 
   showMenu: boolean = false;
 
@@ -61,10 +63,17 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.tempOrder.currentOrderSubject.subscribe((menu) => {
       this.menuOrderList = menu;
+
+      this.menuOrderList.forEach((meal) => {
+        this.total += (meal.mealPrice * meal.mealQuantity);
+      });
     });
   }
   apply() {
-    this.callOrder.emit(this.menuOrderList);
+    this.callOrder.emit({
+      order: this.menuOrderList,
+      date: this.selectedDateTime,
+    });
   }
 
   cancel() {
@@ -83,13 +92,20 @@ export class OrderComponent implements OnInit {
 
   removeFood(Item: Order) {
     this.menuOrderList.forEach((meal) => {
-      if (meal.mealName == Item.mealName && meal.mealCount) {
-        meal.mealCount -= 1;
-        if (meal.mealCount == 0) {
+      if (meal.mealName == Item.mealName && meal.mealQuantity) {
+        meal.mealQuantity -= 1;
+        if (meal.mealQuantity == 0) {
           this.menuOrderList.splice(this.menuOrderList.indexOf(meal), 1);
         }
       }
     });
     this.tempOrder.updateOrder(this.menuOrderList);
+  }
+
+  onDateTimeChange(event: CustomEvent) {
+    const selectedDateTimeString: string = event.detail.value;
+    this.selectedDateTime = new Date(selectedDateTimeString);
+    console.log('Selected Date/Time:', this.selectedDateTime);
+    // Burada seçilen zamanı kullanabilirsiniz, örneğin başka bir değişkene atayabilir veya işlemler yapabilirsiniz.
   }
 }
