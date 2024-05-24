@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SelectedRestaurant } from '../interfaces/selected-restaurant';
 import { RestList } from 'src/classes/rest-list';
 import { Restaurant } from 'src/types/restaurantType';
+import { Table } from 'src/types/tableType';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,7 @@ export class SelectedRestService {
     if (data) {
       return JSON.parse(data);
     }*/
+    console.log("seçilen dönüyor", this.selectedRestaurant)
     return this.selectedRestaurant;
   }
 }

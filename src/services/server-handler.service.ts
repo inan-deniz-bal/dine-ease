@@ -304,4 +304,22 @@ export class ServerHandlerService {
       `${this.apiUrl}/cards/${this.loginSer.getUser()}/${cardId}`
     );
   }
+
+  getRestaurantFromTable(tableId: String): Observable<{
+    status: string;
+    data: {
+      restaurantName: string;
+      menu: Menu[];
+      //table: Table;
+    };
+  }> {
+    return this.http.get<{
+      status: string;
+      data: {
+        restaurantName: string;
+        menu: Menu[];
+        // table: Table;
+      };
+    }>(`${this.apiUrl}/tables/${tableId}` /*, { date: new Date() }*/);
+  }
 }

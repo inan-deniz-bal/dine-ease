@@ -99,6 +99,10 @@ const routes: Routes = [
     path: 'add-card',
     loadChildren: () => import('./add-card/add-card.module').then( m => m.AddCardPageModule)
   },
+  {
+    path: 'table',
+    loadChildren: () => import('./table/table.module').then( m => m.TablePageModule)
+  },
 
 ];
 

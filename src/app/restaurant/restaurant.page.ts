@@ -6,6 +6,7 @@ import { CurrentMenuService } from 'src/services/current-menu.service';
 import { ServerServiceService } from 'src/services/server-service.service';
 import { Restaurant } from 'src/types/restaurantType';
 import { Table } from 'src/types/tableType';
+import { ServerHandlerService } from 'src/services/server-handler.service';
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.page.html',
@@ -36,9 +37,13 @@ export class RestaurantPage implements OnInit {
   showOrderComponent = false;
   selectedTable: Table = {
     tableName: '',
-    status: '',
-    currentOrder: '',
-    customerId: '',
+    orders: [
+      {
+        date: new Date(),
+        customerId: '',
+        status: '',
+      },
+    ],
   };
 
   ngOnInit() {
@@ -56,7 +61,7 @@ export class RestaurantPage implements OnInit {
   }
 
   orderItem(order: Order[]) {
-    console.log("hey ", order)
+    console.log('hey ', order);
     this.navCtrl.navigateForward(['./home-after-order']);
     //this.serverSer.orderItem(order);
   }
