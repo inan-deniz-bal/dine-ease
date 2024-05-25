@@ -101,12 +101,17 @@ export class AddCardPage implements OnInit {
     const { cardNo, cardHolder, cvv, expirityDate } = this.newCard;
 
     if (!/^\d{16}$/.test(cardNo)) {
-      this.failAlert('Kart numarası 16 haneli olmalı ve sadece rakamlardan oluşmalıdır.');
+      this.failAlert(
+        'Kart numarası 16 haneli olmalı ve sadece rakamlardan oluşmalıdır.'
+      );
       return false;
     }
 
-    if (!/^[A-Za-z\s]+$/.test(cardHolder)) {
-      this.failAlert('Kart sahibi sadece harflerden ve boşluklardan oluşmalıdır.');
+    const turkishCharRegex = /^[A-Za-zÇçĞğİıÖöŞşÜü\s]+$/;
+    if (!turkishCharRegex.test(cardHolder)) {
+      this.failAlert(
+        'Kart sahibi sadece harflerden ve boşluklardan oluşmalıdır.'
+      );
       return false;
     }
 
@@ -115,7 +120,10 @@ export class AddCardPage implements OnInit {
       return false;
     }
 
-    if (!/^\d{2}$/.test(expirityDate.month) || !/^\d{4}$/.test(expirityDate.year)) {
+    if (
+      !/^\d{2}$/.test(expirityDate.month) ||
+      !/^\d{4}$/.test(expirityDate.year)
+    ) {
       this.failAlert('Son kullanma tarihi doğru formatta değil.');
       return false;
     }
@@ -125,7 +133,13 @@ export class AddCardPage implements OnInit {
     const expYear = parseInt(expirityDate.year, 10);
 
     // Ay ve yılın geçerli bir tarih oluşturup oluşturmadığını kontrol et
-    if (expMonth < 1 || expMonth > 12 || expYear < currentDate.getFullYear() || (expYear === currentDate.getFullYear() && expMonth < currentDate.getMonth() + 1)) {
+    if (
+      expMonth < 1 ||
+      expMonth > 12 ||
+      expYear < currentDate.getFullYear() ||
+      (expYear === currentDate.getFullYear() &&
+        expMonth < currentDate.getMonth() + 1)
+    ) {
       this.failAlert('Son kullanma tarihi geçerli bir tarih olmalıdır.');
       return false;
     }
