@@ -8,23 +8,34 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-img
-  src="../../assets/hazırlama.png"
-></ion-img>
-<ion-img
-src="../../assets/order2.png"
-></ion-img>
+  <ion-img *ngIf="!isOrderReady" src="../../assets/hazırlama.png"></ion-img>
+  <ion-img *ngIf="isOrderReady" src="../../assets/order2.png"></ion-img>
   <ion-grid>
     <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sipariş Detayı</ion-card-title>
+      </ion-card-header>
       <ion-card-content>
-        <p>Sipariş içeriği...</p>
+        <ion-row *ngFor="let item of currentOrder.orderedMeals">
+          <ion-col size="6">{{item.mealName}}</ion-col>
+          <ion-col size="3">{{item.mealQuantity}} adet</ion-col>
+          <ion-col size="3">{{item.mealPrice}} TL</ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="total">Toplam {{currentOrder.totalPrice}} TL</div>
+        </ion-row>
       </ion-card-content>
     </ion-card>
 
-    <div class="order-detail">
-      <ion-label>Siparişiniz Pişiriliyor</ion-label>
+    <div class="order-detail glow" *ngIf="!isOrderReady">
+      <ion-label>Siparişiniz Hazırlanıyor</ion-label>
+    </div>
+    <div class="order-detail" *ngIf="isOrderReady">
+      <ion-label>Siparişiniz Hazır!</ion-label>
     </div>
 
-    <ion-button expand="full">Siparişi İptal Et!</ion-button>
+    <ion-button expand="full" (click)="onCancelOrderAlert()"
+      >Siparişi İptal Et!</ion-button
+    >
   </ion-grid>
 </ion-content>

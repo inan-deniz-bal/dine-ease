@@ -89,13 +89,23 @@ export class ServerHandlerService {
     }>(`${this.apiUrl}/tables/${tableId}` /*, { date: new Date() }*/);
   }
 
-  makeOrder(order: MakeOrder): Observable<{ status: string }> {
+  makeOrder(order: MakeOrder): Observable<{ status: string , data: MakeOrder}> {
     order.customerId = this.loginSer.getUser();
     console.log(order.customerId)
-    return this.http.post<{ status: string }>(
+    return this.http.post<{ status: string, data: MakeOrder }>(
       `${this.apiUrl}/currentOrders`,
       order
     );
+  }
+
+  checkOrder(orderID: string): Observable<{ status: string; data: MakeOrder }> {
+    return this.http.get<{ status: string; data: MakeOrder }>(
+      `${this.apiUrl}/currentOrders/${orderID}`
+    );
+  }
+
+  closeOrder(orderID:string,tableID:String):Observable<{status:string}>{
+    return this.http.get<{status:string}>(`${this.apiUrl}/currentOrders/${orderID}/${tableID}`)
   }
 
   menu1: Menu = {

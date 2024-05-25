@@ -88,7 +88,15 @@ export class RestaurantPage implements OnInit {
 
     this.serverH.makeOrder(newOrder).subscribe({
       next: (response) => {
-        console.log(response);
+        console.log(response.data);
+        if (response.data._id) {
+          localStorage.setItem('orderID', response.data._id);
+          localStorage.setItem(
+            'tableID',
+            JSON.stringify(response.data.tableId)
+          );
+        }
+
         this.navCtrl.navigateRoot(['./home-after-order']);
       },
       error: (err) => {
@@ -107,7 +115,6 @@ export class RestaurantPage implements OnInit {
         buttons: [
           {
             text: 'Hayır',
-            role: 'cancel',
             handler: () => {
               console.log('Cancel clicked');
             },

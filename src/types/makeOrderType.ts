@@ -8,4 +8,5 @@ export type MakeOrder = {
   totalPrice: Number;
   orderedMeals: Order[];
   orderStatus: String;
+  _id?: string;
 };
