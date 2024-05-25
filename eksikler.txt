@@ -5,15 +5,6 @@
 [6]Geçmiş Siparişler
 1) UI tasarlanacak
 
-
-[1] Sipariş verme
-2) Dolu olan masalar kırmızı olacak
-
-[2] Sipariş Sonrası Ekranı
-1) Tasarımı güncellenecek
-2) Veriler dinamik yapılacak
-3) İptal etme süreci yapılacak
-
 [5]Garson Ana Sayfası
 1) UI güncellenecek
 
@@ -26,8 +17,11 @@
 [8]
 1) Başlıklar Türkçeleştirilecek
 
+[9]
+1)sipariş sonrası ana ekrana yenileme butonu eklenecek
 
-
+[10]
+Siparişin zaman sorunu var, sunucu aynı saatteki iki siparişi alıyor
 
 BİTENLER
 ---------------------

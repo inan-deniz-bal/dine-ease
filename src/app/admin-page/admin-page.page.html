@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-menu-button slot="start"></ion-menu-button>
+    <ion-title>Sipariş Yönetim Sayfası</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-img src="../../assets/admin.png" />
+
+  <ion-card *ngFor="let order of activeOrders" (click)="openDetails(order)">
+    <ion-card-header>
+      <ion-card-title>{{tableName}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ order.orderStatus === 'active' ? 'Aktif' : order.orderStatus }}</p>
+      <p>{{ order.date | date: 'HH:mm dd MMMM yyyy' }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

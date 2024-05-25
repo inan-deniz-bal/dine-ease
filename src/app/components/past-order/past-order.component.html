@@ -10,7 +10,7 @@
         <ion-col>
           <ion-label>{{ pastOrder.totalPrice }} TL</ion-label>
         </ion-col>
-        <ion-col>{{ pastOrder.date }}</ion-col>
+        <ion-col>{{ pastOrder.date | date: 'HH:mm dd MMMM yyyy' }}</ion-col>
       </ion-row>
     </ion-grid>
   </ion-card-content>

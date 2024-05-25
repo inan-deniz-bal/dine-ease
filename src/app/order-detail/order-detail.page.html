@@ -14,7 +14,8 @@
       <ion-card-title>{{selectedOrder.restaurantName}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-label>{{selectedOrder.date}}</ion-label>
+      <ion-label>{{ selectedOrder.date | date: 'HH:mm dd MMMM yyyy' }}</ion-label>
+
       <ion-grid>
         <ion-item *ngFor="let meal of selectedOrder.orderedMeals">
           {{meal.mealName}}: {{meal.mealQuantity}} Adet / {{meal.mealPrice}} TL

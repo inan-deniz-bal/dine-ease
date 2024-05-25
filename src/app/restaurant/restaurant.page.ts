@@ -79,7 +79,7 @@ export class RestaurantPage implements OnInit {
     const newOrder: MakeOrder = {
       orderedMeals: order,
       tableId: this.selectedTable._id,
-      date: gmt3Date,
+      date: date,
       restaurantName: this.selectedRestaurant.name,
       orderStatus: 'active',
       totalPrice: totalPrice,

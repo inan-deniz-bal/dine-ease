@@ -23,6 +23,8 @@ export class ServerHandlerService {
 
 
 
+
+
   login(data: Login): Observable<loginRes> {
     return this.http.post<loginRes>(
       `${this.apiUrl}/customers/login`,
@@ -106,6 +108,18 @@ export class ServerHandlerService {
 
   closeOrder(orderID:string,tableID:String):Observable<{status:string}>{
     return this.http.get<{status:string}>(`${this.apiUrl}/currentOrders/${orderID}/${tableID}`)
+  }
+
+  getRestaurantOrders(restaurantID: string): Observable<{ status: string; data:{
+    orders:MakeOrder[],
+    table:String
+  } }> {
+    return this.http.get<{ status: string; data:{
+      orders:MakeOrder[],
+      table:String
+    }}>(
+      `${this.apiUrl}/rest/${restaurantID}`
+    );
   }
 
   menu1: Menu = {

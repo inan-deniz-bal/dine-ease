@@ -103,6 +103,14 @@ const routes: Routes = [
     path: 'table',
     loadChildren: () => import('./table/table.module').then( m => m.TablePageModule)
   },
+  {
+    path: 'admin-page',
+    loadChildren: () => import('./admin-page/admin-page.module').then( m => m.AdminPagePageModule)
+  },
+  {
+    path: 'admin-order',
+    loadChildren: () => import('./admin-order/admin-order.module').then( m => m.AdminOrderPageModule)
+  },
 
 ];
 

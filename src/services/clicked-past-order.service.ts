@@ -10,7 +10,7 @@ export class ClickedPastOrderService {
     restaurantName: '',
     totalPrice: 0,
     orderedMeals: [],
-    date: '',
+    date: new Date(),
   };
 
   constructor() {}

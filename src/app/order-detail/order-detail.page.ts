@@ -12,7 +12,7 @@ export class OrderDetailPage implements OnInit {
     restaurantName: '',
     totalPrice: 0,
     orderedMeals: [],
-    date: '',
+    date: new Date(),
   };
 
   constructor(private pastOrderService:ClickedPastOrderService) {}

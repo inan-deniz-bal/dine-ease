@@ -14,8 +14,7 @@ export class HomeAfterOrderPage implements OnInit {
     private customerType: CustomerTypeService,
     private serverH: ServerHandlerService,
     private navCtrl: NavController,
-    private alertCtrl: AlertController,
-
+    private alertCtrl: AlertController
   ) {}
   orderID: string = '1';
   tableID = '';
@@ -43,9 +42,15 @@ export class HomeAfterOrderPage implements OnInit {
     if (storedOrderID && storedTableID) {
       this.orderID = storedOrderID;
       this.tableID = JSON.parse(storedTableID);
-      console.log("order ",this.orderID," table ",this.tableID)
+      console.log('order ', this.orderID, ' table ', this.tableID);
       this.serverH.checkOrder(this.orderID).subscribe({
         next: (response) => {
+          if (response.data.orderStatus === 'cancel') {
+            localStorage.removeItem('orderID');
+            localStorage.removeItem('tableID');
+            this.customerType.setCustomerB();
+            this.navCtrl.navigateRoot(['./home']);
+          }
           console.log(response);
           this.currentOrder = response.data;
           this.isOrderReady =
@@ -74,25 +79,26 @@ export class HomeAfterOrderPage implements OnInit {
     });
   }
 
-  onCancelOrderAlert(){
-    this.alertCtrl.create({
-      header: 'Uyarı',
-      message: 'Siparişi iptal etmek istediğinize emin misiniz?',
-      buttons: [
-        {
-          text: 'İptal',
-          role: 'cancel',
-        },
-        {
-          text: 'Evet',
-          handler: () => {
-            this.closeOrder();
+  onCancelOrderAlert() {
+    this.alertCtrl
+      .create({
+        header: 'Uyarı',
+        message: 'Siparişi iptal etmek istediğinize emin misiniz?',
+        buttons: [
+          {
+            text: 'İptal',
+            role: 'cancel',
           },
-        },
-      ],
-    }).then((alert) => {
-      alert.present();
-    });
-
+          {
+            text: 'Evet',
+            handler: () => {
+              this.closeOrder();
+            },
+          },
+        ],
+      })
+      .then((alert) => {
+        alert.present();
+      });
   }
 }
