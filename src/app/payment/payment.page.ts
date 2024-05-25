@@ -4,6 +4,7 @@ import { Card } from 'src/types/cardType';
 import { AlertController } from '@ionic/angular';
 import { ItemReorderEventDetail } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-payment',
@@ -16,10 +17,12 @@ export class PaymentPage implements OnInit {
   constructor(
     private serverH: ServerHandlerService,
     private alertController: AlertController,
-    private route: Router
+    private route: Router,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {
+    console.log('Payment page initialized')
     this.serverH.getUserCards().subscribe({
       next: (data: { status: string; data: Card[] }) => {
         console.log('Data:', data);
@@ -45,13 +48,14 @@ export class PaymentPage implements OnInit {
   }
 
   navigateCardPage() {
-    this.route.navigate(['./add-card']);
+    this.navCtrl.navigateForward(['./add-card']);
   }
 
   deleteCard(card: Card) {
     if (card._id) {
       this.serverH.removeCard(card._id).subscribe({
         next: (data: { status: string }) => {
+          this.cardList = this.cardList.filter((c) => c._id !== card._id);
           console.log(data.status);
         },
         error: (error) => {
@@ -75,5 +79,27 @@ export class PaymentPage implements OnInit {
 
   ngOnDestroy() {
     console.log('Payment page destroyed');
+  }
+
+  onDeleleAlert(card: Card){
+    this.alertController.create({
+      header: 'Kart Silme',
+      message: 'Kartı silmek istediğinize emin misiniz?',
+      buttons: [
+        {
+          text: 'Evet',
+          handler: () => {
+            this.deleteCard(card);
+          },
+        },
+        {
+          text: 'Hayır',
+          role: 'cancel',
+        },
+      ],
+    }).then(alert => {
+      alert.present();
+    });
+
   }
 }

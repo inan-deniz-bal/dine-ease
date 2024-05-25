@@ -72,7 +72,7 @@ export class AddCardPage implements OnInit {
           {
             text: 'Tamam',
             handler: () => {
-              this.navCtrl.navigateRoot('/payment');
+              this.navCtrl.navigateRoot('/home');
             },
           },
         ],
