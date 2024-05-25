@@ -67,6 +67,8 @@ export class RestaurantPage implements OnInit {
   }
 
   orderItem(order: Order[], date: Date) {
+    const offset = 3 * 60;
+    const gmt3Date = new Date(date.getTime() + offset * 60 * 1000);
     let totalPrice = 0;
     order.forEach((meal) => {
       totalPrice += meal.mealPrice * meal.mealQuantity;
@@ -77,7 +79,7 @@ export class RestaurantPage implements OnInit {
     const newOrder: MakeOrder = {
       orderedMeals: order,
       tableId: this.selectedTable._id,
-      date: date,
+      date: gmt3Date,
       restaurantName: this.selectedRestaurant.name,
       orderStatus: 'active',
       totalPrice: totalPrice,
@@ -87,7 +89,7 @@ export class RestaurantPage implements OnInit {
     this.serverH.makeOrder(newOrder).subscribe({
       next: (response) => {
         console.log(response);
-        //this.navCtrl.navigateRoot(['./home-after-order']);
+        this.navCtrl.navigateRoot(['./home-after-order']);
       },
       error: (err) => {
         console.log(err.message);
@@ -122,6 +124,4 @@ export class RestaurantPage implements OnInit {
         alertEl.present();
       });
   }
-
-
 }

@@ -21,6 +21,83 @@ export class ServerHandlerService {
 
   //apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
 
+
+
+  login(data: Login): Observable<loginRes> {
+    return this.http.post<loginRes>(
+      `${this.apiUrl}/customers/login`,
+      data.getUserInfo()
+    );
+  }
+  signUp(user: Customer): Observable<any> {
+    return this.http.post(`${this.apiUrl}/customers/`, user);
+  }
+
+  getPastOrders(): Observable<any> {
+    const userID = this.loginSer.getUser();
+    return this.http.get(`${this.apiUrl}/pastOrders/${userID}`);
+  }
+
+  getAllRestaurants(): Observable<{ status: string; data: Restaurant[] }> {
+    return this.http.get<{ status: string; data: Restaurant[] }>(
+      `${this.apiUrl}/restaurants`
+    );
+  }
+
+  getTablesForRestaurant(
+    restaurantID: string
+  ): Observable<{ status: string; data: Table[] }> {
+    return this.http.get<{ status: string; data: Table[] }>(
+      `${this.apiUrl}/restaurants/tables/${restaurantID}`
+    );
+  }
+
+  getUserCards(): Observable<{ status: string; data: Card[] }> {
+    return this.http.get<{ status: string; data: Card[] }>(
+      `${this.apiUrl}/cards/${this.loginSer.getUser()}`
+    );
+  }
+  addCard(newCard: Card): Observable<{ status: string; data: Card }> {
+    newCard.customerId = this.loginSer.getUser();
+    console.log(newCard);
+    return this.http.post<{ status: string; data: Card }>(
+      `${this.apiUrl}/cards`,
+      newCard
+    );
+  }
+  removeCard(cardId: String): Observable<{ status: string }> {
+    return this.http.delete<{ status: string }>(
+      `${this.apiUrl}/cards/${this.loginSer.getUser()}/${cardId}`
+    );
+  }
+
+  getRestaurantFromTable(tableId: String): Observable<{
+    status: string;
+    data: {
+      restaurantName: string;
+      menu: Menu[];
+      //table: Table;
+    };
+  }> {
+    return this.http.get<{
+      status: string;
+      data: {
+        restaurantName: string;
+        menu: Menu[];
+        // table: Table;
+      };
+    }>(`${this.apiUrl}/tables/${tableId}` /*, { date: new Date() }*/);
+  }
+
+  makeOrder(order: MakeOrder): Observable<{ status: string }> {
+    order.customerId = this.loginSer.getUser();
+    console.log(order.customerId)
+    return this.http.post<{ status: string }>(
+      `${this.apiUrl}/currentOrders`,
+      order
+    );
+  }
+
   menu1: Menu = {
     mealType: 'Sıcaklar',
     meals: [
@@ -256,80 +333,5 @@ export class ServerHandlerService {
   }*/
   getRestaurantMenu(): Menu[] {
     return this.burcuMenu;
-  }
-
-  login(data: Login): Observable<loginRes> {
-    return this.http.post<loginRes>(
-      `${this.apiUrl}/customers/login`,
-      data.getUserInfo()
-    );
-  }
-  signUp(user: Customer): Observable<any> {
-    return this.http.post(`${this.apiUrl}/customers/`, user);
-  }
-
-  getPastOrders(): Observable<any> {
-    const userID = this.loginSer.getUser();
-    return this.http.get(`${this.apiUrl}/pastOrders/${userID}`);
-  }
-
-  getAllRestaurants(): Observable<{ status: string; data: Restaurant[] }> {
-    return this.http.get<{ status: string; data: Restaurant[] }>(
-      `${this.apiUrl}/restaurants`
-    );
-  }
-
-  getTablesForRestaurant(
-    restaurantID: string
-  ): Observable<{ status: string; data: Table[] }> {
-    return this.http.get<{ status: string; data: Table[] }>(
-      `${this.apiUrl}/restaurants/tables/${restaurantID}`
-    );
-  }
-
-  getUserCards(): Observable<{ status: string; data: Card[] }> {
-    return this.http.get<{ status: string; data: Card[] }>(
-      `${this.apiUrl}/cards/${this.loginSer.getUser()}`
-    );
-  }
-  addCard(newCard: Card): Observable<{ status: string; data: Card }> {
-    newCard.customerId = this.loginSer.getUser();
-    console.log(newCard);
-    return this.http.post<{ status: string; data: Card }>(
-      `${this.apiUrl}/cards`,
-      newCard
-    );
-  }
-  removeCard(cardId: String): Observable<{ status: string }> {
-    return this.http.delete<{ status: string }>(
-      `${this.apiUrl}/cards/${this.loginSer.getUser()}/${cardId}`
-    );
-  }
-
-  getRestaurantFromTable(tableId: String): Observable<{
-    status: string;
-    data: {
-      restaurantName: string;
-      menu: Menu[];
-      //table: Table;
-    };
-  }> {
-    return this.http.get<{
-      status: string;
-      data: {
-        restaurantName: string;
-        menu: Menu[];
-        // table: Table;
-      };
-    }>(`${this.apiUrl}/tables/${tableId}` /*, { date: new Date() }*/);
-  }
-
-  makeOrder(order: MakeOrder): Observable<{ status: string }> {
-    order.customerId = this.loginSer.getUser();
-    console.log(order.customerId)
-    return this.http.post<{ status: string }>(
-      `${this.apiUrl}/currentOrders`,
-      order
-    );
   }
 }
