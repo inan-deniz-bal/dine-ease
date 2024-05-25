@@ -128,7 +128,7 @@ export class ServerHandlerService {
     tableId: String
   ): Observable<{ status: string; message: string }> {
     return this.http.post<{ status: string; message: string }>(
-      `${this.apiUrl}/rest${orderID}`,
+      `${this.apiUrl}/rest/${orderID}`,
       { tableId: tableId }
     );
   }
