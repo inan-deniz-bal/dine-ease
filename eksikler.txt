@@ -1,6 +1,3 @@
-[7]Kartlar
-1) Yeni kart eklenince gözükmüyor, refresh eklenecek
-2) Kart silme alertleri yapılacak
 
 [6]Geçmiş Siparişler
 1) UI tasarlanacak
@@ -8,6 +5,7 @@
 
 [3]Garson ödeme alma
 1) UI ve UX neredeyse yok onlar halledilecek
+2) Backend bağlantısı kurulacak
 
 
 [9]
@@ -15,6 +13,9 @@
 
 [10]
 Siparişin zaman sorunu var, sunucu aynı saatteki iki siparişi alıyor
+
+[11]
+Sipariş sonrasında yeni ana sayfaya aktarmak yerine rezervasyonlarım diye bir yer açılabilir orada farklı rezervasyonlar yapılabilir
 
 BİTENLER
 ---------------------
@@ -28,3 +29,6 @@ BİTENLER
 o saatten 1 saat önce o restoranda o masada sipariş var mı kontrol edilecek
 [8]
 1) Başlıklar Türkçeleştirilecek
+[7]Kartlar
+1) Yeni kart eklenince gözükmüyor, refresh eklenecek
+2) Kart silme alertleri yapılacak

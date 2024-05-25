@@ -17,9 +17,9 @@ import { MakeOrder } from 'src/types/makeOrderType';
 export class ServerHandlerService {
   constructor(private loginSer: LoginService, private http: HttpClient) {}
 
-  apiUrl = 'http://localhost:3000/api/v1';
+  //apiUrl = 'http://localhost:3000/api/v1';
 
-  //apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
+  apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
 
   login(data: Login): Observable<loginRes> {
     return this.http.post<loginRes>(
