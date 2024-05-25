@@ -27,29 +27,32 @@ export class AddCardPage implements OnInit {
   ) {}
 
   ngOnInit() {}
+
   addCardAlert() {
-    console.log('deneme');
-    this.alert
-      .create({
-        header: 'Kartı eklemek istediğinize emin misiniz?',
-        message: 'Kart bilgilerinizin doğru olduğundan emin olunuz.',
-        buttons: [
-          {
-            text: 'Evet',
-            handler: () => {
-              this.addCard();
+    if (this.isCardValid()) {
+      this.alert
+        .create({
+          header: 'Kartı eklemek istediğinize emin misiniz?',
+          message: 'Kart bilgilerinizin doğru olduğundan emin olunuz.',
+          buttons: [
+            {
+              text: 'Evet',
+              handler: () => {
+                this.addCard();
+              },
             },
-          },
-          {
-            text: 'Hayır',
-            role: 'cancel',
-          },
-        ],
-      })
-      .then((alert) => {
-        alert.present();
-      });
+            {
+              text: 'Hayır',
+              role: 'cancel',
+            },
+          ],
+        })
+        .then((alert) => {
+          alert.present();
+        });
+    }
   }
+
   addCard() {
     this.serverH.addCard(this.newCard).subscribe({
       next: (data: { status: string; data: Card }) => {
@@ -85,12 +88,48 @@ export class AddCardPage implements OnInit {
   failAlert(msg: string) {
     this.alert
       .create({
-        header: 'Kart Ekleme Başarız',
+        header: 'Kart Ekleme Başarısız',
         message: msg,
         buttons: ['Tamam'],
       })
       .then((alert) => {
         alert.present();
       });
+  }
+
+  isCardValid(): boolean {
+    const { cardNo, cardHolder, cvv, expirityDate } = this.newCard;
+
+    if (!/^\d{16}$/.test(cardNo)) {
+      this.failAlert('Kart numarası 16 haneli olmalı ve sadece rakamlardan oluşmalıdır.');
+      return false;
+    }
+
+    if (!/^[A-Za-z\s]+$/.test(cardHolder)) {
+      this.failAlert('Kart sahibi sadece harflerden ve boşluklardan oluşmalıdır.');
+      return false;
+    }
+
+    if (!/^\d{3}$/.test(cvv)) {
+      this.failAlert('CVV 3 haneli olmalıdır.');
+      return false;
+    }
+
+    if (!/^\d{2}$/.test(expirityDate.month) || !/^\d{4}$/.test(expirityDate.year)) {
+      this.failAlert('Son kullanma tarihi doğru formatta değil.');
+      return false;
+    }
+
+    const currentDate = new Date();
+    const expMonth = parseInt(expirityDate.month, 10);
+    const expYear = parseInt(expirityDate.year, 10);
+
+    // Ay ve yılın geçerli bir tarih oluşturup oluşturmadığını kontrol et
+    if (expMonth < 1 || expMonth > 12 || expYear < currentDate.getFullYear() || (expYear === currentDate.getFullYear() && expMonth < currentDate.getMonth() + 1)) {
+      this.failAlert('Son kullanma tarihi geçerli bir tarih olmalıdır.');
+      return false;
+    }
+
+    return true;
   }
 }

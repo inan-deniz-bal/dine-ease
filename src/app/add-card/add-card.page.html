@@ -13,30 +13,28 @@
   <div class="card-form">
     <div class="card-header">
       <ion-label>Kart Numarası</ion-label>
-      <ion-input [(ngModel)]="newCard.cardNo"></ion-input>
+      <ion-input type="number" [(ngModel)]="newCard.cardNo"></ion-input>
     </div>
     <div class="card-content">
       <div class="card-holder">
         <ion-label>Ad Soyad</ion-label>
-        <ion-input [(ngModel)]="newCard.cardHolder"></ion-input>
+        <ion-input type="text" [(ngModel)]="newCard.cardHolder"></ion-input>
       </div>
       <div class="card-details">
         <div class="date">
           <div>
             <ion-label>Ay</ion-label>
-            <ion-input type="" [(ngModel)]="newCard.expirityDate.month">
-            </ion-input>
+            <ion-input type="number" min="1" max="12" [(ngModel)]="newCard.expirityDate.month"></ion-input>
           </div>
           <div>/</div>
           <div>
             <ion-label>Yıl</ion-label>
-            <ion-input [(ngModel)]="newCard.expirityDate.year"></ion-input>
+            <ion-input type="number" min="2024" max="2100" [(ngModel)]="newCard.expirityDate.year"></ion-input>
           </div>
         </div>
-        <div class="cvv"></div>
-        <div>
+        <div class="cvv">
           <ion-label>CVV</ion-label>
-          <ion-input [(ngModel)]="newCard.cvv"></ion-input>
+          <ion-input type="number" [(ngModel)]="newCard.cvv"></ion-input>
         </div>
       </div>
     </div>
