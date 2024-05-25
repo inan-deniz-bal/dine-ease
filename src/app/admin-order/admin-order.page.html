@@ -25,7 +25,11 @@
         </ion-row>
       </ion-card-content>
     </ion-card>
-    <ion-button expand="full" color="success">Sipariş Hazırlandı</ion-button>
-    <ion-button expand="full" color="danger"> Siparişi İptal Et</ion-button>
+    <ion-button expand="full" color="success" (click)="onOrderReady()" *ngIf="!isOrderReady"
+      >Sipariş Hazırlandı</ion-button
+    >
+    <ion-button expand="full" color="danger" (click)="onOrderCancelled()">
+      Siparişi İptal Et</ion-button
+    >
   </ion-grid>
 </ion-content>
