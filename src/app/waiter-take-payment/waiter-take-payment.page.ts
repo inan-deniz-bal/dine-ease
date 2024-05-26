@@ -1,33 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { WaiterTableHandlerService } from 'src/services/waiter-table-handler.service';
 import { Order } from 'src/interfaces/order';
-
+import { WaiterPaymentService } from 'src/services/waiter-payment.service';
+import { ServerHandlerService } from 'src/services/server-handler.service';
+import { TempOrder } from 'src/types/tempOrderType';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-waiter-take-payment',
   templateUrl: './waiter-take-payment.page.html',
   styleUrls: ['./waiter-take-payment.page.scss'],
 })
-// EKSİKLER
-// FİYATLANDIRMA EKSİK
 export class WaiterTakePaymentPage implements OnInit {
-  orderList: Order[] = [
-    {
-      mealName: 'Pilav',
-      mealQuantity: 3,
-      mealPrice: 30,
-    },
-    {
-      mealName: 'Cacık',
-      mealQuantity: 1,
-      mealPrice: 15,
-    },
-  ];
-
+  orderList: Order[] = [];
   mealsToPay: Order[] = [];
 
-  constructor(private waiterTableService: WaiterTableHandlerService) {}
-  tableName :String= '';
+  constructor(
+    private alertCtrl:AlertController,
+    private serverH: ServerHandlerService,
+    private waiterP: WaiterPaymentService,
+    private waiterTableService: WaiterTableHandlerService
+  ) {}
+  tableName: String = '';
   ngOnInit() {
+    this.orderList = this.waiterP.getTempOrder().orderedMeals;
     this.tableName = this.waiterTableService.getTable().tableName;
   }
 
@@ -67,6 +62,11 @@ export class WaiterTakePaymentPage implements OnInit {
     }
     this.orderList = this.checkForNoMeal(this.orderList);
   }
+
+
+
+
+
   removeFromPay(meal: Order) {
     if (meal.mealQuantity && meal.mealQuantity <= 1) {
       const newMeals = this.mealsToPay.filter(
@@ -92,6 +92,8 @@ export class WaiterTakePaymentPage implements OnInit {
   }
 
   addToList(meal: Order, mealList: Order[]) {
+    console.log("ödenecek yemekler: ", this.mealsToPay)
+    console.log("kalan yemekler", this.orderList)
     const contains = mealList.some(
       (payMeal) => payMeal.mealName === meal.mealName
     );
@@ -112,5 +114,31 @@ export class WaiterTakePaymentPage implements OnInit {
       });
       return mealList;
     }
+
+  }
+
+  approvePayment() {
+
+  }
+
+  onApprovePaymentAlert(){
+    this.alertCtrl.create({
+      header:'Ödeme Onayı',
+      message:'Ödeme işlemini onaylıyor musunuz?',
+      buttons:[
+        {
+          text:'Evet',
+          handler:()=>{
+            this.approvePayment();
+          }
+        },
+        {
+          text:'Hayır',
+          role:'cancel'
+        }
+      ]
+    }).then(alertEl=>{
+      alertEl.present();
+    })
   }
 }

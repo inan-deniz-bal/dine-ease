@@ -5,7 +5,7 @@ import { TempOrder } from 'src/types/tempOrderType';
   providedIn: 'root',
 })
 export class WaiterPaymentService {
-  defaulTempOrder: TempOrder = {
+  private defaulTempOrder: TempOrder = {
     currentOrderId: '',
     orderedMeals: [],
     paidMeals: [],
@@ -17,6 +17,7 @@ export class WaiterPaymentService {
   }
 
   setTempOrder(tempOrder: TempOrder) {
+    console.log("değer değişti")
     this.defaulTempOrder = tempOrder;
   }
 

@@ -9,26 +9,27 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
+    <ion-card-header>
+      <ion-card-title>Kalan Siparişler</ion-card-title>
+    </ion-card-header>
     <ion-card-content>
       <!--Burada forla döneceğiz-->
-      <ion-item *ngFor=" let order of orderList">
-        <ion-col> {{order.mealName}} [{{order.mealQuantity}}]</ion-col>
-        <ion-buttons>
-          <ion-button (click)="addToPay(order)">Ekle</ion-button>
-          <!--<ion-button (click)="removeFromPay(order)">Çıkart</ion-button> -->
-        </ion-buttons>
-      </ion-item>
+      <ion-row *ngFor=" let porder of orderList" (click)="addToPay(porder)">
+        <ion-col size="6">{{porder.mealName}}</ion-col>
+        <ion-col size="3">{{porder.mealQuantity}} adet</ion-col>
+        <ion-col size="3">{{porder.mealPrice}} TL</ion-col>
+      </ion-row>
       <div class="kalan">
-        Ödemesi alınanlar:
+        <ion-card-title> Ödemesi Alınacaklar:</ion-card-title>
 
-        <ion-list>
-          <ion-row
-            *ngFor="let meals of mealsToPay "
-            (click)="removeFromPay(meals)"
-          >
-            {{meals.mealName}} / [{{meals.mealQuantity}}]
-          </ion-row>
-        </ion-list>
+        <ion-row
+          *ngFor="let meals of mealsToPay "
+          (click)="removeFromPay(meals)"
+        >
+          <ion-col size="6">{{meals.mealName}}</ion-col>
+          <ion-col size="3">{{meals.mealQuantity}} adet</ion-col>
+          <ion-col size="3">{{meals.mealPrice}} TL</ion-col>
+        </ion-row>
       </div>
     </ion-card-content>
   </ion-card>

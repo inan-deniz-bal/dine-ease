@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-grid>
-    <ion-card>
+    <ion-card *ngIf="totalLeft>0">
       <ion-card-header>
         <ion-card-title>Sipariş Detayı</ion-card-title>
       </ion-card-header>
@@ -20,13 +20,12 @@
           <ion-col size="3">{{order.mealPrice}} TL</ion-col>
         </ion-row>
         <ion-row>
+          <div class="total">Toplam {{totalLeft}} TL</div>
         </ion-row>
       </ion-card-content>
     </ion-card>
 
-
-
-    <ion-card>
+    <ion-card *ngIf="totalPaid>0">
       <ion-card-header>
         <ion-card-title>Ödemesi Alınanlar</ion-card-title>
       </ion-card-header>
@@ -37,7 +36,7 @@
           <ion-col size="3">{{order.mealPrice}} TL</ion-col>
         </ion-row>
         <ion-row>
-          <div class="total">Toplam {{totalLeft}} TL</div>
+          <div class="total">Toplam {{totalPaid}} TL</div>
         </ion-row>
       </ion-card-content>
     </ion-card>
@@ -47,7 +46,9 @@
       <ion-button expand="full" (click)="takePayment()"> Ödeme Al</ion-button>
     </ion-col>
     <ion-col>
-      <ion-button expand="full" (click)="closeTable()"> Masayı Kapat</ion-button>
+      <ion-button expand="full" (click)="closeTable()">
+        Masayı Kapat</ion-button
+      >
     </ion-col>
   </ion-row>
 </ion-content>

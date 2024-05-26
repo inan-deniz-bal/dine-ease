@@ -47,17 +47,16 @@ export class WaiterTablePage implements OnInit {
       next: (response) => {
         this.waiterP.setTempOrder(response.data);
         this.currentOrder = response.data.orderedMeals;
-        this.totalLeft = this.currentOrder.reduce(
-          (acc, cur) => acc + cur.mealPrice,
-          0
-        );
+
+        this.currentOrder.forEach((meal) => {
+          this.totalLeft += meal.mealPrice * meal.mealQuantity;
+        });
 
         this.paidOrders = response.data.paidMeals;
 
-        this.totalPaid = this.paidOrders.reduce(
-          (acc, cur) => acc + cur.mealPrice,
-          0
-        );
+        this.paidOrders.forEach((meal) => {
+          this.totalPaid += meal.mealPrice * meal.mealQuantity;
+        });
       },
       error: (error) => {
         console.log(error);
