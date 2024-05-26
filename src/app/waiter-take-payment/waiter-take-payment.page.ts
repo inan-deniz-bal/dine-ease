@@ -18,6 +18,7 @@ import { slideOutToRightAnimation } from 'src/animations/amination3';
 export class WaiterTakePaymentPage implements OnInit {
   orderList: Order[] = [];
   mealsToPay: Order[] = [];
+  paidMeals: Order[] = [];
   disabled = false;
 
   constructor(
@@ -31,7 +32,8 @@ export class WaiterTakePaymentPage implements OnInit {
   ngOnInit() {
     this.orderList = this.waiterP.getTempOrder().orderedMeals;
     this.tableName = this.waiterTableService.getTable().tableName;
-    if (this.orderList.length == 0) {
+    this.paidMeals = this.waiterP.getTempOrder().paidMeals;
+    if (this.orderList.length == 0 && this.mealsToPay.length == 0) {
       this.disabled = true;
       this.alertCtrl
         .create({
@@ -141,15 +143,15 @@ export class WaiterTakePaymentPage implements OnInit {
   approvePayment() {
     console.log('siparişten kalanlar ', this.orderList);
     console.log('ödenecekler ', this.mealsToPay);
-    if(this.orderList.length == 0 ){
-      console.log("merhaba")
-      this.onNoMorePaymentAlert();
-    }
+    console.log('ödeneceklerin uzunluğu', this.mealsToPay.length);
     if (this.mealsToPay.length == 0 && this.orderList.length == 0) {
+      this.onNoMorePaymentAlert();
+    } else if (this.mealsToPay.length == 0 && this.orderList.length != 0) {
+      console.log('lütfen bir şeyler ekleyin');
       this.alertCtrl
         .create({
           header: 'Hata',
-          message: 'Ödenecek bir şey yok.',
+          message: 'Lütfen ödenecek bir şey ekleyin.',
           buttons: [
             {
               text: 'Tamam',
@@ -159,12 +161,14 @@ export class WaiterTakePaymentPage implements OnInit {
         .then((alertEl) => {
           alertEl.present();
         });
-      return;
     } else {
       const tempOrderId = this.waiterP.getTempOrder()._id;
+      console.log('bulundu');
+
       if (tempOrderId) {
+        const concatPaidOrders = this.paidMeals.concat(this.mealsToPay);
         this.serverH
-          .updateTempOrder( this.orderList,this.mealsToPay, tempOrderId)
+          .updateTempOrder(this.orderList, concatPaidOrders, tempOrderId)
           .subscribe({
             next: (response) => {
               console.log(response);
@@ -207,7 +211,8 @@ export class WaiterTakePaymentPage implements OnInit {
     this.alertCtrl
       .create({
         header: 'Ödeme Alınacak Başka Sipariş Yok',
-        message: 'Ödeme alınacak başka sipariş bulunamadı. Masayı kapatabilirsiniz!',
+        message:
+          'Ödeme alınacak başka sipariş bulunamadı. Masayı kapatabilirsiniz!',
         buttons: [
           {
             text: 'Tamam',

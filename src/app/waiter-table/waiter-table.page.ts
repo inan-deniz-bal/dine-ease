@@ -123,6 +123,7 @@ export class WaiterTablePage implements OnInit {
   }
 
   closeTable() {
+    console.log('toplam kalan', this.totalLeft);
     if (this.totalLeft == 0) {
       const tableId = this.table._id;
       const currentOrderid = this.waiterP
@@ -132,8 +133,10 @@ export class WaiterTablePage implements OnInit {
       if (tableId && currentOrderid && tempOrderId) {
         this.serverH.closeOrder(currentOrderid, tableId).subscribe({
           next: (response) => {
+            console.log('ilk response', response);
             this.serverH.deleteTempOrder(tempOrderId).subscribe({
-              next: (response) => {
+              next: (response2) => {
+                console.log('temp order silme response', response2);
                 this.navCtrl.navigateRoot(['./waiter-home']);
               },
               error: (error) => {
@@ -143,12 +146,24 @@ export class WaiterTablePage implements OnInit {
           },
           error: (error) => {
             console.log(error);
-
           },
         });
       }
     } else {
-      console.log('Ödenmemiş para var', this.totalLeft);
+      this.alertCtrl
+        .create({
+          header: 'Hata',
+          message:
+            'Masada ödemesi alınmamış ürünler var. Lütfen ödemelerini alın!',
+          buttons: [
+            {
+              text: 'Tamam',
+            },
+          ],
+        })
+        .then((alertEl) => {
+          alertEl.present();
+        });
     }
     //eğer kalan para sıfırsa borç kapanır
   }
