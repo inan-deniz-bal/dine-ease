@@ -63,7 +63,7 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.tempOrder.currentOrderSubject.subscribe((menu) => {
       this.menuOrderList = menu;
-
+      this.total = 0;
       this.menuOrderList.forEach((meal) => {
         this.total += (meal.mealPrice * meal.mealQuantity);
       });

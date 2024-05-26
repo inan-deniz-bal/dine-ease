@@ -73,36 +73,39 @@ export class RestaurantPage implements OnInit {
     order.forEach((meal) => {
       totalPrice += meal.mealPrice * meal.mealQuantity;
     });
+    if (totalPrice <= 0) {
+      this.noOrderAlert();
+    } else {
+      console.log('hey ', order);
+      console.log('masa', this.selectedTable);
+      const newOrder: MakeOrder = {
+        orderedMeals: order,
+        tableId: this.selectedTable._id,
+        date: date,
+        restaurantName: this.selectedRestaurant.name,
+        orderStatus: 'active',
+        totalPrice: totalPrice,
+      };
+      console.log('newOrder', newOrder);
 
-    console.log('hey ', order);
-    console.log('masa', this.selectedTable);
-    const newOrder: MakeOrder = {
-      orderedMeals: order,
-      tableId: this.selectedTable._id,
-      date: date,
-      restaurantName: this.selectedRestaurant.name,
-      orderStatus: 'active',
-      totalPrice: totalPrice,
-    };
-    console.log('newOrder', newOrder);
+      this.serverH.makeOrder(newOrder).subscribe({
+        next: (response) => {
+          console.log(response.data);
+          if (response.data._id) {
+            localStorage.setItem('orderID', response.data._id);
+            localStorage.setItem(
+              'tableID',
+              JSON.stringify(response.data.tableId)
+            );
+          }
 
-    this.serverH.makeOrder(newOrder).subscribe({
-      next: (response) => {
-        console.log(response.data);
-        if (response.data._id) {
-          localStorage.setItem('orderID', response.data._id);
-          localStorage.setItem(
-            'tableID',
-            JSON.stringify(response.data.tableId)
-          );
-        }
-
-        this.navCtrl.navigateRoot(['./home-after-order']);
-      },
-      error: (err) => {
-        console.log(err.message);
-      },
-    });
+          this.navCtrl.navigateRoot(['./home-after-order']);
+        },
+        error: (err) => {
+          console.log(err.message);
+        },
+      });
+    }
   }
 
   onOrderAlert(order: Order[], date: Date) {
@@ -126,6 +129,18 @@ export class RestaurantPage implements OnInit {
             },
           },
         ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
+  }
+  noOrderAlert() {
+    this.alertCtrl
+      .create({
+        header: 'Sipariş Başarısız',
+        message:
+          'Siparişinizde herhangi bir ürün bulunmamaktadır. Lütfen ürün ekleyiniz',
+        buttons: ['Tamam'],
       })
       .then((alertEl) => {
         alertEl.present();

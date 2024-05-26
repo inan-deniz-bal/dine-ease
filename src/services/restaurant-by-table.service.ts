@@ -24,6 +24,7 @@ export class RestaurantByTableService {
   }
 
   setSelectedTableID(id: string): void {
+    console.log("yeni id", id)
     this.selectedTableID = id;
   }
 

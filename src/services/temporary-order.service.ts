@@ -16,8 +16,9 @@ export class TemporaryOrderService {
   }
 
   getOrder(): Order[] {
-
+    console.log("yeni sipariş", this.currentOrder)
     return this.currentOrder;
+
 
   }
 

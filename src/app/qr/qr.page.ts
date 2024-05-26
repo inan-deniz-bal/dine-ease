@@ -4,6 +4,7 @@ import { ServerHandlerService } from 'src/services/server-handler.service';
 import { NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { RestaurantByTableService } from 'src/services/restaurant-by-table.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-qr',
@@ -15,7 +16,8 @@ export class QrPage implements OnInit {
     private serverH: ServerHandlerService,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
-    private restByt: RestaurantByTableService
+    private restByt: RestaurantByTableService,
+    private router: Router
   ) {}
   isTransparent = false;
 
@@ -34,6 +36,9 @@ export class QrPage implements OnInit {
         next: (response) => {
           if (response.status === 'success') {
             this.stopScan();
+            console.log("sonuçlar ", response.data, result.content);
+            console.log(JSON.stringify(response, null, 2));
+
             this.restByt.setResponse(response.data);
             this.restByt.setSelectedTableID(result.content);
             this.navCtrl.navigateRoot(['./table']);

@@ -30,45 +30,53 @@ export class TablePage implements OnInit {
 
   ngOnInit() {
     this.table._id = this.restByTable.getSelectedTableID();
+    console.log('Masa idsi', this.table._id);
     this.menu = this.restByTable.getResponse().menu;
     this.selectedRestaurantName = this.restByTable.getResponse().restaurantName;
+    console.log(
+      'MASA ',
+      this.restByTable.getResponse().restaurantName,
+      this.restByTable.getResponse().menu
+    );
   }
 
   orderItem(order: Order[], date: Date) {
-    const offset = 3 * 60;
-    const gmt3Date = new Date(date.getTime() + offset * 60 * 1000);
     let totalPrice = 0;
     order.forEach((meal) => {
       totalPrice += meal.mealPrice * meal.mealQuantity;
     });
 
-    const newOrder: MakeOrder = {
-      orderedMeals: order,
-      tableId: this.table._id,
-      date: date,
-      restaurantName: this.selectedRestaurantName,
-      orderStatus: 'active',
-      totalPrice: totalPrice,
-    };
-    console.log('newOrder', newOrder);
+    if (totalPrice <= 0) {
+      this.noOrderAlert();
+    } else {
+      const newOrder: MakeOrder = {
+        orderedMeals: order,
+        tableId: this.table._id,
+        date: date,
+        restaurantName: this.selectedRestaurantName,
+        orderStatus: 'active',
+        totalPrice: totalPrice,
+      };
+      console.log('newOrder', newOrder);
 
-    this.serverH.makeOrder(newOrder).subscribe({
-      next: (response) => {
-        console.log(response.data);
-        if (response.data._id) {
-          localStorage.setItem('orderID', response.data._id);
-          localStorage.setItem(
-            'tableID',
-            JSON.stringify(response.data.tableId)
-          );
-        }
+      this.serverH.makeOrder(newOrder).subscribe({
+        next: (response) => {
+          console.log(response.data);
+          if (response.data._id) {
+            localStorage.setItem('orderID', response.data._id);
+            localStorage.setItem(
+              'tableID',
+              JSON.stringify(response.data.tableId)
+            );
+          }
 
-        this.navCtrl.navigateRoot(['./home-after-order']);
-      },
-      error: (err) => {
-        console.log(err.message);
-      },
-    });
+          this.navCtrl.navigateRoot(['./home-after-order']);
+        },
+        error: (err) => {
+          console.log(err.message);
+        },
+      });
+    }
   }
 
   onOrderAlert(order: Order[], date: Date) {
@@ -100,5 +108,37 @@ export class TablePage implements OnInit {
 
   closeOrder() {
     this.navCtrl.navigateRoot(['./qr']);
+  }
+
+  failedAlert() {
+    this.alertCtrl
+      .create({
+        header: 'Sipariş Başarısız',
+        message: 'Siparişiniz alınamadı. Lütfen tekrar deneyin.',
+        buttons: [
+          {
+            text: 'Tamam',
+            handler: () => {
+              this.navCtrl.navigateRoot(['./qr']);
+            },
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
+  }
+
+  noOrderAlert() {
+    this.alertCtrl
+      .create({
+        header: 'Sipariş Başarısız',
+        message:
+          'Siparişinizde herhangi bir ürün bulunmamaktadır. Lütfen ürün ekleyiniz',
+        buttons: ['Tamam'],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
   }
 }
