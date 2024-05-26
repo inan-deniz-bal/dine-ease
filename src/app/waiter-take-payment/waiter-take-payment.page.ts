@@ -28,7 +28,7 @@ export class WaiterTakePaymentPage implements OnInit {
   constructor(private waiterTableService: WaiterTableHandlerService) {}
   tableName :String= '';
   ngOnInit() {
-    this.tableName = this.waiterTableService.getTable();
+    this.tableName = this.waiterTableService.getTable().tableName;
   }
 
   addToPay(meal: Order) {

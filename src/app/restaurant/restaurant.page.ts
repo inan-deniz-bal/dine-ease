@@ -48,6 +48,7 @@ export class RestaurantPage implements OnInit {
         date: new Date(),
         customerId: '',
         status: '',
+        currentOrder: '',
       },
     ],
   };

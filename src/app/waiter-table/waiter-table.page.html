@@ -3,14 +3,45 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title> {{table}}</ion-title>
+    <ion-title> {{table.tableName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-content> BURADA SİPARİŞLER OLACAK </ion-card-content>
-  </ion-card>
+  <ion-grid>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sipariş Detayı</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row *ngFor="let order of currentOrder">
+          <ion-col size="6">{{order.mealName}}</ion-col>
+          <ion-col size="3">{{order.mealQuantity}} adet</ion-col>
+          <ion-col size="3">{{order.mealPrice}} TL</ion-col>
+        </ion-row>
+        <ion-row>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Ödemesi Alınanlar</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row *ngFor="let order of paidOrders">
+          <ion-col size="6">{{order.mealName}}</ion-col>
+          <ion-col size="3">{{order.mealQuantity}} adet</ion-col>
+          <ion-col size="3">{{order.mealPrice}} TL</ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="total">Toplam {{totalLeft}} TL</div>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
   <ion-row>
     <ion-col>
       <ion-button expand="full" (click)="takePayment()"> Ödeme Al</ion-button>

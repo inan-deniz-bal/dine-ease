@@ -33,7 +33,7 @@ export class WaiterHomePage implements OnInit {
 
   onClickTable(clickedTable: Table) {
     console.log(clickedTable);
-    this.waiterTable.setTable(clickedTable.tableName);
+    this.waiterTable.setTable(clickedTable);
     this.route.navigate(['/waiter-table']);
   }
 }

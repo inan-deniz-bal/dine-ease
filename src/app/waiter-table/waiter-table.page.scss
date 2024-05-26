@@ -1,0 +1,18 @@
+ion-button{
+  color: white !important;
+  font-weight: bold !important;
+}
+ion-card {
+  ion-card-title {
+    font-size: 1.5rem;
+    color: black;
+  }
+  background: #fefded;
+  border-radius: 8%;
+  width: 90%;
+  ion-card-content {
+    padding: 20px;
+    font-size: 1rem;
+    color: black;
+  }
+}

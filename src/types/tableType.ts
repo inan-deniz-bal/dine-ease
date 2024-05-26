@@ -1,10 +1,10 @@
 export type Table = {
   tableName: String;
   _id: String;
-  orders?: [
+  orders: [
     {
       date: Date;
-      currentOrder?: any;
+      currentOrder: string;
       customerId: String;
       status: String;
     }

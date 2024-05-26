@@ -12,6 +12,8 @@ import { Card } from 'src/types/cardType';
 import { loginRes } from 'src/types/loginResponseType';
 import { MakeOrder } from 'src/types/makeOrderType';
 
+import { Order } from 'src/interfaces/order';
+import { TempOrder } from 'src/types/tempOrderType';
 import { restaurantByTableResponseType } from 'src/types/restaurantByTableResponseType';
 @Injectable({
   providedIn: 'root',
@@ -19,9 +21,9 @@ import { restaurantByTableResponseType } from 'src/types/restaurantByTableRespon
 export class ServerHandlerService {
   constructor(private loginSer: LoginService, private http: HttpClient) {}
 
-  //apiUrl = 'http://localhost:3000/api/v1';
+  apiUrl = 'http://localhost:3000/api/v1';
 
-  apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
+  //apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
 
   login(data: Login): Observable<loginRes> {
     return this.http.post<loginRes>(
@@ -73,11 +75,11 @@ export class ServerHandlerService {
 
   getRestaurantFromTable(tableId: String): Observable<{
     status: string;
-    data: restaurantByTableResponseType
+    data: restaurantByTableResponseType;
   }> {
     return this.http.get<{
       status: string;
-      data: restaurantByTableResponseType
+      data: restaurantByTableResponseType;
     }>(`${this.apiUrl}/tables/qr/${tableId}` /*, { date: new Date() }*/);
   }
 
@@ -132,6 +134,29 @@ export class ServerHandlerService {
   ): Observable<{ status: string; message: string }> {
     return this.http.get<{ status: string; message: string }>(
       `${this.apiUrl}/rest/ready/${orderId}`
+    );
+  }
+
+  checkTempOrder(
+    ordersID: string[]
+  ): Observable<{ status: string; data: TempOrder }> {
+    return this.http.post<{ status: string; data: TempOrder }>(
+      `${this.apiUrl}/tempOrders`,
+      { ordersID: ordersID }
+    );
+  }
+
+  updateTempOrder(
+    orderedMeals: Order[],
+    paidMeals: Order[],
+    orderId: string
+  ): Observable<{ status: string; data: TempOrder }> {
+    return this.http.post<{ status: string; data: TempOrder }>(
+      `${this.apiUrl}/tempOrders/${orderId}`,
+      {
+        orderedMeals: orderedMeals,
+        paidMeals: paidMeals,
+      }
     );
   }
 

@@ -16,6 +16,14 @@ export class TablePage implements OnInit {
   table: Table = {
     tableName: 'QR Masa',
     _id: '',
+    orders: [
+      {
+        date: new Date(),
+        currentOrder: '',
+        customerId: '',
+        status: '',
+      },
+    ],
   };
 
   selectedRestaurantName = '';
