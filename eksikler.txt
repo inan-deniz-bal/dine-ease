@@ -1,6 +1,3 @@
-[1]Garson ödeme alma
-1) UI ve UX neredeyse yok onlar halledilecek
-2) Backend bağlantısı kurulacak
 
 [2]
 1)sipariş sonrası ana ekrana yenileme butonu eklenecek
@@ -40,3 +37,6 @@ o saatten 1 saat önce o restoranda o masada sipariş var mı kontrol edilecek
 [6]Geçmiş Siparişler
 1) UI tasarlanacak
 
+[1]Garson ödeme alma
+1) UI ve UX neredeyse yok onlar halledilecek
+2) Backend bağlantısı kurulacak
