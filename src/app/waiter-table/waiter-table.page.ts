@@ -89,7 +89,7 @@ export class WaiterTablePage implements OnInit {
   }
 
   takePayment() {
-    this.route.navigate(['./waiter-take-payment']);
+    this.navCtrl.navigateRoot(['./waiter-take-payment']);
   }
 
   closeTable() {

@@ -137,7 +137,8 @@ export class WaiterTakePaymentPage implements OnInit {
   }
 
   approvePayment() {
-
+    console.log("siparişten kalanlar ", this.orderList)
+    console.log("ödenecekler ", this.mealsToPay)
   }
 
   onApprovePaymentAlert(){
@@ -159,5 +160,9 @@ export class WaiterTakePaymentPage implements OnInit {
     }).then(alertEl=>{
       alertEl.present();
     })
+  }
+
+  backWards(){
+    this.navCtrl.navigateRoot(["./waiter-table"])
   }
 }

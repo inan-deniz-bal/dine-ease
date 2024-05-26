@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button class="g" (click)="backWards()"> < Geri</ion-button>
     </ion-buttons>
     <ion-title>{{tableName}}</ion-title>
   </ion-toolbar>
@@ -34,5 +34,5 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button *ngIf="!disabled" expand="full"> Ödemeyi Onayla </ion-button>
+  <ion-button *ngIf="!disabled" expand="full" (click)="approvePayment()"> Ödemeyi Onayla </ion-button>
 </ion-content>
