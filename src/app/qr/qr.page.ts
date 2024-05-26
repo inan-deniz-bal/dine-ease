@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { ServerHandlerService } from 'src/services/server-handler.service';
 import { NavController } from '@ionic/angular';
-import { NavigationExtras } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { RestaurantByTableService } from 'src/services/restaurant-by-table.service';
 
 @Component({
   selector: 'app-qr',
@@ -14,7 +14,8 @@ export class QrPage implements OnInit {
   constructor(
     private serverH: ServerHandlerService,
     private navCtrl: NavController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private restByt: RestaurantByTableService
   ) {}
   isTransparent = false;
 
@@ -33,10 +34,9 @@ export class QrPage implements OnInit {
         next: (response) => {
           if (response.status === 'success') {
             this.stopScan();
-            const navigationExtras: NavigationExtras = {
-              state: { data: response.data }, // Data to pass to the destination component
-            };
-            this.navCtrl.navigateRoot(['./table'], navigationExtras);
+            this.restByt.setResponse(response.data);
+            this.restByt.setSelectedTableID(result.content);
+            this.navCtrl.navigateRoot(['./table']);
           }
         },
         error: (error) => {

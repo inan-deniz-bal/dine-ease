@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Table } from 'src/types/tableType';
 import { Menu } from 'src/interfaces/menu';
 import { ServerHandlerService } from 'src/services/server-handler.service';
-import { ActivatedRoute } from '@angular/router';
+import { RestaurantByTableService } from 'src/services/restaurant-by-table.service';
 
 @Component({
   selector: 'app-table',
@@ -11,26 +11,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TablePage implements OnInit {
   table: Table = {
-    tableName: '',
+    tableName: 'QR Masa',
     _id: '',
   };
   menu: Menu[] = [];
   constructor(
     private serverH: ServerHandlerService,
-    private route: ActivatedRoute
+    private restByTable: RestaurantByTableService
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      // Eğer veri NavigationExtras aracılığıyla aktarıldıysa state içinde olur
-      const data = window.history.state.data;
-      if (data) {
-        //this.table = data.table;
-        this.menu = data.menu;
-        // İşlemlerinizi burada yapabilirsiniz
-      } else {
-        // Veri NavigationExtras ile aktarılmadıysa, servis veya başka bir kaynaktan alabilirsiniz
-      }
-    });
+    this.table._id = this.restByTable.getSelectedTableID();
   }
 }
