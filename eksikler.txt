@@ -1,25 +1,26 @@
 
-[2]
-1)sipariş sonrası ana ekrana yenileme butonu eklenecek
 
-[3]
+[2]
 Siparişin zaman sorunu var, sunucu aynı saatteki iki siparişi alıyor
 
-[4]
+[1]
 1) Garson ana sayfası dinamik olacak, loginde hangi restoranda çalışıyorsa orası dönecek
 
-[5]
-1) Restoran sayfasında restoranların özellikleri güncellenecek. Park yeri, vegan, çocuk oyun alanı var mı eklenecek.
-Ayrıca doluluk oranı anlık sipariş zamanlarıyla kontrol edilecek. Yani get restaurant isteği atılınca restoranların masaları o an + 5 dakika için dolu mu değil mi bakılacak
 
 
-[6]
-1) Restoran menüleri güncellenecek
-[7]
+[3]
 Sipariş sonrasında yeni ana sayfaya aktarmak yerine rezervasyonlarım diye bir yer açılabilir orada farklı rezervasyonlar yapılabilir
 
 BİTENLER
 ---------------------
+[5]
+1) Restoran sayfasında restoranların özellikleri güncellenecek. Park yeri, vegan, çocuk oyun alanı var mı eklenecek.
+Ayrıca doluluk oranı anlık sipariş zamanlarıyla kontrol edilecek. Yani get restaurant isteği atılınca restoranların masaları o an + 5 dakika için dolu mu değil mi bakılacak
+
+[2]
+[6]
+1) Restoran menüleri güncellenecek
+1)sipariş sonrası ana ekrana yenileme butonu eklenecek
 /*
 [0]QR
 1)UI tasarlanacak ve masaya yönlendirecek  */
