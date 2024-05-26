@@ -6,6 +6,8 @@ import { ServerHandlerService } from 'src/services/server-handler.service';
 import { Order } from 'src/interfaces/order';
 import { TempOrder } from 'src/types/tempOrderType';
 import { WaiterPaymentService } from 'src/services/waiter-payment.service';
+import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-waiter-table',
   templateUrl: './waiter-table.page.html',
@@ -16,10 +18,14 @@ export class WaiterTablePage implements OnInit {
     private waiterTable: WaiterTableHandlerService,
     private serverH: ServerHandlerService,
     private route: Router,
-    private waiterP: WaiterPaymentService
+    private waiterP: WaiterPaymentService,
+    private alertCtrl: AlertController,
+    private navCtrl: NavController
   ) {}
   currentOrder: Order[] = [];
   paidOrders: Order[] = [];
+
+  isPageDisabled = false;
 
   totalLeft = 0;
   totalPaid = 0;
@@ -59,6 +65,24 @@ export class WaiterTablePage implements OnInit {
         });
       },
       error: (error) => {
+        this.isPageDisabled = true;
+        this.alertCtrl
+          .create({
+            header: 'Hata',
+            message: 'Sipariş bulunamadı.',
+            buttons: [
+              {
+                text: 'Tamam',
+                handler: () => {
+                  this.navCtrl.navigateRoot(['./waiter-home']);
+                },
+              },
+            ],
+          })
+          .then((alertEl) => {
+            alertEl.present();
+          });
+
         console.log(error);
       },
     });

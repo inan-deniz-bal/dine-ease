@@ -41,7 +41,7 @@
       </ion-card-content>
     </ion-card>
   </ion-grid>
-  <ion-row>
+  <ion-row *ngIf="!isPageDisabled">
     <ion-col>
       <ion-button expand="full" (click)="takePayment()"> Ödeme Al</ion-button>
     </ion-col>

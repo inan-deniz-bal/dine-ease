@@ -3,6 +3,8 @@ import { ServerHandlerService } from 'src/services/server-handler.service';
 import { MakeOrder } from 'src/types/makeOrderType';
 import { AdminSelectedOrderService } from 'src/services/admin-selected-order.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.page.html',
@@ -16,7 +18,9 @@ export class AdminPagePage implements OnInit {
 
   constructor(private serverH: ServerHandlerService,
     private selectedOrder: AdminSelectedOrderService,
-    private router: Router
+    private router: Router,
+    private alertCtrl: AlertController,
+    private navCtrl:NavController
   ) {}
 
   ngOnInit() {
@@ -28,6 +32,20 @@ export class AdminPagePage implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        this.alertCtrl.create({
+          header: 'Hata',
+          message: 'Listelenecek sipariş bulunamadı.',
+          buttons: [
+            {
+              text: 'Tamam',
+              handler: () => {
+                this.navCtrl.navigateRoot(['/admin-home']);
+              },
+            },
+          ],
+        }).then(alertEl => {
+          alertEl.present();
+        });
       },
     });
   }

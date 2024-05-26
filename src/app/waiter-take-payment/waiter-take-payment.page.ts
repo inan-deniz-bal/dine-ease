@@ -5,6 +5,7 @@ import { WaiterPaymentService } from 'src/services/waiter-payment.service';
 import { ServerHandlerService } from 'src/services/server-handler.service';
 import { TempOrder } from 'src/types/tempOrderType';
 import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-waiter-take-payment',
   templateUrl: './waiter-take-payment.page.html',
@@ -13,9 +14,11 @@ import { AlertController } from '@ionic/angular';
 export class WaiterTakePaymentPage implements OnInit {
   orderList: Order[] = [];
   mealsToPay: Order[] = [];
+  disabled = false;
 
   constructor(
     private alertCtrl:AlertController,
+    private navCtrl:NavController,
     private serverH: ServerHandlerService,
     private waiterP: WaiterPaymentService,
     private waiterTableService: WaiterTableHandlerService
@@ -24,6 +27,22 @@ export class WaiterTakePaymentPage implements OnInit {
   ngOnInit() {
     this.orderList = this.waiterP.getTempOrder().orderedMeals;
     this.tableName = this.waiterTableService.getTable().tableName;
+    if(this.orderList.length==0){
+      this.disabled=true;
+      this.alertCtrl.create({
+        header:'Hata',
+        message:'Ödeme alınacak sipariş bulunamadı.',
+        buttons:[{
+          text:'Tamam',
+          handler:()=>{
+            this.navCtrl.navigateRoot(["./waiter-home"])
+          }
+        }]
+      }).then(alertEl=>{
+        alertEl.present();
+
+      })
+    }
   }
 
   addToPay(meal: Order) {

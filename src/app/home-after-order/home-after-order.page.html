@@ -34,7 +34,7 @@
       <ion-label>Siparişiniz Hazır!</ion-label>
     </div>
 
-    <ion-button expand="full" (click)="onCancelOrderAlert()"
+    <ion-button expand="full" (click)="onCancelOrderAlert()" *ngIf="!isOrderReady"
       >Siparişi İptal Et!</ion-button
     >
   </ion-grid>
