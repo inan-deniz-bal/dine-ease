@@ -9,15 +9,21 @@
 
 <ion-content [fullscreen]="true" class="homeE">
   <ion-card *ngFor="let rest of restaurants" (click)="showRestaurant(rest)">
-    <img src={{rest.images}}>
+    <img src="{{rest.images}}" />
     <ion-card-title> {{rest.name}} </ion-card-title>
     <ion-card-content>
 
-
       <ion-row>
-        <ion-col> {{rest.customerCount}}/ {{rest.totalCapacity}} </ion-col>
-        <ion-col>Park Yeri : 0</ion-col>
-        <ion-col>Vegan Menü</ion-col>
+        <ion-col>
+          <ion-label>
+            {{rest.customerCount}} masa dolu
+          </ion-label></ion-col>
+        <ion-col> <ion-label >{{rest.totalCapacity}} kapasiteli </ion-label></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col *ngFor="let feature of rest.features">
+          <ion-img [src]="'../../assets/' + feature + '.png'"></ion-img>
+        </ion-col>
       </ion-row>
     </ion-card-content>
   </ion-card>

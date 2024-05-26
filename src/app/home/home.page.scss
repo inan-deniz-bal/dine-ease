@@ -14,3 +14,9 @@ img{
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
 }
+
+ion-img{
+  min-width: 30px!important;
+  min-height: 50px!important;
+  max-width: 40px!important;
+}

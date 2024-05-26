@@ -8,4 +8,5 @@ export type Restaurant = {
   totalCapacity: Number;
   customerCount: Number;
   images?:string;
+  features?: string[];
 };

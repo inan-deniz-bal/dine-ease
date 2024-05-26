@@ -14,7 +14,7 @@ import { Restaurant } from 'src/types/restaurantType';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  restourants: RestList[] = [];
+
   restaurants: Restaurant[] = [];
   constructor(
     private serverH: ServerHandlerService,
@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
         console.log('hello');
 
         //this.restourants = this.serverH.getRestList();
-        console.log('Restaurants ', this.restourants);
+
         this.serverH.getAllRestaurants().subscribe({
           next: (data) => {
             console.log('Data:', data);
