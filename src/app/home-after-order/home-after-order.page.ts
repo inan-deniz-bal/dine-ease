@@ -45,7 +45,7 @@ export class HomeAfterOrderPage implements OnInit {
       console.log('order ', this.orderID, ' table ', this.tableID);
       this.serverH.checkOrder(this.orderID).subscribe({
         next: (response) => {
-          if (response.data.orderStatus === 'cancel') {
+          if (response.data.orderStatus === 'cancel' || response.data.orderStatus === 'closed') {
             localStorage.removeItem('orderID');
             localStorage.removeItem('tableID');
             this.customerType.setCustomerB();
