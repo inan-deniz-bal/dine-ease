@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerTypeService } from 'src/services/customer-type.service';
 import { ServerHandlerService } from 'src/services/server-handler.service';
 import { MakeOrder } from 'src/types/makeOrderType';
-import { NavController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
+
 @Component({
   selector: 'app-home-after-order',
   templateUrl: './home-after-order.page.html',
@@ -14,8 +14,10 @@ export class HomeAfterOrderPage implements OnInit {
     private customerType: CustomerTypeService,
     private serverH: ServerHandlerService,
     private navCtrl: NavController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController
   ) {}
+
   orderID: string = '1';
   tableID = '';
   isOrderReady: boolean = false;
@@ -35,16 +37,23 @@ export class HomeAfterOrderPage implements OnInit {
     orderStatus: '1',
   };
 
-  ngOnInit() {
+  async ngOnInit() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Yükleniyor...',
+    });
+    await loading.present();
+
     this.customerType.setCustomerA();
     const storedOrderID = localStorage.getItem('orderID');
     const storedTableID = localStorage.getItem('tableID');
+
     if (storedOrderID && storedTableID) {
       this.orderID = storedOrderID;
       this.tableID = JSON.parse(storedTableID);
       console.log('order ', this.orderID, ' table ', this.tableID);
       this.serverH.checkOrder(this.orderID).subscribe({
-        next: (response) => {
+        next: async (response) => {
+          await loading.dismiss();
           if (response.data.orderStatus === 'cancel' || response.data.orderStatus === 'closed') {
             localStorage.removeItem('orderID');
             localStorage.removeItem('tableID');
@@ -53,27 +62,35 @@ export class HomeAfterOrderPage implements OnInit {
           }
           console.log(response);
           this.currentOrder = response.data;
-          this.isOrderReady =
-            this.currentOrder.orderStatus === 'ready' ? true : false;
+          this.isOrderReady = this.currentOrder.orderStatus === 'ready';
         },
-        error: (err) => {
+        error: async (err) => {
+          await loading.dismiss();
           console.log(err);
         },
       });
+    } else {
+      await loading.dismiss();
     }
   }
 
-  closeOrder() {
+  async closeOrder() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Yükleniyor...',
+    });
+    await loading.present();
+
     this.serverH.closeOrder(this.orderID, this.tableID).subscribe({
-      next: (response) => {
+      next: async (response) => {
+        await loading.dismiss();
         console.log(response);
         this.customerType.setCustomerB();
-
         localStorage.removeItem('orderID');
         localStorage.removeItem('tableID');
         this.navCtrl.navigateRoot(['./home']);
       },
-      error: (err) => {
+      error: async (err) => {
+        await loading.dismiss();
         console.log(err);
       },
     });
@@ -100,5 +117,26 @@ export class HomeAfterOrderPage implements OnInit {
       .then((alert) => {
         alert.present();
       });
+  }
+
+  doRefresh(event: any) {
+    this.serverH.checkOrder(this.orderID).subscribe({
+      next: (response) => {
+        if (response.data.orderStatus === 'cancel' || response.data.orderStatus === 'closed') {
+          localStorage.removeItem('orderID');
+          localStorage.removeItem('tableID');
+          this.customerType.setCustomerB();
+          this.navCtrl.navigateRoot(['./home']);
+        }
+        console.log(response);
+        this.currentOrder = response.data;
+        this.isOrderReady = this.currentOrder.orderStatus === 'ready';
+        event.target.complete();
+      },
+      error: (err) => {
+        console.log(err);
+        event.target.complete();
+      },
+    });
   }
 }

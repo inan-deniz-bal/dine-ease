@@ -10,6 +10,11 @@
 <ion-content [fullscreen]="true">
   <ion-img *ngIf="!isOrderReady" src="../../assets/hazırlama.png"></ion-img>
   <ion-img *ngIf="isOrderReady" src="../../assets/order2.png"></ion-img>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid>
     <ion-card>
       <ion-card-header>
@@ -17,12 +22,12 @@
       </ion-card-header>
       <ion-card-content>
         <ion-row *ngFor="let item of currentOrder.orderedMeals">
-          <ion-col size="6">{{item.mealName}}</ion-col>
-          <ion-col size="3">{{item.mealQuantity}} adet</ion-col>
-          <ion-col size="3">{{item.mealPrice}} TL</ion-col>
+          <ion-col size="6">{{ item.mealName }}</ion-col>
+          <ion-col size="3">{{ item.mealQuantity }} adet</ion-col>
+          <ion-col size="3">{{ item.mealPrice }} TL</ion-col>
         </ion-row>
         <ion-row>
-          <div class="total">Toplam {{currentOrder.totalPrice}} TL</div>
+          <div class="total">Toplam {{ currentOrder.totalPrice }} TL</div>
         </ion-row>
       </ion-card-content>
     </ion-card>
@@ -34,7 +39,10 @@
       <ion-label>Siparişiniz Hazır!</ion-label>
     </div>
 
-    <ion-button expand="full" (click)="onCancelOrderAlert()" *ngIf="!isOrderReady"
+    <ion-button
+      expand="full"
+      (click)="onCancelOrderAlert()"
+      *ngIf="!isOrderReady"
       >Siparişi İptal Et!</ion-button
     >
   </ion-grid>
