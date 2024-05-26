@@ -8,6 +8,10 @@ import { TempOrder } from 'src/types/tempOrderType';
 import { WaiterPaymentService } from 'src/services/waiter-payment.service';
 import { AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+
+import { slideInFromLeftAnimation } from 'src/animations/animation';
+import { slideInFromRightAnimation } from 'src/animations/animation2';
+import { slideOutToRightAnimation } from 'src/animations/amination3';
 @Component({
   selector: 'app-waiter-table',
   templateUrl: './waiter-table.page.html',
@@ -43,14 +47,17 @@ export class WaiterTablePage implements OnInit {
   };
   ordersId: string[] = [];
   currentFee = 0;
+
   ngOnInit() {
     this.table = this.waiterTable.getTable();
+    console.log('table id', this.table._id);
     this.table.orders.map((order) => {
       this.ordersId.push(order.currentOrder);
     });
     console.log('order idler', this.ordersId);
     this.serverH.checkTempOrder(this.ordersId).subscribe({
       next: (response) => {
+        console.log('geçerli sipariş: ', response.data);
         this.waiterP.setTempOrder(response.data);
         this.currentOrder = response.data.orderedMeals;
 
@@ -92,7 +99,60 @@ export class WaiterTablePage implements OnInit {
     this.navCtrl.navigateRoot(['./waiter-take-payment']);
   }
 
+  onCloseTableAlert() {
+    this.alertCtrl
+      .create({
+        header: 'Masayı Kapat',
+        message: 'Masa kapatmak istediğinizden emin misiniz?',
+        buttons: [
+          {
+            text: 'Hayır',
+            role: 'cancel',
+          },
+          {
+            text: 'Evet',
+            handler: () => {
+              this.closeTable();
+            },
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
+  }
+
   closeTable() {
+    if (this.totalLeft == 0) {
+      const tableId = this.table._id;
+      const currentOrderid = this.waiterP
+        .getTempOrder()
+        .currentOrderId.toString();
+      const tempOrderId = this.waiterP.getTempOrder()._id;
+      if (tableId && currentOrderid && tempOrderId) {
+        this.serverH.closeOrder(currentOrderid, tableId).subscribe({
+          next: (response) => {
+            this.serverH.deleteTempOrder(tempOrderId).subscribe({
+              next: (response) => {
+                this.navCtrl.navigateRoot(['./waiter-home']);
+              },
+              error: (error) => {
+                console.log(error);
+              },
+            });
+          },
+          error: (error) => {
+            console.log(error);
+
+          },
+        });
+      }
+    } else {
+      console.log('Ödenmemiş para var', this.totalLeft);
+    }
     //eğer kalan para sıfırsa borç kapanır
+  }
+  navHome() {
+    this.navCtrl.navigateRoot(['./waiter-home']);
   }
 }

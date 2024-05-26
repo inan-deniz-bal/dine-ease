@@ -6,6 +6,10 @@ import { ServerHandlerService } from 'src/services/server-handler.service';
 import { TempOrder } from 'src/types/tempOrderType';
 import { AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { slideInFromLeftAnimation } from 'src/animations/animation';
+import { slideInFromRightAnimation } from 'src/animations/animation2';
+import { slideOutToRightAnimation } from 'src/animations/amination3';
+
 @Component({
   selector: 'app-waiter-take-payment',
   templateUrl: './waiter-take-payment.page.html',
@@ -17,8 +21,8 @@ export class WaiterTakePaymentPage implements OnInit {
   disabled = false;
 
   constructor(
-    private alertCtrl:AlertController,
-    private navCtrl:NavController,
+    private alertCtrl: AlertController,
+    private navCtrl: NavController,
     private serverH: ServerHandlerService,
     private waiterP: WaiterPaymentService,
     private waiterTableService: WaiterTableHandlerService
@@ -27,21 +31,24 @@ export class WaiterTakePaymentPage implements OnInit {
   ngOnInit() {
     this.orderList = this.waiterP.getTempOrder().orderedMeals;
     this.tableName = this.waiterTableService.getTable().tableName;
-    if(this.orderList.length==0){
-      this.disabled=true;
-      this.alertCtrl.create({
-        header:'Hata',
-        message:'Ödeme alınacak sipariş bulunamadı.',
-        buttons:[{
-          text:'Tamam',
-          handler:()=>{
-            this.navCtrl.navigateRoot(["./waiter-home"])
-          }
-        }]
-      }).then(alertEl=>{
-        alertEl.present();
-
-      })
+    if (this.orderList.length == 0) {
+      this.disabled = true;
+      this.alertCtrl
+        .create({
+          header: 'Hata',
+          message: 'Ödeme alınacak sipariş bulunamadı.',
+          buttons: [
+            {
+              text: 'Tamam',
+              handler: () => {
+                this.navCtrl.navigateRoot(['./waiter-home']);
+              },
+            },
+          ],
+        })
+        .then((alertEl) => {
+          alertEl.present();
+        });
     }
   }
 
@@ -82,10 +89,6 @@ export class WaiterTakePaymentPage implements OnInit {
     this.orderList = this.checkForNoMeal(this.orderList);
   }
 
-
-
-
-
   removeFromPay(meal: Order) {
     if (meal.mealQuantity && meal.mealQuantity <= 1) {
       const newMeals = this.mealsToPay.filter(
@@ -111,8 +114,8 @@ export class WaiterTakePaymentPage implements OnInit {
   }
 
   addToList(meal: Order, mealList: Order[]) {
-    console.log("ödenecek yemekler: ", this.mealsToPay)
-    console.log("kalan yemekler", this.orderList)
+    console.log('ödenecek yemekler: ', this.mealsToPay);
+    console.log('kalan yemekler', this.orderList);
     const contains = mealList.some(
       (payMeal) => payMeal.mealName === meal.mealName
     );
@@ -133,36 +136,92 @@ export class WaiterTakePaymentPage implements OnInit {
       });
       return mealList;
     }
-
   }
 
   approvePayment() {
-    console.log("siparişten kalanlar ", this.orderList)
-    console.log("ödenecekler ", this.mealsToPay)
+    console.log('siparişten kalanlar ', this.orderList);
+    console.log('ödenecekler ', this.mealsToPay);
+    if(this.orderList.length == 0 ){
+      console.log("merhaba")
+      this.onNoMorePaymentAlert();
+    }
+    if (this.mealsToPay.length == 0 && this.orderList.length == 0) {
+      this.alertCtrl
+        .create({
+          header: 'Hata',
+          message: 'Ödenecek bir şey yok.',
+          buttons: [
+            {
+              text: 'Tamam',
+            },
+          ],
+        })
+        .then((alertEl) => {
+          alertEl.present();
+        });
+      return;
+    } else {
+      const tempOrderId = this.waiterP.getTempOrder()._id;
+      if (tempOrderId) {
+        this.serverH
+          .updateTempOrder( this.orderList,this.mealsToPay, tempOrderId)
+          .subscribe({
+            next: (response) => {
+              console.log(response);
+              this.navCtrl.navigateRoot(['./waiter-table']);
+            },
+            error: (error) => {
+              if (error.error.message == 'done') {
+                this.onNoMorePaymentAlert();
+              }
+            },
+          });
+      }
+    }
   }
 
-  onApprovePaymentAlert(){
-    this.alertCtrl.create({
-      header:'Ödeme Onayı',
-      message:'Ödeme işlemini onaylıyor musunuz?',
-      buttons:[
-        {
-          text:'Evet',
-          handler:()=>{
-            this.approvePayment();
-          }
-        },
-        {
-          text:'Hayır',
-          role:'cancel'
-        }
-      ]
-    }).then(alertEl=>{
-      alertEl.present();
-    })
+  onApprovePaymentAlert() {
+    this.alertCtrl
+      .create({
+        header: 'Ödeme Onayı',
+        message: 'Ödeme işlemini onaylıyor musunuz?',
+        buttons: [
+          {
+            text: 'Evet',
+            handler: () => {
+              this.approvePayment();
+            },
+          },
+          {
+            text: 'Hayır',
+            role: 'cancel',
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
   }
 
-  backWards(){
-    this.navCtrl.navigateRoot(["./waiter-table"])
+  onNoMorePaymentAlert() {
+    this.alertCtrl
+      .create({
+        header: 'Ödeme Alınacak Başka Sipariş Yok',
+        message: 'Ödeme alınacak başka sipariş bulunamadı. Masayı kapatabilirsiniz!',
+        buttons: [
+          {
+            text: 'Tamam',
+            handler: () => {
+              this.navCtrl.navigateRoot(['./waiter-table']);
+            },
+          },
+        ],
+      })
+      .then((alertEl) => {
+        alertEl.present();
+      });
+  }
+  backWards() {
+    this.navCtrl.navigateRoot(['./waiter-table']);
   }
 }

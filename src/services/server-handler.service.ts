@@ -149,7 +149,7 @@ export class ServerHandlerService {
   updateTempOrder(
     orderedMeals: Order[],
     paidMeals: Order[],
-    orderId: string
+    orderId: String
   ): Observable<{ status: string; data: TempOrder }> {
     return this.http.post<{ status: string; data: TempOrder }>(
       `${this.apiUrl}/tempOrders/${orderId}`,
@@ -157,6 +157,12 @@ export class ServerHandlerService {
         orderedMeals: orderedMeals,
         paidMeals: paidMeals,
       }
+    );
+  }
+
+  deleteTempOrder(orderId: String): Observable<{ status: string }> {
+    return this.http.delete<{ status: string }>(
+      `${this.apiUrl}/tempOrders/${orderId}`
     );
   }
 
