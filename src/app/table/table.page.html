@@ -3,10 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{table.tableName}}</ion-title>
+    <ion-title>{{selectedRestaurantName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+  <app-order-qr
+    [restmenu]="menu"
+    (closeOrder)="closeOrder()"
+    (callOrder)="onOrderAlert($event.order,$event.date)"
+  ></app-order-qr>
 </ion-content>

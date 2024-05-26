@@ -1,0 +1,28 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title> Menü </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list *ngFor="let menuType of restaurantMenu">
+      <div>
+        <ion-item (click)="mealClicked(menuType)"
+          ><ion-label>{{ menuType.mealType }}</ion-label></ion-item
+        >
+        <div *ngIf="clickedMenutype === menuType.mealType">
+          <ion-item *ngFor="let meal of menuType.meals" (click)="addFood(meal)">
+            <div class="meal">
+              <div>
+                {{ meal.mealName }}
+              </div>
+              <div>{{ meal.mealPrice }} TL</div>
+            </div>
+            <!--<ion-buttons *ngIf="addCart">
+              <ion-button (click)="addFood(meal)">Add</ion-button>
+              <ion-button (click)="removeFood(meal)">Remove</ion-button>
+            </ion-buttons>
+          --></ion-item>
+        </div>
+      </div>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

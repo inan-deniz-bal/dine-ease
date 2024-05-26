@@ -1,0 +1,63 @@
+<app-menu-qr *ngIf="showMenu" [restaurantMenu]="restmenu"> </app-menu-qr>
+<ion-card>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      </ion-item>
+
+      <ion-item
+        ><ion-label (click)="openMenu()">{{ menuText }}</ion-label>
+      </ion-item>
+
+      <div class="menuSum">
+        <ion-item detail="true"> Menü Özeti </ion-item>
+
+        <ion-row
+          *ngFor="let order of menuOrderList"
+          (click)="removeFood(order)"
+        >
+          <div class="order">
+            <div>
+              {{ order.mealName }}
+            </div>
+            <div>
+              {{ order.mealQuantity }}/
+              {{ order.mealPrice * order.mealQuantity }} TL
+            </div>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="total">
+            <div>Toplam</div>
+            <div>{{ total }} TL</div>
+          </div>
+        </ion-row>
+      </div>
+
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="apply()" color="secondary" expand="full">
+            Onayla</ion-button
+          >
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="cancel()" color="danger" expand="full">
+            İptal</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime
+      min="{{ minDateTime }}"
+      minuteValues="0,15,30,45"
+      id="datetime"
+      (ionChange)="onDateTimeChange($event)"
+    ></ion-datetime>
+  </ng-template>
+</ion-modal>

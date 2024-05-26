@@ -8,13 +8,12 @@ import { TablePageRoutingModule } from './table-routing.module';
 
 import { TablePage } from './table.page';
 
+import { OrderQrComponent } from '../components/order-qr/order-qr.component';
+
+import { MenuQrComponent } from '../components/menu-qr/menu-qr.component';
+
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TablePageRoutingModule
-  ],
-  declarations: [TablePage]
+  imports: [CommonModule, FormsModule, IonicModule, TablePageRoutingModule],
+  declarations: [TablePage, OrderQrComponent, MenuQrComponent],
 })
 export class TablePageModule {}
