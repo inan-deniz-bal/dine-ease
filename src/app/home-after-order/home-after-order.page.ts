@@ -3,7 +3,7 @@ import { CustomerTypeService } from 'src/services/customer-type.service';
 import { ServerHandlerService } from 'src/services/server-handler.service';
 import { MakeOrder } from 'src/types/makeOrderType';
 import { NavController, AlertController, LoadingController } from '@ionic/angular';
-
+import { UpdateCurrentOrderService } from 'src/services/update-current-order.service';
 @Component({
   selector: 'app-home-after-order',
   templateUrl: './home-after-order.page.html',
@@ -15,7 +15,8 @@ export class HomeAfterOrderPage implements OnInit {
     private serverH: ServerHandlerService,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private updateCurrent: UpdateCurrentOrderService
   ) {}
 
   orderID: string = '1';
@@ -139,4 +140,12 @@ export class HomeAfterOrderPage implements OnInit {
       },
     });
   }
+
+
+  onEditOrders(){
+    this.navCtrl.navigateForward(['./edit-order']);
+    this.updateCurrent.setCurrentOrder(this.currentOrder);
+
+  }
+
 }

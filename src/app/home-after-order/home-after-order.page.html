@@ -39,6 +39,15 @@
       <ion-label>Siparişiniz Hazır!</ion-label>
     </div>
 
+
+    <ion-button
+    expand="full"
+    (click)="onEditOrders()"
+    color="success"
+    *ngIf="!isOrderReady"
+    >Siparişi Düzenle</ion-button
+  >
+
     <ion-button
       expand="full"
       (click)="onCancelOrderAlert()"

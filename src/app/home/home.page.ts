@@ -37,6 +37,7 @@ export class HomePage implements OnInit {
         this.navCtrl.navigateRoot('/waiter-home');
       } else {
         console.log('hello');
+        localStorage.removeItem('isFromQR');
 
         //this.restourants = this.serverH.getRestList();
 

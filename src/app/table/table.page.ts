@@ -59,13 +59,14 @@ export class TablePage implements OnInit {
     } else {
       const newOrder: MakeOrder = {
         orderedMeals: order,
-        tableId: this.table._id,
+        tableId: this.table._id.replace('\n', ''),
         date: date,
         restaurantName: this.selectedRestaurantName,
         orderStatus: 'active',
         totalPrice: totalPrice,
       };
-      console.log('newOrder', newOrder);
+      console.log(JSON.stringify(newOrder, null, 2));
+
 
       this.serverH.makeOrder(newOrder).subscribe({
         next: (response) => {
@@ -81,6 +82,16 @@ export class TablePage implements OnInit {
           this.navCtrl.navigateRoot(['./home-after-order']);
         },
         error: (err) => {
+          this.alertCtrl
+            .create({
+              header: 'Sipariş Başarısız',
+              message: err.message,
+              buttons: ['Tamam'],
+            })
+            .then((alertEl) => {
+              alertEl.present();
+            });
+
           console.log(err.message);
         },
       });

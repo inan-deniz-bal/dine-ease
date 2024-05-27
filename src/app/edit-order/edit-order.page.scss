@@ -1,0 +1,73 @@
+.order-detail {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 5px;
+  background-color: bisque;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.order-detail.glow {
+  animation: glowPulse 1000s infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px 10px rgba(9, 99, 151, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 10px 5px rgba(9, 99, 151, 0.8);
+  }
+}
+
+.order-detail {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 5px;
+  background-color: bisque;
+  transition: box-shadow 0.3s ease-in-out;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.order-detail.glow {
+  animation: glowPulse 1s infinite;
+}
+
+ion-grid {
+  margin-top: 5rem;
+}
+
+ion-label {
+  color: black;
+}
+ion-card {
+  ion-card-title {
+    font-size: 1.5rem;
+    color: black;
+  }
+  background: #fefded;
+  border-radius: 8%;
+  width: 90%;
+  ion-card-content {
+    padding: 20px;
+    font-size: 1rem;
+    color: black;
+  }
+}
+
+.total {
+  font-size: 1.2rem;
+  color: black;
+  font-weight: bold;
+  margin-right: 0px;
+  margin-left: auto;
+  margin-top: 1rem;
+}
+
+ion-button{
+  color:white!important;
+  font-weight: bold!important;
+}

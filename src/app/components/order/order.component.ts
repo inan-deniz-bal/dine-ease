@@ -31,6 +31,8 @@ export class OrderComponent implements OnInit {
   selectedDateTime: Date = new Date();
   menuText = 'Menüyü Göster';
 
+
+
   minDateTime: string;
   minuteValues: string[] = [];
 
@@ -61,6 +63,7 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.tempOrder.currentOrderSubject.subscribe((menu) => {
       this.menuOrderList = menu;
       this.total = 0;

@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="/home-after-order"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Siparişi Düzenle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Sipariş Detayı</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row *ngFor="let item of currentOrder.orderedMeals">
+        <ion-col size="6">{{ item.mealName }}</ion-col>
+        <ion-col size="3">{{ item.mealQuantity }} adet</ion-col>
+        <ion-col size="3">{{ item.mealPrice }} TL</ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="total">Toplam {{ currentOrder.totalPrice }} TL</div>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

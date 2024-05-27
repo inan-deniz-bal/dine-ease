@@ -24,6 +24,7 @@ export class OrderQrComponent implements OnInit {
 
   minDateTime: string;
   minuteValues: string[] = [];
+  isFromQR = false;
 
   menuOrderList: Order[] = [];
 
@@ -52,6 +53,8 @@ export class OrderQrComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isFromQR = localStorage.getItem('isFromQR') === 'true';
+
     this.tempOrder.currentOrderSubject.subscribe((menu) => {
       this.menuOrderList = menu;
       this.total = 0;
@@ -94,10 +97,5 @@ export class OrderQrComponent implements OnInit {
     this.tempOrder.updateOrder(this.menuOrderList);
   }
 
-  onDateTimeChange(event: CustomEvent) {
-    const selectedDateTimeString: string = event.detail.value;
-    this.selectedDateTime = new Date(selectedDateTimeString);
-    console.log('Selected Date/Time:', this.selectedDateTime);
-    // Burada seçilen zamanı kullanabilirsiniz, örneğin başka bir değişkene atayabilir veya işlemler yapabilirsiniz.
-  }
+
 }

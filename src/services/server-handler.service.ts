@@ -85,6 +85,11 @@ export class ServerHandlerService {
 
   makeOrder(order: MakeOrder): Observable<{ status: string; data: MakeOrder }> {
     order.customerId = this.loginSer.getUser();
+    console.log("user id",order.customerId);
+
+    console.log("masa id",order.tableId);
+    console.log("sunucudan sipariş",JSON.stringify(order, null, 2));
+
     console.log(order.customerId);
     return this.http.post<{ status: string; data: MakeOrder }>(
       `${this.apiUrl}/currentOrders`,

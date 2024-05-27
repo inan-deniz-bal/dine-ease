@@ -2,9 +2,6 @@
 <ion-card>
   <ion-card-content>
     <ion-list>
-      <ion-item>
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
-      </ion-item>
 
       <ion-item
         ><ion-label (click)="openMenu()">{{ menuText }}</ion-label>
@@ -51,13 +48,3 @@
   </ion-card-content>
 </ion-card>
 
-<ion-modal [keepContentsMounted]="true">
-  <ng-template>
-    <ion-datetime
-      min="{{ minDateTime }}"
-      minuteValues="0,15,30,45"
-      id="datetime"
-      (ionChange)="onDateTimeChange($event)"
-    ></ion-datetime>
-  </ng-template>
-</ion-modal>

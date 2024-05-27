@@ -99,7 +99,7 @@ export class RestaurantPage implements OnInit {
               JSON.stringify(response.data.tableId)
             );
           }
-
+          localStorage.removeItem('isFromQR');
           this.navCtrl.navigateRoot(['./home-after-order']);
         },
         error: (err) => {
@@ -111,7 +111,7 @@ export class RestaurantPage implements OnInit {
 
   onOrderAlert(order: Order[], date: Date) {
     console.log('order', order);
-    console.log('date', date);
+    console.log('date tarih', date);
     this.alertCtrl
       .create({
         header: 'Sipariş Onayı',
