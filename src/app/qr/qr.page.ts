@@ -36,7 +36,7 @@ export class QrPage implements OnInit {
         next: (response) => {
           if (response.status === 'success') {
             this.stopScan();
-            console.log("sonuçlar ", response.data.toString(), result.content);
+            console.log('sonuçlar ', response.data.toString(), result.content);
             console.log(JSON.stringify(response, null, 2));
 
             this.restByt.setResponse(response.data);
@@ -62,8 +62,9 @@ export class QrPage implements OnInit {
   failAlert(message: string) {
     this.alertCtrl
       .create({
-        header: 'Masa Dolu',
-        message: message,
+        header: 'Masa Hatası',
+        message:
+          'Okuttuğunuz QR bozulmuş, lütfen restoran görevlisine bildirin.',
         buttons: [
           {
             text: 'Tamam',
