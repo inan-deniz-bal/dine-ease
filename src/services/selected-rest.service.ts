@@ -21,6 +21,7 @@ export class SelectedRestService {
   selectRestaurant(restInfo: Restaurant) {
     this.selectedRestaurant = restInfo;
     console.log('seçilen:', this.selectedRestaurant);
+    localStorage.setItem('selected-restaurant', JSON.stringify(restInfo));
 
     /* localStorage.setItem(
       'selected-restaurant',
@@ -28,6 +29,10 @@ export class SelectedRestService {
     );*/
   }
   getSelectedRestaurant(): Restaurant {
+    const data = localStorage.getItem('selected-restaurant');
+    if (data) {
+      return JSON.parse(data);
+    }
     /* const data = localStorage.getItem('selected-restaurant');
     if (data) {
       return JSON.parse(data);

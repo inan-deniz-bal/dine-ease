@@ -143,7 +143,7 @@ export class HomeAfterOrderPage implements OnInit {
 
 
   onEditOrders(){
-    this.navCtrl.navigateForward(['./edit-order']);
+    this.navCtrl.navigateRoot(['./edit-order']);
     this.updateCurrent.setCurrentOrder(this.currentOrder);
 
   }

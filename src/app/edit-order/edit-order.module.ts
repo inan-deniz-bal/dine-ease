@@ -8,6 +8,9 @@ import { EditOrderPageRoutingModule } from './edit-order-routing.module';
 
 import { EditOrderPage } from './edit-order.page';
 
+import { OrderTableComponent } from '../components/order-table/order-table.component';
+
+import { MenuTableComponent } from '../components/menu-table/menu-table.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +18,6 @@ import { EditOrderPage } from './edit-order.page';
     IonicModule,
     EditOrderPageRoutingModule
   ],
-  declarations: [EditOrderPage]
+  declarations: [EditOrderPage,OrderTableComponent,MenuTableComponent]
 })
 export class EditOrderPageModule {}

@@ -1,0 +1,45 @@
+<app-menu-table *ngIf="showMenu" [restaurantMenu]="restmenu"> </app-menu-table>
+<ion-card>
+  <ion-card-content>
+    <ion-list>
+
+      <ion-item
+        ><ion-label (click)="openMenu()">{{ menuText }}</ion-label>
+      </ion-item>
+
+      <div class="menuSum">
+        <ion-item detail="true"> Menü Özeti </ion-item>
+
+        <ion-row
+          *ngFor="let order of menuOrderList"
+          (click)="removeFood(order)"
+        >
+          <div class="order">
+            <div>
+              {{ order.mealName }}
+            </div>
+            <div>
+              {{ order.mealQuantity }}/
+              {{ order.mealPrice * order.mealQuantity }} TL
+            </div>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="total">
+            <div>Toplam</div>
+            <div>{{ total }} TL</div>
+          </div>
+        </ion-row>
+      </div>
+
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="apply()" color="secondary" expand="full">
+            Onayla</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+

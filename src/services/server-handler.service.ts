@@ -21,9 +21,9 @@ import { restaurantByTableResponseType } from 'src/types/restaurantByTableRespon
 export class ServerHandlerService {
   constructor(private loginSer: LoginService, private http: HttpClient) {}
 
-  //apiUrl = 'http://localhost:3000/api/v1';
+  apiUrl = 'http://localhost:3000/api/v1';
 
-  apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
+  //apiUrl = 'https://node1-1-ri4g.onrender.com/api/v1';
 
   login(data: Login): Observable<loginRes> {
     return this.http.post<loginRes>(
@@ -85,10 +85,10 @@ export class ServerHandlerService {
 
   makeOrder(order: MakeOrder): Observable<{ status: string; data: MakeOrder }> {
     order.customerId = this.loginSer.getUser();
-    console.log("user id",order.customerId);
+    console.log('user id', order.customerId);
 
-    console.log("masa id",order.tableId);
-    console.log("sunucudan sipariş",JSON.stringify(order, null, 2));
+    console.log('masa id', order.tableId);
+    console.log('sunucudan sipariş', JSON.stringify(order, null, 2));
 
     console.log(order.customerId);
     return this.http.post<{ status: string; data: MakeOrder }>(
@@ -139,6 +139,20 @@ export class ServerHandlerService {
   ): Observable<{ status: string; message: string }> {
     return this.http.get<{ status: string; message: string }>(
       `${this.apiUrl}/rest/ready/${orderId}`
+    );
+  }
+
+  updateOrder(
+    orderId: string,
+    newPrice: number,
+    newOrders: Order[]
+  ): Observable<{ status: string }> {
+    return this.http.put<{ status: string }>(
+      `${this.apiUrl}/currentOrders/${orderId}`,
+      {
+        totalPrice: newPrice,
+        orderedMeals: newOrders,
+      }
     );
   }
 
